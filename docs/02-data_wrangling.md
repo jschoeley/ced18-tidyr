@@ -6,10 +6,6 @@ Data Wrangling
 
 ```r
 library(tidyverse)
-
-# General social survey
-# source: http://gss.norc.org/s
-gss <- haven::read_stata('data/gss/GSS2016.DTA')
 ```
 
 The "tidy" approach to data wrangling
@@ -22,10 +18,10 @@ The "tidy" approach to data wrangling
 3) **Tidy Data** Everything is a data frame with cases as rows and variables as columns.
 4) **Tidy iteration** Transformations can be repeatedly applied to different row or column subsets without the use of a for loop.
 
-Transforming data using verbs
------------------------------
+6 verbs for data transformation
+-------------------------------
 
-The `tidyverse` provides us with an array of *verbs* for data transformation such as `filter()`, `mutate()`, `summarise()` and many more. While each of those verbs performs a distinct action they all have a common design. All verbs...
+The `tidyverse` provides us with an array of *verbs* for data transformation such as `mutate()`, `filter()`, `arrange()` and others. While each of those verbs performs a distinct action they all have a common design. All verbs...
 
 - ...have as their first argument a data frame:
 
@@ -604,16 +600,16 @@ gss %>% select(sample(ncol(.)))
 
 ```
 ## # A tibble: 2,867 x 960
-##   unrelat  lessreg meovrwrk natsci libcom appemps aidhouse adults pikupsex
-##   <dbl+lb> <dbl+l> <dbl+lb> <dbl+> <dbl+> <dbl+l> <dbl+lb> <dbl+> <dbl+lb>
-## 1 0        1       3        2      2      <NA>    2        2      <NA>    
-## 2 <NA>     1       2        <NA>   <NA>   <NA>    2        1      2       
-## 3 0        <NA>    <NA>     <NA>   2      <NA>    <NA>     2      <NA>    
-## 4 0        2       4        1      2      <NA>    3        4      <NA>    
-## 5 0        <NA>    <NA>     2      2      <NA>    <NA>     3      <NA>    
-## # ... with 2,862 more rows, and 951 more variables: pray <dbl+lbl>,
-## #   cctv <dbl+lbl>, rwrkindp <dbl+lbl>, babies <dbl+lbl>,
-## #   gender11 <dbl+lbl>, …
+##   racdif2  divorce  wordsum  teens wordc discaffw sparts richwork corrupt2
+##   <dbl+lb> <dbl+lb> <dbl+lb> <dbl> <dbl> <dbl+lb> <dbl+> <dbl+lb> <dbl+lb>
+## 1 2        2        8        2     1     <NA>     3      2        3       
+## 2 2        <NA>     5        0     0     <NA>     4      <NA>     3       
+## 3 <NA>     2        <NA>     0     <NA>  <NA>     <NA>   <NA>     <NA>    
+## 4 2        2        5        2     <NA>  <NA>     2      1        5       
+## 5 <NA>     2        <NA>     0     <NA>  <NA>     <NA>   1        <NA>    
+## # ... with 2,862 more rows, and 951 more variables: suicide3 <dbl+lbl>,
+## #   artloc <dbl+lbl>, rhlpsoc <dbl+lbl>, econsup1 <dbl+lbl>,
+## #   fehire <dbl+lbl>, …
 ```
 
 Selected columns can be renamed.
@@ -1196,11 +1192,11 @@ gss %>% slice(sample(1:n()))
 ## # A tibble: 2,867 x 960
 ##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
 ##   <dbl+> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 2      4     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 2 1      1     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 3 5      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 4 5      5     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 5 1      1     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+## 1 1      1     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+## 2 5      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+## 3 2      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+## 4 1      1     5     3     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
+## 5 5      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
 ## # ... with 2,862 more rows, and 948 more variables: mar13 <dbl+lbl>,
 ## #   mar14 <dbl+lbl>, abany <dbl+lbl>, abdefect <dbl+lbl>,
 ## #   abhlth <dbl+lbl>, …
@@ -1246,8 +1242,8 @@ euro_regio %>%
 
 
 
-Pipes
------
+Data pipelines
+--------------
 
 We can chain multiple function and transformations steps into a *data analysis pipeline*. This is a great approach for clear, fast, interactive data analysis.
 
@@ -1279,7 +1275,7 @@ WorldPhones %>%
 
 The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.
 
-### Excercise: Pipes
+### Excercise: Data pipelines
 
 Rewrite the following expressions as pipes:
 
@@ -1389,6 +1385,8 @@ FALSE    5 2 1 2
 Tidy data
 ---------
 
+### What is tidy data?
+
 Many programming tasks become easier once the data is in a tidy format. But what is tidy data? Our working definition: **data needs to be a data frame** and **every variable of interest needs to be a separate column**. Let's explore what that means.
 
 
@@ -1431,8 +1429,6 @@ Say we we want to plot the number of telephone connections over time by continen
     * the year `year`
 
 Problem is, *none* of these variables are explicitly given in our data frame. Of course the data is all there, just not in a format we can use (with ggplot). So the question is how to reshape the data into a form where all the variables of interest are separate columns in the data frame.
-
-To reshape we are going to use the libraries [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html). Both are loaded when you load `library(tidyverse)`.
 
 The easiest variable to make explicit is the year. It is given as rownames of the data frame. We take the rownames, convert them from character to integer type, and add them as the variable `year` to the data frame. We use the `tidyverse` function `mutate()` to add a new variable to a data frame.
 
@@ -1524,7 +1520,72 @@ ggplot(phones) +
 
 ![](02-data_wrangling_files/figure-epub3/unnamed-chunk-46-1.png)<!-- -->
 
-### Long versus wide format data
+### Convert to data frame
+
+We "tidy" the output of the `survfit` function via the "broom" package.
+
+
+```r
+library(survival)
+surv <- survfit(
+  Surv(time = heart$start,
+       time2 = heart$stop,
+       event = heart$event) ~ heart$transplant
+)
+surv
+```
+
+```
+## Call: survfit(formula = Surv(time = heart$start, time2 = heart$stop, 
+##     event = heart$event) ~ heart$transplant)
+## 
+##                    records n.max n.start events median 0.95LCL 0.95UCL
+## heart$transplant=0     103   103       0     30    149      69      NA
+## heart$transplant=1      69    45       0     45     90      53     334
+```
+
+```r
+broom::tidy(surv) %>%
+  ggplot(aes(x = time, y = estimate)) +
+  geom_step(aes(colour = strata))
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-47-1.png)<!-- -->
+
+Dobson (1990) Page 93: Randomized Controlled Trial.
+
+
+```r
+dat <- data_frame(
+  counts = c(18,17,15,20,10,20,25,13,12),
+  outcome = gl(3,1,9),
+  treatment = gl(3,3)
+)
+
+dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
+
+broom::tidy(dat_fit)
+```
+
+```
+##          term      estimate std.error     statistic      p.value
+## 1 (Intercept)  3.044522e+00 0.1708987  1.781478e+01 5.426767e-71
+## 2    outcome2 -4.542553e-01 0.2021708 -2.246889e+00 2.464711e-02
+## 3    outcome3 -2.929871e-01 0.1927423 -1.520097e+00 1.284865e-01
+## 4  treatment2  1.337909e-15 0.2000000  6.689547e-15 1.000000e+00
+## 5  treatment3  1.421085e-15 0.2000000  7.105427e-15 1.000000e+00
+```
+
+```r
+broom::glance(dat_fit)
+```
+
+```
+##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
+## 1      10.58145       8 -23.38066 56.76132 57.74744 5.129141           4
+```
+
+### Long versus wide format
 
 Each table has a *wide format* and a long format representation. The information content is the same in both formats. It's the layout that differs.
 
@@ -1615,7 +1676,7 @@ hmd %>%
 ## # ... with 4 more rows
 ```
 
-### Making the implicit explicit
+### Handling missing values
 
 
 ```r
@@ -1635,66 +1696,11 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 ## [1] 2862
 ```
 
+### Recoding variables
 
-```r
-USArrests %>% rownames_to_column('state')
-```
+### Case studies in data cleaning
 
-```
-##             state Murder Assault UrbanPop Rape
-## 1         Alabama   13.2     236       58 21.2
-## 2          Alaska   10.0     263       48 44.5
-## 3         Arizona    8.1     294       80 31.0
-## 4        Arkansas    8.8     190       50 19.5
-## 5      California    9.0     276       91 40.6
-## 6        Colorado    7.9     204       78 38.7
-## 7     Connecticut    3.3     110       77 11.1
-## 8        Delaware    5.9     238       72 15.8
-## 9         Florida   15.4     335       80 31.9
-## 10        Georgia   17.4     211       60 25.8
-## 11         Hawaii    5.3      46       83 20.2
-## 12          Idaho    2.6     120       54 14.2
-## 13       Illinois   10.4     249       83 24.0
-## 14        Indiana    7.2     113       65 21.0
-## 15           Iowa    2.2      56       57 11.3
-## 16         Kansas    6.0     115       66 18.0
-## 17       Kentucky    9.7     109       52 16.3
-## 18      Louisiana   15.4     249       66 22.2
-## 19          Maine    2.1      83       51  7.8
-## 20       Maryland   11.3     300       67 27.8
-## 21  Massachusetts    4.4     149       85 16.3
-## 22       Michigan   12.1     255       74 35.1
-## 23      Minnesota    2.7      72       66 14.9
-## 24    Mississippi   16.1     259       44 17.1
-## 25       Missouri    9.0     178       70 28.2
-## 26        Montana    6.0     109       53 16.4
-## 27       Nebraska    4.3     102       62 16.5
-## 28         Nevada   12.2     252       81 46.0
-## 29  New Hampshire    2.1      57       56  9.5
-## 30     New Jersey    7.4     159       89 18.8
-## 31     New Mexico   11.4     285       70 32.1
-## 32       New York   11.1     254       86 26.1
-## 33 North Carolina   13.0     337       45 16.1
-## 34   North Dakota    0.8      45       44  7.3
-## 35           Ohio    7.3     120       75 21.4
-## 36       Oklahoma    6.6     151       68 20.0
-## 37         Oregon    4.9     159       67 29.3
-## 38   Pennsylvania    6.3     106       72 14.9
-## 39   Rhode Island    3.4     174       87  8.3
-## 40 South Carolina   14.4     279       48 22.5
-## 41   South Dakota    3.8      86       45 12.8
-## 42      Tennessee   13.2     188       59 26.9
-## 43          Texas   12.7     201       80 25.5
-## 44           Utah    3.2     120       80 22.9
-## 45        Vermont    2.2      48       32 11.2
-## 46       Virginia    8.5     156       63 20.7
-## 47     Washington    4.0     145       73 26.2
-## 48  West Virginia    5.7      81       39  9.3
-## 49      Wisconsin    2.6      53       66 10.8
-## 50        Wyoming    6.8     161       60 15.6
-```
-
-### Tidying data on police arrests
+#### Tidying data on police arrests
 
 Before we start plotting we need to ask ourselves: *What do we need to do with our data in order to get the plot we want?* Here are some examples.
 
@@ -1713,7 +1719,7 @@ USArrests %>%
   geom_point(aes(x = UrbanPop, y = state))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-53-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-54-1.png)<!-- -->
 
 
 ```r
@@ -1733,11 +1739,11 @@ USArrests %>%
   geom_point(aes(x = rate, y = state, colour = crime))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-54-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-55-1.png)<!-- -->
 
 
 
-### Tidying Anscombe's quartet
+#### Tidying Anscombe's quartet
 
 Can you figure out what happens here? Try running the code yourself line by line.
 
@@ -1754,9 +1760,9 @@ anscombe %>%
   facet_wrap(~panel)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-56-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-57-1.png)<!-- -->
 
-### Tidying data on test-retest reliability
+#### Tidying data on test-retest reliability
 
 
 ```r
@@ -1819,7 +1825,7 @@ long %>%
 ## Warning: Removed 30 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-58-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
 
 Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
 
@@ -1836,7 +1842,7 @@ long %>%
 ## Warning: Removed 54 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
 
 Differences are seen most clearly when plotted directly.
 
@@ -1859,9 +1865,9 @@ long %>%
 ## Warning: Removed 39 rows containing non-finite values (stat_bindot).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-61-1.png)<!-- -->
 
-### Tidying the EU time-use-survey
+#### Tidying the EU time-use-survey
 
 
 ```r
@@ -1902,90 +1908,23 @@ eu_timeuse
 
 ```
 ## # A tibble: 1,671 x 6
-##    activity         country  year prtcp_rate prtcp_time_min time_spent_min
-##    <chr>            <chr>   <dbl>      <dbl>          <dbl>          <dbl>
-##  1 Activities rela… Austria  2010       22.6             48             11
-##  2 Activities rela… Belgium  2000        1.4             88              1
-##  3 Activities rela… Belgium  2010       12.5             46              6
-##  4 Activities rela… Bulgar…  2000        7.1             39              3
-##  5 Activities rela… Estonia  2000       10.9             44              5
-##  6 Activities rela… Estonia  2010        6.9             45              3
-##  7 Activities rela… Finland  2000        7.2             23              2
-##  8 Activities rela… Finland  2010        8.3             27              2
-##  9 Activities rela… France   2000        1.6            102              2
-## 10 Activities rela… France   2010        7.1             51              4
-## # ... with 1,661 more rows
-```
-
-### Tidying model output
-
-We "tidy" the output of the `survfit` function via the "broom" package.
-
-
-```r
-library(survival)
-surv <- survfit(
-  Surv(time = heart$start,
-       time2 = heart$stop,
-       event = heart$event) ~ heart$transplant
-)
-surv
-```
-
-```
-## Call: survfit(formula = Surv(time = heart$start, time2 = heart$stop, 
-##     event = heart$event) ~ heart$transplant)
-## 
-##                    records n.max n.start events median 0.95LCL 0.95UCL
-## heart$transplant=0     103   103       0     30    149      69      NA
-## heart$transplant=1      69    45       0     45     90      53     334
-```
-
-```r
-broom::tidy(surv) %>%
-  ggplot(aes(x = time, y = estimate)) +
-  geom_step(aes(colour = strata))
-```
-
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-62-1.png)<!-- -->
-
-Dobson (1990) Page 93: Randomized Controlled Trial.
-
-
-```r
-dat <- data_frame(
-  counts = c(18,17,15,20,10,20,25,13,12),
-  outcome = gl(3,1,9),
-  treatment = gl(3,3)
-)
-
-dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
-
-broom::tidy(dat_fit)
-```
-
-```
-##          term      estimate std.error     statistic      p.value
-## 1 (Intercept)  3.044522e+00 0.1708987  1.781478e+01 5.426767e-71
-## 2    outcome2 -4.542553e-01 0.2021708 -2.246889e+00 2.464711e-02
-## 3    outcome3 -2.929871e-01 0.1927423 -1.520097e+00 1.284865e-01
-## 4  treatment2  1.337909e-15 0.2000000  6.689547e-15 1.000000e+00
-## 5  treatment3  1.421085e-15 0.2000000  7.105427e-15 1.000000e+00
-```
-
-```r
-broom::glance(dat_fit)
-```
-
-```
-##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-## 1      10.58145       8 -23.38066 56.76132 57.74744 5.129141           4
+##   activity          country  year prtcp_rate prtcp_time_min time_spent_min
+##   <chr>             <chr>   <dbl>      <dbl>          <dbl>          <dbl>
+## 1 Activities relat… Austria  2010       22.6             48             11
+## 2 Activities relat… Belgium  2000        1.4             88              1
+## 3 Activities relat… Belgium  2010       12.5             46              6
+## 4 Activities relat… Bulgar…  2000        7.1             39              3
+## 5 Activities relat… Estonia  2000       10.9             44              5
+## # ... with 1,666 more rows
 ```
 
 ### Excercise: Tidy data
 
 - Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
 
+
+
+- Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
 
 Joins
@@ -2000,7 +1939,7 @@ income <-
 ```
 
 ```
-## Table tgs00026 cached at /tmp/RtmpYvMMUk/eurostat/tgs00026_date_code_FF.rds
+## Table tgs00026 cached at /tmp/Rtmp8HylfA/eurostat/tgs00026_date_code_FF.rds
 ```
 
 ```r
@@ -2012,7 +1951,7 @@ unemp <-
 ```
 
 ```
-## Table tgs00010 cached at /tmp/RtmpYvMMUk/eurostat/tgs00010_date_code_FF.rds
+## Table tgs00010 cached at /tmp/Rtmp8HylfA/eurostat/tgs00010_date_code_FF.rds
 ```
 
 ```r
@@ -2023,7 +1962,7 @@ totfert <-
 ```
 
 ```
-## Table tgs00100 cached at /tmp/RtmpYvMMUk/eurostat/tgs00100_date_code_FF.rds
+## Table tgs00100 cached at /tmp/Rtmp8HylfA/eurostat/tgs00100_date_code_FF.rds
 ```
 
 ```r
@@ -2035,7 +1974,7 @@ lifeexp <-
 ```
 
 ```
-## Table tgs00101 cached at /tmp/RtmpYvMMUk/eurostat/tgs00101_date_code_FF.rds
+## Table tgs00101 cached at /tmp/Rtmp8HylfA/eurostat/tgs00101_date_code_FF.rds
 ```
 
 ```r
@@ -2050,7 +1989,7 @@ popchange <-
 ```
 
 ```
-## Table tgs00099 cached at /tmp/RtmpYvMMUk/eurostat/tgs00099_date_code_FF.rds
+## Table tgs00099 cached at /tmp/Rtmp8HylfA/eurostat/tgs00099_date_code_FF.rds
 ```
 
 ```r
@@ -2079,13 +2018,6 @@ eu_regional_indicators <-
 ### Excercise: Joins
 
 - Create a dataset to a single topic of your choice by joining eurostat tables.
-
-Recoding
---------
-
-### Excercise: Recoding
-
-- Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
 Tidy iteration
 --------------
@@ -2142,7 +2074,7 @@ hmd %>%
   facet_wrap(~sex)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
 
 #### Grouped `filter()`
 
@@ -2195,9 +2127,9 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
 
-### Grouped `summarise()`
+#### Grouped `summarise()`
 
 Say we have a collection of life-tables by country, sex, and year and we want to calculate the coefficient of variation for the life-table distribution of deaths. In other words we want to
 
@@ -2250,7 +2182,7 @@ hmd %>%
   facet_wrap(~country, scales = 'free')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-71-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-70-1.png)<!-- -->
 
 #### Grouped `do()`
 

@@ -1,5 +1,6 @@
 ---
-title: Tidy R
+title: Lecture Notes for the Tidy R Seminar
+subtitle: 'CED, Barcelona, Summer 2018.'
 author: Jonas Schöley
 date: 2018-07-16
 site: bookdown::bookdown_site
@@ -15,7 +16,7 @@ Before we start
 
 
 
-These are the packages we will use during this course.
+Please run this chunk of code below in your R session. It will install all the packages we need during the course.
 
 
 ```r

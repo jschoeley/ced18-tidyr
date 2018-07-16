@@ -1,5 +1,4 @@
 book_filename: 'ced18-tidyr'
-chapter_name: 'Chapter '
 repo: https://github.com/jschoeley/ced18-tidyr
 output_dir: docs
 clean: [packages.bib, bookdown.bbl]

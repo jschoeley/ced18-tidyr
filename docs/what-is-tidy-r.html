@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tidy R</title>
-  <meta name="description" content="Tidy R">
+  <title>Lecture Notes for the Tidy R Seminar</title>
+  <meta name="description" content="Lecture Notes for the Tidy R Seminar">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Tidy R" />
+  <meta property="og:title" content="Lecture Notes for the Tidy R Seminar" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="jschoeley/ced18-tidyr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Tidy R" />
+  <meta name="twitter:title" content="Lecture Notes for the Tidy R Seminar" />
   
   
   
@@ -100,9 +100,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Bookdown Book</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
 <li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
 <li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
@@ -115,34 +112,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#the-tidy-approach-to-data-wrangling"><i class="fa fa-check"></i><b>3.1</b> The “tidy” approach to data wrangling</a></li>
-<li class="chapter" data-level="3.2" data-path="data-wrangling.html"><a href="data-wrangling.html#transforming-data-using-verbs"><i class="fa fa-check"></i><b>3.2</b> Transforming data using verbs</a><ul>
+<li class="chapter" data-level="3.2" data-path="data-wrangling.html"><a href="data-wrangling.html#verbs-for-data-transformation"><i class="fa fa-check"></i><b>3.2</b> 6 verbs for data transformation</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#column-based-transforms"><i class="fa fa-check"></i><b>3.2.1</b> Column based transforms</a></li>
 <li class="chapter" data-level="3.2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#row-based-transforms"><i class="fa fa-check"></i><b>3.2.2</b> Row based transforms</a></li>
 <li class="chapter" data-level="3.2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-basic-verbs"><i class="fa fa-check"></i><b>3.2.3</b> Excercise: Basic verbs</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="data-wrangling.html"><a href="data-wrangling.html#pipes"><i class="fa fa-check"></i><b>3.3</b> Pipes</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-pipes"><i class="fa fa-check"></i><b>3.3.1</b> Excercise: Pipes</a></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling.html"><a href="data-wrangling.html#data-pipelines"><i class="fa fa-check"></i><b>3.3</b> Data pipelines</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-data-pipelines"><i class="fa fa-check"></i><b>3.3.1</b> Excercise: Data pipelines</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>3.4</b> Tidy data</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="data-wrangling.html"><a href="data-wrangling.html#long-versus-wide-format-data"><i class="fa fa-check"></i><b>3.4.1</b> Long versus wide format data</a></li>
-<li class="chapter" data-level="3.4.2" data-path="data-wrangling.html"><a href="data-wrangling.html#making-the-implicit-explicit"><i class="fa fa-check"></i><b>3.4.2</b> Making the implicit explicit</a></li>
-<li class="chapter" data-level="3.4.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-police-arrests"><i class="fa fa-check"></i><b>3.4.3</b> Tidying data on police arrests</a></li>
-<li class="chapter" data-level="3.4.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-anscombes-quartet"><i class="fa fa-check"></i><b>3.4.4</b> Tidying Anscombe’s quartet</a></li>
-<li class="chapter" data-level="3.4.5" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-test-retest-reliability"><i class="fa fa-check"></i><b>3.4.5</b> Tidying data on test-retest reliability</a></li>
-<li class="chapter" data-level="3.4.6" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-the-eu-time-use-survey"><i class="fa fa-check"></i><b>3.4.6</b> Tidying the EU time-use-survey</a></li>
-<li class="chapter" data-level="3.4.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-model-output"><i class="fa fa-check"></i><b>3.4.7</b> Tidying model output</a></li>
-<li class="chapter" data-level="3.4.8" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-tidy-data"><i class="fa fa-check"></i><b>3.4.8</b> Excercise: Tidy data</a></li>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling.html"><a href="data-wrangling.html#what-is-tidy-data"><i class="fa fa-check"></i><b>3.4.1</b> What is tidy data?</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling.html"><a href="data-wrangling.html#convert-to-data-frame"><i class="fa fa-check"></i><b>3.4.2</b> Convert to data frame</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling.html"><a href="data-wrangling.html#long-versus-wide-format"><i class="fa fa-check"></i><b>3.4.3</b> Long versus wide format</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-wrangling.html"><a href="data-wrangling.html#handling-missing-values"><i class="fa fa-check"></i><b>3.4.4</b> Handling missing values</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding-variables"><i class="fa fa-check"></i><b>3.4.5</b> Recoding variables</a></li>
+<li class="chapter" data-level="3.4.6" data-path="data-wrangling.html"><a href="data-wrangling.html#case-studies-in-data-cleaning"><i class="fa fa-check"></i><b>3.4.6</b> Case studies in data cleaning</a></li>
+<li class="chapter" data-level="3.4.7" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-tidy-data"><i class="fa fa-check"></i><b>3.4.7</b> Excercise: Tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="data-wrangling.html"><a href="data-wrangling.html#joins"><i class="fa fa-check"></i><b>3.5</b> Joins</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-joins"><i class="fa fa-check"></i><b>3.5.1</b> Excercise: Joins</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding"><i class="fa fa-check"></i><b>3.6</b> Recoding</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-recoding"><i class="fa fa-check"></i><b>3.6.1</b> Excercise: Recoding</a></li>
-</ul></li>
-<li class="chapter" data-level="3.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-iteration"><i class="fa fa-check"></i><b>3.7</b> Tidy iteration</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-wise-operations"><i class="fa fa-check"></i><b>3.7.1</b> Group-wise operations</a></li>
-<li class="chapter" data-level="3.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#grouped-summarise"><i class="fa fa-check"></i><b>3.7.2</b> Grouped <code>summarise()</code></a></li>
-<li class="chapter" data-level="3.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#column-wise-operations"><i class="fa fa-check"></i><b>3.7.3</b> Column-wise operations</a></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-iteration"><i class="fa fa-check"></i><b>3.6</b> Tidy iteration</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-wise-operations"><i class="fa fa-check"></i><b>3.6.1</b> Group-wise operations</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-wrangling.html"><a href="data-wrangling.html#column-wise-operations"><i class="fa fa-check"></i><b>3.6.2</b> Column-wise operations</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
@@ -174,9 +166,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
 <li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -186,7 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidy R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lecture Notes for the Tidy R Seminar</a>
           </h1>
         </div>
 
@@ -195,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="what-is-tidy-r" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> What is tidy R?</h1>
+<h1><span class="header-section-number">2</span> What is tidy R?</h1>
 <div id="differences-between-tidy-and-base-r" class="section level2">
 <h2><span class="header-section-number">2.1</span> Differences between tidy and base R</h2>
 <p>The Gompertz Law describes the exponential relationship between age and mortality rate in human populations. Its two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> describe the overall mortality level and the relative rate of mortality inrease over age. It is well known that both parameters correlate with each other. The code below demonstrates this co-variance by fitting the Gompertz equation to Swedish birth cohorts and plotting the parameter estimates against each other.</p>

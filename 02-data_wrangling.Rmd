@@ -9,10 +9,6 @@ options(tibble.print_max = 5,
 
 ```{r message=FALSE}
 library(tidyverse)
-
-# General social survey
-# source: http://gss.norc.org/s
-gss <- haven::read_stata('data/gss/GSS2016.DTA')
 ```
 
 The "tidy" approach to data wrangling
@@ -25,10 +21,10 @@ The "tidy" approach to data wrangling
 3) **Tidy Data** Everything is a data frame with cases as rows and variables as columns.
 4) **Tidy iteration** Transformations can be repeatedly applied to different row or column subsets without the use of a for loop.
 
-Transforming data using verbs
------------------------------
+6 verbs for data transformation
+-------------------------------
 
-The `tidyverse` provides us with an array of *verbs* for data transformation such as `filter()`, `mutate()`, `summarise()` and many more. While each of those verbs performs a distinct action they all have a common design. All verbs...
+The `tidyverse` provides us with an array of *verbs* for data transformation such as `mutate()`, `filter()`, `arrange()` and others. While each of those verbs performs a distinct action they all have a common design. All verbs...
 
 - ...have as their first argument a data frame:
 
@@ -446,8 +442,8 @@ gss %>% select(-matches('[1-9]'))
 gss %>% select(contains('pol'))
 ```
 
-Pipes
------
+Data pipelines
+--------------
 
 We can chain multiple function and transformations steps into a *data analysis pipeline*. This is a great approach for clear, fast, interactive data analysis.
 
@@ -476,7 +472,7 @@ WorldPhones %>%
 
 The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.
 
-### Excercise: Pipes
+### Excercise: Data pipelines
 
 Rewrite the following expressions as pipes:
 
@@ -509,6 +505,8 @@ xtabs(~ gear + cyl, data = mtcars, subset = mtcars$gear > 4)
 Tidy data
 ---------
 
+### What is tidy data?
+
 Many programming tasks become easier once the data is in a tidy format. But what is tidy data? Our working definition: **data needs to be a data frame** and **every variable of interest needs to be a separate column**. Let's explore what that means.
 
 ```{r}
@@ -535,8 +533,6 @@ Say we we want to plot the number of telephone connections over time by continen
 
 Problem is, *none* of these variables are explicitly given in our data frame. Of course the data is all there, just not in a format we can use (with ggplot). So the question is how to reshape the data into a form where all the variables of interest are separate columns in the data frame.
 
-To reshape we are going to use the libraries [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html). Both are loaded when you load `library(tidyverse)`.
-
 The easiest variable to make explicit is the year. It is given as rownames of the data frame. We take the rownames, convert them from character to integer type, and add them as the variable `year` to the data frame. We use the `tidyverse` function `mutate()` to add a new variable to a data frame.
 
 ```{r}
@@ -558,7 +554,39 @@ ggplot(phones) +
   geom_line(aes(x = year, y = n, colour = cont))
 ```
 
-### Long versus wide format data
+### Convert to data frame
+
+We "tidy" the output of the `survfit` function via the "broom" package.
+
+```{r}
+library(survival)
+surv <- survfit(
+  Surv(time = heart$start,
+       time2 = heart$stop,
+       event = heart$event) ~ heart$transplant
+)
+surv
+broom::tidy(surv) %>%
+  ggplot(aes(x = time, y = estimate)) +
+  geom_step(aes(colour = strata))
+```
+
+Dobson (1990) Page 93: Randomized Controlled Trial.
+
+```{r}
+dat <- data_frame(
+  counts = c(18,17,15,20,10,20,25,13,12),
+  outcome = gl(3,1,9),
+  treatment = gl(3,3)
+)
+
+dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
+
+broom::tidy(dat_fit)
+broom::glance(dat_fit)
+```
+
+### Long versus wide format
 
 Each table has a *wide format* and a long format representation. The information content is the same in both formats. It's the layout that differs.
 
@@ -601,7 +629,7 @@ hmd %>%
   select(country, period, age, Female, Male)
 ```
 
-### Making the implicit explicit
+### Handling missing values
 
 ```{r}
 # turn implicit NAs into explicit NAs
@@ -609,11 +637,11 @@ eu_timeuse_tot %>% skimr::n_missing()
 eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_missing()
 ```
 
-```{r}
-USArrests %>% rownames_to_column('state')
-```
+### Recoding variables
 
-### Tidying data on police arrests
+### Case studies in data cleaning
+
+#### Tidying data on police arrests
 
 Before we start plotting we need to ask ourselves: *What do we need to do with our data in order to get the plot we want?* Here are some examples.
 
@@ -663,7 +691,7 @@ USArrests %>%
   geom_point()
 ```
 
-### Tidying Anscombe's quartet
+#### Tidying Anscombe's quartet
 
 Can you figure out what happens here? Try running the code yourself line by line.
 
@@ -679,7 +707,7 @@ anscombe %>%
   facet_wrap(~panel)
 ```
 
-### Tidying data on test-retest reliability
+#### Tidying data on test-retest reliability
 
 ```{r message=FALSE}
 wide <- read_csv("https://raw.githubusercontent.com/jschoeley/idem_viz/master/ggplot_practical/03-tidy_data/wide_data.csv")
@@ -730,7 +758,7 @@ long %>%
   facet_wrap(~rater)
 ```
 
-### Tidying the EU time-use-survey
+#### Tidying the EU time-use-survey
 
 ```{r message=FALSE, cache=TRUE}
 library(lubridate)
@@ -761,38 +789,6 @@ eu_timeuse <-
 eu_timeuse
 ```
 
-### Tidying model output
-
-We "tidy" the output of the `survfit` function via the "broom" package.
-
-```{r}
-library(survival)
-surv <- survfit(
-  Surv(time = heart$start,
-       time2 = heart$stop,
-       event = heart$event) ~ heart$transplant
-)
-surv
-broom::tidy(surv) %>%
-  ggplot(aes(x = time, y = estimate)) +
-  geom_step(aes(colour = strata))
-```
-
-Dobson (1990) Page 93: Randomized Controlled Trial.
-
-```{r}
-dat <- data_frame(
-  counts = c(18,17,15,20,10,20,25,13,12),
-  outcome = gl(3,1,9),
-  treatment = gl(3,3)
-)
-
-dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
-
-broom::tidy(dat_fit)
-broom::glance(dat_fit)
-```
-
 ### Excercise: Tidy data
 
 - Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
@@ -815,6 +811,9 @@ foo %>%
   facet_wrap(~geo) +
   theme_minimal()
 ```
+
+- Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
+
 
 Joins
 -----
@@ -866,13 +865,6 @@ eu_regional_indicators <-
 ### Excercise: Joins
 
 - Create a dataset to a single topic of your choice by joining eurostat tables.
-
-Recoding
---------
-
-### Excercise: Recoding
-
-- Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
 Tidy iteration
 --------------
@@ -948,7 +940,7 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-### Grouped `summarise()`
+#### Grouped `summarise()`
 
 Say we have a collection of life-tables by country, sex, and year and we want to calculate the coefficient of variation for the life-table distribution of deaths. In other words we want to
 
