@@ -16,6 +16,9 @@ Before we start
 
 
 
+Prerequisites
+-------------
+
 Please run this chunk of code below in your R session. It will install all the packages we need during the course.
 
 
@@ -38,3 +41,12 @@ devtools::install_cran(
   repos = "https://cran.rstudio.com/"
 )
 ```
+
+Literate programming in Rmarkdown
+---------------------------------
+
+[The official Rmarkdown cheat sheet.](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+### Excercise: Literate programming in Rmarkdown
+
+- Rewrite any of your existing R-scripts into an Rmarkdown script. Demonstrate loading data from the hard disc, plot output, text blocks, headers and lists. Export to pdf.

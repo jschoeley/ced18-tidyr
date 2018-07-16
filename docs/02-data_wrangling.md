@@ -3,9 +3,35 @@ Data Wrangling
 
 
 
+Datasets used in this chapter
+-----------------------------
+
 
 ```r
 library(tidyverse)
+
+# hmd_counts
+# Deaths and exposures by age, year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd_counts.RData')
+
+# General social survey
+# source: http://gss.norc.org/s
+gss <- haven::read_stata('data/gss/GSS2016.DTA')
+
+# euro_regio
+# European regional population statistics
+load('data/euro_regio/euro_regio.Rdata')
+
+# eu_timeuse_tot
+# European timeuse survey
+# source: Eurostat
+load('data/eu_timeuse/eu_timeuse_tot.Rdata')
+
+# hmd
+# Life tables by year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd.RData')
 ```
 
 The "tidy" approach to data wrangling
@@ -57,11 +83,6 @@ The data frame to operate on is always the first argument in any of the *verb* f
 
 
 ```r
-# hmd_counts
-# Deaths and exposures by age, year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd_counts.RData')
-
 select(hmd_counts, 1)
 ```
 
@@ -297,9 +318,6 @@ Using `select()` we can specify which columns to keep and which columns to delet
 
 
 ```r
-# General social survey
-# source: http://gss.norc.org/s
-gss <- haven::read_stata('data/gss/GSS2016.DTA')
 gss
 ```
 
@@ -600,16 +618,16 @@ gss %>% select(sample(ncol(.)))
 
 ```
 ## # A tibble: 2,867 x 960
-##   racdif2  divorce  wordsum  teens wordc discaffw sparts richwork corrupt2
-##   <dbl+lb> <dbl+lb> <dbl+lb> <dbl> <dbl> <dbl+lb> <dbl+> <dbl+lb> <dbl+lb>
-## 1 2        2        8        2     1     <NA>     3      2        3       
-## 2 2        <NA>     5        0     0     <NA>     4      <NA>     3       
-## 3 <NA>     2        <NA>     0     <NA>  <NA>     <NA>   <NA>     <NA>    
-## 4 2        2        5        2     <NA>  <NA>     2      1        5       
-## 5 <NA>     2        <NA>     0     <NA>  <NA>     <NA>   1        <NA>    
-## # ... with 2,862 more rows, and 951 more variables: suicide3 <dbl+lbl>,
-## #   artloc <dbl+lbl>, rhlpsoc <dbl+lbl>, econsup1 <dbl+lbl>,
-## #   fehire <dbl+lbl>, …
+##   libmslm  snsmot2c  raclive  gender9  relhhd3  clssmtes  tumblr  savejobs
+##   <dbl+lb> <dbl+lbl> <dbl+lb> <dbl+lb> <dbl+lb> <dbl+lbl> <dbl+l> <dbl+lb>
+## 1 2        <NA>      1        <NA>     4        <NA>      <NA>    3       
+## 2 <NA>     <NA>      1        <NA>     <NA>     2         2       3       
+## 3 1        <NA>      1        <NA>     <NA>     2         2       <NA>    
+## 4 2        <NA>      2        <NA>     4        <NA>      <NA>    4       
+## 5 1        <NA>      2        <NA>     4        2         2       <NA>    
+## # ... with 2,862 more rows, and 952 more variables: adforjob <dbl+lbl>,
+## #   cutgovt <dbl+lbl>, gender12 <dbl+lbl>, rowngun <dbl+lbl>,
+## #   coind10 <dbl+lbl>, …
 ```
 
 Selected columns can be renamed.
@@ -679,10 +697,6 @@ You can create subsets of the rows in your data using `filter()`.
 
 
 ```r
-# euro_regio
-# European regional population statistics
-load('data/euro_regio/euro_regio.Rdata')
-
 # return rows of `euro_regio` where year is equal to 2016
 euro_regio %>% filter(year == 2016)
 ```
@@ -1098,11 +1112,6 @@ euro_regio %>% filter(is.na(pop))
 
 
 ```r
-# eu_timeuse_tot
-# European timeuse survey
-# source: Eurostat
-load('data/eu_timeuse/eu_timeuse_tot.Rdata')
-
 # order data frame by increasing date
 eu_timeuse_tot %>% arrange(year)
 ```
@@ -1182,24 +1191,102 @@ eu_timeuse_tot %>% arrange(desc(activity_name), country_name)
 
 #### `slice()` rows
 
+Rows are selected with `slice()`. The rows in a dataframe are indexed 1 to n, with n being the total number of rows. The `slice()` function takes a single integer or a vector of integers and returns the rows with the correponding index.
+
 
 ```r
-#random shuffle
-gss %>% slice(sample(1:n()))
+# extract the first row
+hmd_counts %>% slice(1)
 ```
 
 ```
-## # A tibble: 2,867 x 960
-##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
-##   <dbl+> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 1      1     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 2 5      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 3 2      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 4 1      1     5     3     <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## 5 5      <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA>  <NA> 
-## # ... with 2,862 more rows, and 948 more variables: mar13 <dbl+lbl>,
-## #   mar14 <dbl+lbl>, abany <dbl+lbl>, abdefect <dbl+lbl>,
-## #   abhlth <dbl+lbl>, …
+## # A tibble: 1 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
+## 1 AUS     Female   1921     0     1 3842. 64052.
+```
+
+```r
+# extract the last row
+hmd_counts %>% slice(n())
+```
+
+```
+## # A tibble: 1 x 7
+##   country sex   period   age    nx   nDx   nEx
+##   <chr>   <chr>  <int> <int> <int> <dbl> <dbl>
+## 1 USA     Total   2016   110    NA    94  165.
+```
+
+```r
+# extract rows 20 to 40
+hmd_counts %>% slice(20:40)
+```
+
+```
+## # A tibble: 21 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
+## 1 AUS     Female   1921    19     1  101. 45909.
+## 2 AUS     Female   1921    20     1  138. 46387.
+## 3 AUS     Female   1921    21     1  118. 46437.
+## 4 AUS     Female   1921    22     1  116. 45769.
+## 5 AUS     Female   1921    23     1  149. 45746.
+## # ... with 16 more rows
+```
+
+Functions which return integers can be used inside `slice()`.
+
+
+```r
+# extract every 10th row
+hmd_counts%>% slice(seq(1, n(), 10))
+```
+
+```
+## # A tibble: 130,470 x 7
+##   country sex    period   age    nx    nDx    nEx
+##   <chr>   <chr>   <int> <int> <int>  <dbl>  <dbl>
+## 1 AUS     Female   1921     0     1 3842.  64052.
+## 2 AUS     Female   1921    10     1   69.0 55240.
+## 3 AUS     Female   1921    20     1  138.  46387.
+## 4 AUS     Female   1921    30     1  183.  46315.
+## 5 AUS     Female   1921    40     1  198.  35317.
+## # ... with 1.305e+05 more rows
+```
+
+```r
+# extract 50 random rows
+hmd_counts%>% slice(sample(1:n(), 50))
+```
+
+```
+## # A tibble: 50 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
+## 1 LUX     Male     2000    29     1    8   3478.
+## 2 FIN     Male     1930    33     1  196  22997.
+## 3 FRATNP  Female   1866    73     1 6987. 77440.
+## 4 HUN     Female   2003    69     1 1204. 55310.
+## 5 IRL     Male     1956     8     1   22  30830.
+## # ... with 45 more rows
+```
+
+```r
+# randomly shuffle all rows
+hmd_counts %>% slice(sample(1:n()))
+```
+
+```
+## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx       nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>     <dbl>
+## 1 NLD     Male     1906    47     1  231   24716.  
+## 2 ITA     Male     1914    80     1 4081.  26908.  
+## 3 CAN     Female   1974    32     1  112  149418.  
+## 4 IRL     Male     1993    84     1  460    2757.  
+## 5 SWE     Female   1981   109     1    1       0.83
+## # ... with 1.305e+06 more rows
 ```
 
 ### Excercise: Basic verbs
@@ -1249,31 +1336,34 @@ We can chain multiple function and transformations steps into a *data analysis p
 
 This is what we need to know in order to build pipelines:
 
-* The object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right
-* If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`)
+* By default, the object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right.
 
 Here's a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.
 
 
 ```r
-# the raw data...
-WorldPhones %>%
-  # ...is converted to a data frame...
-  as.data.frame() %>%
-  # ...the rownames are added as the column `year`...
-  # (note that I use the dot here to explicitly refer to the input data)
-  mutate(year = as.integer(rownames(.))) %>%
-  # ...the data gets transformed from wide to long format...
-  gather(key = cont, value = n, -year) %>%
-  # ...and finally plotted
-  # (note that I can pipe the tidy data frame directly into ggplot)
-  ggplot() +
-  geom_line(aes(x = year, y = n, colour = cont))
+# Remaining life-expectancy at former and new retirement age in Russia by sex
+hmd %>%
+  filter(period == 2014, country == 'RUS', sex != 'Total',
+         sex == 'Male' & age %in% c(60, 65) |
+           sex == 'Female' & age %in% c(55, 63)) %>%
+  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'old',
+                                    age %in% c(63, 65)~ 'new')) %>% 
+  select(sex, retirement_age, ex) %>%
+  ggplot(aes(x = sex, y = ex, fill = retirement_age)) +
+  geom_col(position = 'dodge')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-39-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-40-1.png)<!-- -->
 
-The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.
+* If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`). In that case the object on the left is only passed to the dot and not to the first argument.
+
+
+
+* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. But the dot does not need to stand on its own. It can be indexed like a regular R object.
+
+
+
 
 ### Excercise: Data pipelines
 
@@ -1304,7 +1394,7 @@ FALSE [1] 171700
 hist(colMeans(replicate(1000, runif(100))))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-40-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-43-1.png)<!-- -->
 
 ```r
 #replicate(1000, runif(100)) %>% colMeans() %>% hist()
@@ -1518,7 +1608,7 @@ ggplot(phones) +
   geom_line(aes(x = year, y = n, colour = cont))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-46-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-49-1.png)<!-- -->
 
 ### Convert to data frame
 
@@ -1550,7 +1640,7 @@ broom::tidy(surv) %>%
   geom_step(aes(colour = strata))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-47-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-50-1.png)<!-- -->
 
 Dobson (1990) Page 93: Randomized Controlled Trial.
 
@@ -1631,11 +1721,6 @@ spread(long, key = Sex, value = N)
 
 
 ```r
-# hmd
-# Life tables by year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd.RData')
-
 # common problems: no matching row was found
 hmd %>%
   filter(period > 2005, country == 'RUS', age == 0) %>%
@@ -1700,49 +1785,6 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 
 ### Case studies in data cleaning
 
-#### Tidying data on police arrests
-
-Before we start plotting we need to ask ourselves: *What do we need to do with our data in order to get the plot we want?* Here are some examples.
-
-
-```r
-# we start with raw data...
-USArrests %>%
-  mutate(
-    # ...and add the new variable `state` from the rownames...
-    state = rownames(.),
-    # ...we then reorder the levels of `state` according to the percentage of
-    # people living in urban areas...
-    state = reorder(state, UrbanPop)) %>%
-  # ...and make a dotplot of the percentage of urban population by state...
-  ggplot() +
-  geom_point(aes(x = UrbanPop, y = state))
-```
-
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-54-1.png)<!-- -->
-
-
-```r
-# we start with raw data...
-USArrests %>%
-  mutate(
-    # ...and add the new variable `state` from the rownames...
-    state = rownames(.),
-    # ...we then reorder the levels of `state` according to the combined
-    # murder, assault and crime rates...
-    state = reorder(state, Murder+Assault+Rape)) %>%
-  # ...we convert to long format, gathering "Assault", "Murder" and "Rape"
-  # into "crime"...
-  gather(key = crime, value = rate, -state, -UrbanPop) %>%
-  # ...and make a dotplot of the crime-rate by crime and state
-  ggplot() +
-  geom_point(aes(x = rate, y = state, colour = crime))
-```
-
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-55-1.png)<!-- -->
-
-
-
 #### Tidying Anscombe's quartet
 
 Can you figure out what happens here? Try running the code yourself line by line.
@@ -1784,7 +1826,6 @@ wide
 ## #   circum_camera1a <dbl>, …
 ```
 
-
 ```r
 long <-
   wide %>%
@@ -1825,7 +1866,7 @@ long %>%
 ## Warning: Removed 30 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-58-1.png)<!-- -->
 
 Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
 
@@ -1842,7 +1883,7 @@ long %>%
 ## Warning: Removed 54 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
 
 Differences are seen most clearly when plotted directly.
 
@@ -1865,7 +1906,7 @@ long %>%
 ## Warning: Removed 39 rows containing non-finite values (stat_bindot).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-61-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
 
 #### Tidying the EU time-use-survey
 
@@ -1920,10 +1961,6 @@ eu_timeuse
 
 ### Excercise: Tidy data
 
-- Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
-
-
-
 - Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
 
@@ -1939,7 +1976,7 @@ income <-
 ```
 
 ```
-## Table tgs00026 cached at /tmp/Rtmp8HylfA/eurostat/tgs00026_date_code_FF.rds
+## Table tgs00026 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00026_date_code_FF.rds
 ```
 
 ```r
@@ -1951,7 +1988,7 @@ unemp <-
 ```
 
 ```
-## Table tgs00010 cached at /tmp/Rtmp8HylfA/eurostat/tgs00010_date_code_FF.rds
+## Table tgs00010 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00010_date_code_FF.rds
 ```
 
 ```r
@@ -1962,7 +1999,7 @@ totfert <-
 ```
 
 ```
-## Table tgs00100 cached at /tmp/Rtmp8HylfA/eurostat/tgs00100_date_code_FF.rds
+## Table tgs00100 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00100_date_code_FF.rds
 ```
 
 ```r
@@ -1974,7 +2011,7 @@ lifeexp <-
 ```
 
 ```
-## Table tgs00101 cached at /tmp/Rtmp8HylfA/eurostat/tgs00101_date_code_FF.rds
+## Table tgs00101 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00101_date_code_FF.rds
 ```
 
 ```r
@@ -1989,7 +2026,7 @@ popchange <-
 ```
 
 ```
-## Table tgs00099 cached at /tmp/Rtmp8HylfA/eurostat/tgs00099_date_code_FF.rds
+## Table tgs00099 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00099_date_code_FF.rds
 ```
 
 ```r
@@ -2036,11 +2073,6 @@ Biologists sometimes express age not in years but in shares of total life-expect
 
 
 ```r
-# hmd
-# Life tables by year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd.RData')
-
 hmd %>%
   group_by(country, sex, period) %>%
   mutate(relAge = age / ex[1]) %>%
@@ -2074,7 +2106,7 @@ hmd %>%
   facet_wrap(~sex)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-64-1.png)<!-- -->
 
 #### Grouped `filter()`
 
@@ -2084,10 +2116,6 @@ hmd %>%
 
 
 ```r
-# euro_regio
-# European regional population statistics
-load('data/euro_regio/euro_regio.Rdata')
-
 euro_regio %>%
   # for each country...
   group_by(country_name) %>%
@@ -2127,7 +2155,7 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
 
 #### Grouped `summarise()`
 
@@ -2182,7 +2210,7 @@ hmd %>%
   facet_wrap(~country, scales = 'free')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-70-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
 
 #### Grouped `do()`
 
@@ -2275,5 +2303,9 @@ mutate(hmd_counts,
 ```
 
 #### `*_all()`
+
+#### Excercise: Column-wise operations
+
+- Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
 
 

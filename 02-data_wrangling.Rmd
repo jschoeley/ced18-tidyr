@@ -7,8 +7,34 @@ options(tibble.print_max = 5,
         tibble.max_extra_cols = 5)
 ```
 
+Datasets used in this chapter
+-----------------------------
+
 ```{r message=FALSE}
 library(tidyverse)
+
+# hmd_counts
+# Deaths and exposures by age, year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd_counts.RData')
+
+# General social survey
+# source: http://gss.norc.org/s
+gss <- haven::read_stata('data/gss/GSS2016.DTA')
+
+# euro_regio
+# European regional population statistics
+load('data/euro_regio/euro_regio.Rdata')
+
+# eu_timeuse_tot
+# European timeuse survey
+# source: Eurostat
+load('data/eu_timeuse/eu_timeuse_tot.Rdata')
+
+# hmd
+# Life tables by year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd.RData')
 ```
 
 The "tidy" approach to data wrangling
@@ -40,11 +66,6 @@ select(as.data.frame(WorldPhones), 3)
 The data frame to operate on is always the first argument in any of the *verb* functions. Here we `select()` the first variable of the data frame `hmd_counts`.
 
 ```{r}
-# hmd_counts
-# Deaths and exposures by age, year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd_counts.RData')
-
 select(hmd_counts, 1)
 ```
 
@@ -130,9 +151,6 @@ hmd_counts %>%
 Using `select()` we can specify which columns to keep and which columns to delete from a data frame. Let's have a look at a typical panel data set: The [General Social Survey](http://gss.norc.org/). We can see that the `gss` data features 960 columns.
 
 ```{r}
-# General social survey
-# source: http://gss.norc.org/s
-gss <- haven::read_stata('data/gss/GSS2016.DTA')
 gss
 ```
 
@@ -240,10 +258,6 @@ hmd_counts %>% rename(`Person-years exposure` = nEx, `Number of deaths` = nDx)
 You can create subsets of the rows in your data using `filter()`.
 
 ```{r}
-# euro_regio
-# European regional population statistics
-load('data/euro_regio/euro_regio.Rdata')
-
 # return rows of `euro_regio` where year is equal to 2016
 euro_regio %>% filter(year == 2016)
 ```
@@ -363,11 +377,6 @@ euro_regio %>% filter(is.na(pop))
 `arrange()` re-orders the rows of a dataframe according to the values of one or more variables within that dataframe.
 
 ```{r}
-# eu_timeuse_tot
-# European timeuse survey
-# source: Eurostat
-load('data/eu_timeuse/eu_timeuse_tot.Rdata')
-
 # order data frame by increasing date
 eu_timeuse_tot %>% arrange(year)
 ```
@@ -391,9 +400,30 @@ eu_timeuse_tot %>% arrange(desc(activity_name), country_name)
 
 #### `slice()` rows
 
+Rows are selected with `slice()`. The rows in a dataframe are indexed 1 to n, with n being the total number of rows. The `slice()` function takes a single integer or a vector of integers and returns the rows with the correponding index.
+
 ```{r}
-#random shuffle
-gss %>% slice(sample(1:n()))
+# extract the first row
+hmd_counts %>% slice(1)
+
+# extract the last row
+hmd_counts %>% slice(n())
+
+# extract rows 20 to 40
+hmd_counts %>% slice(20:40)
+```
+
+Functions which return integers can be used inside `slice()`.
+
+```{r}
+# extract every 10th row
+hmd_counts%>% slice(seq(1, n(), 10))
+
+# extract 50 random rows
+hmd_counts%>% slice(sample(1:n(), 50))
+
+# randomly shuffle all rows
+hmd_counts %>% slice(sample(1:n()))
 ```
 
 ### Excercise: Basic verbs
@@ -449,28 +479,35 @@ We can chain multiple function and transformations steps into a *data analysis p
 
 This is what we need to know in order to build pipelines:
 
-* The object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right
-* If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`)
+* By default, the object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right.
 
 Here's a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.
 
 ```{r}
-# the raw data...
-WorldPhones %>%
-  # ...is converted to a data frame...
-  as.data.frame() %>%
-  # ...the rownames are added as the column `year`...
-  # (note that I use the dot here to explicitly refer to the input data)
-  mutate(year = as.integer(rownames(.))) %>%
-  # ...the data gets transformed from wide to long format...
-  gather(key = cont, value = n, -year) %>%
-  # ...and finally plotted
-  # (note that I can pipe the tidy data frame directly into ggplot)
-  ggplot() +
-  geom_line(aes(x = year, y = n, colour = cont))
+# Remaining life-expectancy at former and new retirement age in Russia by sex
+hmd %>%
+  filter(period == 2014, country == 'RUS', sex != 'Total',
+         sex == 'Male' & age %in% c(60, 65) |
+           sex == 'Female' & age %in% c(55, 63)) %>%
+  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'old',
+                                    age %in% c(63, 65)~ 'new')) %>% 
+  select(sex, retirement_age, ex) %>%
+  ggplot(aes(x = sex, y = ex, fill = retirement_age)) +
+  geom_col(position = 'dodge')
 ```
 
-The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.
+* If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`). In that case the object on the left is only passed to the dot and not to the first argument.
+
+```{r}
+
+```
+
+* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. But the dot does not need to stand on its own. It can be indexed like a regular R object.
+
+```{r}
+
+```
+
 
 ### Excercise: Data pipelines
 
@@ -610,11 +647,6 @@ spread(long, key = Sex, value = N)
 ```
 
 ```{r error=TRUE}
-# hmd
-# Life tables by year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd.RData')
-
 # common problems: no matching row was found
 hmd %>%
   filter(period > 2005, country == 'RUS', age == 0) %>%
@@ -641,56 +673,6 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 
 ### Case studies in data cleaning
 
-#### Tidying data on police arrests
-
-Before we start plotting we need to ask ourselves: *What do we need to do with our data in order to get the plot we want?* Here are some examples.
-
-```{r}
-# we start with raw data...
-USArrests %>%
-  mutate(
-    # ...and add the new variable `state` from the rownames...
-    state = rownames(.),
-    # ...we then reorder the levels of `state` according to the percentage of
-    # people living in urban areas...
-    state = reorder(state, UrbanPop)) %>%
-  # ...and make a dotplot of the percentage of urban population by state...
-  ggplot() +
-  geom_point(aes(x = UrbanPop, y = state))
-```
-
-```{r}
-# we start with raw data...
-USArrests %>%
-  mutate(
-    # ...and add the new variable `state` from the rownames...
-    state = rownames(.),
-    # ...we then reorder the levels of `state` according to the combined
-    # murder, assault and crime rates...
-    state = reorder(state, Murder+Assault+Rape)) %>%
-  # ...we convert to long format, gathering "Assault", "Murder" and "Rape"
-  # into "crime"...
-  gather(key = crime, value = rate, -state, -UrbanPop) %>%
-  # ...and make a dotplot of the crime-rate by crime and state
-  ggplot() +
-  geom_point(aes(x = rate, y = state, colour = crime))
-```
-
-```{r include=FALSE, eval=FALSE}
-library(ggrepel) # brilliant package for labelling points in a scatterplot
-# we start with raw data...
-USArrests %>%
-  # ...and add the new variable `state` from the rownames...
-  mutate(state = rownames(.)) %>%
-  # ...andmake a labelled scatterplot of Murder versus Rape
-  ggplot(aes(x = Murder, y = Rape)) +
-  geom_text_repel(aes(label = state),
-                  colour = "grey",
-                  segment.color = "grey",
-                  size = 3) +
-  geom_point()
-```
-
 #### Tidying Anscombe's quartet
 
 Can you figure out what happens here? Try running the code yourself line by line.
@@ -712,9 +694,7 @@ anscombe %>%
 ```{r message=FALSE}
 wide <- read_csv("https://raw.githubusercontent.com/jschoeley/idem_viz/master/ggplot_practical/03-tidy_data/wide_data.csv")
 wide
-```
 
-```{r}
 long <-
   wide %>%
   # add a unique identifier to each row (each patient)
@@ -791,27 +771,6 @@ eu_timeuse
 
 ### Excercise: Tidy data
 
-- Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
-
-```{r include=FALSE, cache=TRUE}
-foo <- get_eurostat('t2020_10', time_format = 'raw')
-foo %>%
-  spread(time, values) %>%
-  mutate_at(vars(`1993`:`2017`), funs(.-TARGET)) %>%
-  gather(... = -c(1:5, 'TARGET')) %>%
-  filter(!is.na(value)) %>%
-  select(geo, year = key, employment = value, target = TARGET) %>%
-  mutate(year = as.integer(year),
-         ontarget = ifelse(employment < 0, 'no', 'yes')) %>%
-  ggplot(aes(year, employment)) +
-  geom_col(aes(fill = ontarget), show.legend = FALSE,
-           position = position_nudge(x = 0.5), width = 1) +
-  geom_step() +
-  coord_cartesian(ylim = c(-10, 10)) +
-  facet_wrap(~geo) +
-  theme_minimal()
-```
-
 - Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
 
@@ -882,11 +841,6 @@ Biologists sometimes express age not in years but in shares of total life-expect
 3. Re-combine the results of 2 into a data frame with columns identifying the sub-groups
 
 ```{r}
-# hmd
-# Life tables by year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd.RData')
-
 hmd %>%
   group_by(country, sex, period) %>%
   mutate(relAge = age / ex[1]) %>%
@@ -913,10 +867,6 @@ hmd %>%
 `slice()` selects rows by index. Using `slice()` in a grouped fashion we can return the first and last row for each group -- this comes in handy as a quick check for data structure and coverage.
 
 ```{r}
-# euro_regio
-# European regional population statistics
-load('data/euro_regio/euro_regio.Rdata')
-
 euro_regio %>%
   # for each country...
   group_by(country_name) %>%
@@ -987,11 +937,6 @@ hmd %>%
 - Calculate five year abridged mortality rates for the whole `hmd_counts` data.
 
 ```{r include=FALSE, eval=FALSE}
-# hmd_counts
-# Deaths and exposures by age, year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd_counts.RData')
-
 hmd_counts %>%
   mutate(x5 = age%/%5*5) %>%
   group_by(country, sex, x5) %>%
@@ -1027,4 +972,25 @@ mutate(hmd_counts,
 
 #### `*_all()`
 
+#### Excercise: Column-wise operations
 
+- Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
+
+```{r include=FALSE, cache=TRUE}
+foo <- get_eurostat('t2020_10', time_format = 'raw')
+foo %>%
+  spread(time, values) %>%
+  mutate_at(vars(`1993`:`2017`), funs(.-TARGET)) %>%
+  gather(... = -c(1:5, 'TARGET')) %>%
+  filter(!is.na(value)) %>%
+  select(geo, year = key, employment = value, target = TARGET) %>%
+  mutate(year = as.integer(year),
+         ontarget = ifelse(employment < 0, 'no', 'yes')) %>%
+  ggplot(aes(year, employment)) +
+  geom_col(aes(fill = ontarget), show.legend = FALSE,
+           position = position_nudge(x = 0.5), width = 1) +
+  geom_step() +
+  coord_cartesian(ylim = c(-10, 10)) +
+  facet_wrap(~geo) +
+  theme_minimal()
+```

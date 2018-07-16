@@ -3,8 +3,8 @@ What is tidy R?
 
 
 
-Differences between tidy and base R
------------------------------------
+tidy R vs. base R
+-----------------
 
 The Gompertz Law describes the exponential relationship between age and mortality rate in human populations. Its two parameters $a$ and $b$ describe the overall mortality level and the relative rate of mortality inrease over age. It is well known that both parameters correlate with each other. The code below demonstrates this co-variance by fitting the Gompertz equation to Swedish birth cohorts and plotting the parameter estimates against each other.
 
@@ -84,19 +84,69 @@ What are the differences?
 
 ![In tidy R all information exists in the form of data frame columns.](assets/variable_in_its_own_column.png)
 
-### Excercise: Differences between tidy and base R
+### Excercise: tidy R vs. base R
 
 - Discuss the differences.
 
-Literate programming in Rmarkdown
----------------------------------
+First steps in tidy R
+---------------------
 
-[The official Rmarkdown cheat sheet.](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+This is the script we developed during the first lecture.
 
-### Excercise: Literate programming in Rmarkdown
+Everything starts with a dataframe.
 
-- Rewrite any of your existing R-scripts into an Rmarkdown script. Demonstrate loading data from the hard disc, plot output, text blocks, headers and lists. Export to pdf.
 
-First steps in tidy data analysis
----------------------------------
+```r
+library(tidyverse)
 
+load('data/hmd/hmd_counts.RData')
+
+hmd_counts %>%
+  arrange(country, sex, period, age)
+```
+
+```
+## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
+## 1 AUS     Female   1921     0     1 3842. 64052.
+## 2 AUS     Female   1921     1     1  719. 59619.
+## 3 AUS     Female   1921     2     1  330. 57126.
+## 4 AUS     Female   1921     3     1  166. 57484.
+## 5 AUS     Female   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows
+```
+
+*Split-apply-combine* is such a common data analysis pattern.
+
+`summarise()` can work with base R functions that take a vector as input and return a scalar (a single value) as output. If you work with a function that returns a small vector (like `range()`) you must make sure to subset the output of that function to a scalar.
+
+
+```r
+counts <-
+  hmd_counts %>%
+  arrange(country, sex, period, age) %>%
+  filter(age >= 30, sex == 'Total') %>%
+  drop_na() %>%
+  group_by(country) %>%
+  summarise(min = range(period)[1],
+            max = range(period)[2])
+```
+
+We can write a pipe end-to-end, from raw data, to finished plot, without ever saving the results. It is important to know how your data looks like at each stage in the pipe. You can write `data %>% View()` to get that information.
+
+
+```r
+hmd_counts %>%
+  arrange(country, sex, period, age) %>%
+  filter(age >= 30, sex == 'Total') %>%
+  drop_na() %>%
+  group_by(country, period) %>%
+  summarise(D = sum(nDx), E = sum(nEx)) %>%
+  mutate(CDR = D/E) %>%
+  filter(country == 'ESP') %>%
+  ggplot() +
+  geom_line(aes(x = period, y = CDR))
+```
+
+![](01-what_is_tidy_r_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
