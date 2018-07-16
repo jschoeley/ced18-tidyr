@@ -14,7 +14,7 @@
   
   
   
-  
+  <meta name="github-repo" content="jschoeley/ced18-tidyr" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Tidy R" />
@@ -25,6 +25,7 @@
 <meta name="author" content="Jonas Schöley">
 
 
+<meta name="date" content="2018-07-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -86,6 +87,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -98,6 +100,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Bookdown Book</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
 <li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
 <li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
@@ -169,6 +174,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
 <li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -187,9 +195,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="data-wrangling" class="section level1">
-<h1><span class="header-section-number">3</span> Data Wrangling</h1>
+<h1><span class="header-section-number">Chapter 3</span> Data Wrangling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
 
 <span class="co"># General social survey</span>
 <span class="co"># source: http://gss.norc.org/s</span>
@@ -581,16 +588,16 @@ gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sele
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reorder the columns randomly</span>
 gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">sample</span>(<span class="kw">ncol</span>(.)))</code></pre></div>
 <pre><code>## # A tibble: 2,867 x 960
-##   away11  parborn  prfmwhy5  rintjob  relsp4 old4  sparms gender1 copres10
-##   &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lbl&gt; &lt;dbl+lb&gt; &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl+&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt;
-## 1 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     4      15    4      1       &lt;NA&gt;    
-## 2 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  4      1       &lt;NA&gt;    
-## 3 &lt;NA&gt;    0        3         &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;   1       &lt;NA&gt;    
-## 4 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     41     21    2      1       &lt;NA&gt;    
-## 5 &lt;NA&gt;    0        &lt;NA&gt;      3        &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;   1       &lt;NA&gt;    
-## # ... with 2,862 more rows, and 951 more variables: inthisp &lt;dbl+lbl&gt;,
-## #   relate4 &lt;dbl+lbl&gt;, wkwkends &lt;dbl+lbl&gt;, wrkshift &lt;dbl+lbl&gt;,
-## #   courts &lt;dbl+lbl&gt;, …</code></pre>
+##   frndsex  colcom  gender3 fund16 old4  cojew balpos relhh12 brlawfl wordh
+##   &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl+&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl&gt;
+## 1 &lt;NA&gt;     5       1       2      15    &lt;NA&gt;  1      &lt;NA&gt;    2       1    
+## 2 1        &lt;NA&gt;    &lt;NA&gt;    2      &lt;NA&gt;  &lt;NA&gt;  1      &lt;NA&gt;    3       0    
+## 3 &lt;NA&gt;     4       &lt;NA&gt;    2      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt; 
+## 4 &lt;NA&gt;     5       1       2      21    &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;    3       &lt;NA&gt; 
+## 5 &lt;NA&gt;     5       2       3      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt; 
+## # ... with 2,862 more rows, and 950 more variables: agedchld &lt;dbl+lbl&gt;,
+## #   uscitzn &lt;dbl+lbl&gt;, marital &lt;dbl+lbl&gt;, wtssall &lt;dbl+lbl&gt;,
+## #   ethnum &lt;dbl+lbl&gt;, …</code></pre>
 <p>Selected columns can be renamed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dt">ID =</span> id, <span class="dt">EDUCATION =</span> educ)</code></pre></div>
 <pre><code>## # A tibble: 2,867 x 2
@@ -944,11 +951,11 @@ gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slic
 <pre><code>## # A tibble: 2,867 x 960
 ##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
 ##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
-## 2 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
-## 3 5      5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
-## 4 1      1     5     &lt;NA&gt;  &lt;NA&gt;  5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
-## 5 3      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 1 5      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 5      1     1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 3      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
 ## # ... with 2,862 more rows, and 948 more variables: mar13 &lt;dbl+lbl&gt;,
 ## #   mar14 &lt;dbl+lbl&gt;, abany &lt;dbl+lbl&gt;, abdefect &lt;dbl+lbl&gt;,
 ## #   abhlth &lt;dbl+lbl&gt;, …</code></pre>
@@ -1008,7 +1015,7 @@ WorldPhones <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># (note that I can pipe the tidy data frame directly into ggplot)</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">colour =</span> cont))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.</p>
 <div id="excercise-pipes" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> Excercise: Pipes</h3>
@@ -1022,7 +1029,7 @@ WorldPhones <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1:100 %&gt;% cumsum() %&gt;% sum()</span>
 
 <span class="kw">hist</span>(<span class="kw">colMeans</span>(<span class="kw">replicate</span>(<span class="dv">1000</span>, <span class="kw">runif</span>(<span class="dv">100</span>))))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#replicate(1000, runif(100)) %&gt;% colMeans() %&gt;% hist()</span>
 
 <span class="kw">any</span>(<span class="kw">is.na</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
@@ -1157,7 +1164,7 @@ phones</code></pre></div>
 <p>We told the computer to look at all columns apart from <code>year</code> and transform them into the columns <code>cont</code> and <code>n</code>. <code>cont</code> holds the continent names for the variable <code>n</code>, the number of telephone connections. The continent names are taken from the original column names we <em>gathered</em> over. We now can plot our data easily.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(phones) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">colour =</span> cont))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <div id="long-versus-wide-format-data" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Long versus wide format data</h3>
 <p>Each table has a <em>wide format</em> and a long format representation. The information content is the same in both formats. It’s the layout that differs.</p>
@@ -1289,7 +1296,7 @@ USArrests <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># ...and make a dotplot of the percentage of urban population by state...</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> UrbanPop, <span class="dt">y =</span> state))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we start with raw data...</span>
 USArrests <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(
@@ -1304,7 +1311,7 @@ USArrests <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># ...and make a dotplot of the crime-rate by crime and state</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rate, <span class="dt">y =</span> state, <span class="dt">colour =</span> crime))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 <div id="tidying-anscombes-quartet" class="section level3">
 <h3><span class="header-section-number">3.4.4</span> Tidying Anscombe’s quartet</h3>
@@ -1318,7 +1325,7 @@ USArrests <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>panel)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="tidying-data-on-test-retest-reliability" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> Tidying data on test-retest reliability</h3>
@@ -1363,7 +1370,7 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(rater<span class="op">~</span>measurement)</code></pre></div>
 <pre><code>## Warning: Removed 30 rows containing missing values (geom_path).</code></pre>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
@@ -1371,7 +1378,7 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(measurement<span class="op">~</span>rater)</code></pre></div>
 <pre><code>## Warning: Removed 54 rows containing missing values (geom_path).</code></pre>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
 <p>Differences are seen most clearly when plotted directly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
@@ -1382,7 +1389,7 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>rater)</code></pre></div>
 <pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 39 rows containing non-finite values (stat_bindot).</code></pre>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 </div>
 <div id="tidying-the-eu-time-use-survey" class="section level3">
 <h3><span class="header-section-number">3.4.6</span> Tidying the EU time-use-survey</h3>
@@ -1414,14 +1421,19 @@ eu_timeuse &lt;-
 ## failed to parse, or all strings are NAs</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eu_timeuse</code></pre></div>
 <pre><code>## # A tibble: 1,671 x 6
-##   activity          country  year prtcp_rate prtcp_time_min time_spent_min
-##   &lt;chr&gt;             &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
-## 1 Activities relat… Austria  2010       22.6             48             11
-## 2 Activities relat… Belgium  2000        1.4             88              1
-## 3 Activities relat… Belgium  2010       12.5             46              6
-## 4 Activities relat… Bulgar…  2000        7.1             39              3
-## 5 Activities relat… Estonia  2000       10.9             44              5
-## # ... with 1,666 more rows</code></pre>
+##    activity         country  year prtcp_rate prtcp_time_min time_spent_min
+##    &lt;chr&gt;            &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+##  1 Activities rela… Austria  2010       22.6             48             11
+##  2 Activities rela… Belgium  2000        1.4             88              1
+##  3 Activities rela… Belgium  2010       12.5             46              6
+##  4 Activities rela… Bulgar…  2000        7.1             39              3
+##  5 Activities rela… Estonia  2000       10.9             44              5
+##  6 Activities rela… Estonia  2010        6.9             45              3
+##  7 Activities rela… Finland  2000        7.2             23              2
+##  8 Activities rela… Finland  2010        8.3             27              2
+##  9 Activities rela… France   2000        1.6            102              2
+## 10 Activities rela… France   2010        7.1             51              4
+## # ... with 1,661 more rows</code></pre>
 </div>
 <div id="tidying-model-output" class="section level3">
 <h3><span class="header-section-number">3.4.7</span> Tidying model output</h3>
@@ -1442,7 +1454,7 @@ surv</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">broom<span class="op">::</span><span class="kw">tidy</span>(surv) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> estimate)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_step</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> strata))</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p>Dobson (1990) Page 93: Randomized Controlled Trial.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
   <span class="dt">counts =</span> <span class="kw">c</span>(<span class="dv">18</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">13</span>,<span class="dv">12</span>),
@@ -1476,24 +1488,24 @@ broom<span class="op">::</span><span class="kw">tidy</span>(dat_fit)</code></pre
 income &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00026&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">income =</span> values)</code></pre></div>
-<pre><code>## Table tgs00026 cached at /tmp/RtmpqqFFj5/eurostat/tgs00026_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00026 cached at /tmp/RtmpFntefL/eurostat/tgs00026_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># unemployment rate</span>
 unemp &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00010&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">unemp =</span> values)</code></pre></div>
-<pre><code>## Table tgs00010 cached at /tmp/RtmpqqFFj5/eurostat/tgs00010_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00010 cached at /tmp/RtmpFntefL/eurostat/tgs00010_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total fertility rate</span>
 totfert &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00100&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">totfert =</span> values)</code></pre></div>
-<pre><code>## Table tgs00100 cached at /tmp/RtmpqqFFj5/eurostat/tgs00100_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00100 cached at /tmp/RtmpFntefL/eurostat/tgs00100_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total life-expectancy</span>
 lifeexp &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00101&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">lifeexp =</span> values)</code></pre></div>
-<pre><code>## Table tgs00101 cached at /tmp/RtmpqqFFj5/eurostat/tgs00101_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00101 cached at /tmp/RtmpFntefL/eurostat/tgs00101_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># population change</span>
 popchange &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00099&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
@@ -1502,7 +1514,7 @@ popchange &lt;-
          <span class="dt">netmigrate =</span> CNMIGRATRT,
          <span class="dt">growthrate =</span> GROWRT,
          <span class="dt">natgrowthrate =</span> NATGROWRT)</code></pre></div>
-<pre><code>## Table tgs00099 cached at /tmp/RtmpqqFFj5/eurostat/tgs00099_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00099 cached at /tmp/RtmpFntefL/eurostat/tgs00099_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
 eu_regional_indicators &lt;-
 <span class="st">  </span>unemp <span class="op">%&gt;%</span>
@@ -1574,7 +1586,7 @@ hmd <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> relAge, <span class="dt">y =</span> lx, <span class="dt">group =</span> period, <span class="dt">color =</span> period)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>sex)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 <div id="grouped-filter" class="section level4">
 <h4><span class="header-section-number">3.7.1.2</span> Grouped <code>filter()</code></h4>
@@ -1615,7 +1627,7 @@ euro_regio <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeexp,
                 <span class="dt">label =</span> nuts2_name, <span class="dt">color =</span> nuts2_name),
             <span class="dt">show.legend =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
 </div>
 <div id="grouped-summarise" class="section level3">
@@ -1657,7 +1669,7 @@ euro_regio <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">x =</span> e0, <span class="dt">y =</span> cv, <span class="dt">color =</span> sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <div id="grouped-do" class="section level4">
 <h4><span class="header-section-number">3.7.2.1</span> Grouped <code>do()</code></h4>
 </div>
@@ -1773,7 +1785,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["ced18-tidyr.pdf", "ced18-tidyr.epub"],
 "toc": {
 "collapse": "subsection"
 }

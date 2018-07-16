@@ -14,7 +14,7 @@
   
   
   
-  
+  <meta name="github-repo" content="jschoeley/ced18-tidyr" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Tidy R" />
@@ -25,6 +25,7 @@
 <meta name="author" content="Jonas Schöley">
 
 
+<meta name="date" content="2018-07-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -86,6 +87,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -98,6 +100,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Bookdown Book</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
 <li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
 <li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
@@ -169,6 +174,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
 <li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -187,7 +195,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="what-is-tidy-r" class="section level1">
-<h1><span class="header-section-number">2</span> What is tidy R?</h1>
+<h1><span class="header-section-number">Chapter 2</span> What is tidy R?</h1>
 <div id="differences-between-tidy-and-base-r" class="section level2">
 <h2><span class="header-section-number">2.1</span> Differences between tidy and base R</h2>
 <p>The Gompertz Law describes the exponential relationship between age and mortality rate in human populations. Its two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> describe the overall mortality level and the relative rate of mortality inrease over age. It is well known that both parameters correlate with each other. The code below demonstrates this co-variance by fitting the Gompertz equation to Swedish birth cohorts and plotting the parameter estimates against each other.</p>
@@ -214,7 +222,7 @@ hmd_coef &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw
 <span class="co"># plot a versus b coefficients</span>
 <span class="kw">plot</span>(<span class="dt">x =</span> hmd_coef[,<span class="dv">1</span>], <span class="dt">y =</span> hmd_coef[,<span class="dv">2</span>],
      <span class="dt">main =</span> <span class="st">&#39;Gompertz correlation&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;a&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="01-what_is_tidy_r_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Here’s how I would write the same program today, using the <code>tidyverse</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="co"># load data</span>
@@ -236,7 +244,40 @@ hmd_counts <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a, <span class="dt">y =</span> b), <span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Gompertz correlation&#39;</span>)</code></pre></div>
-<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="01-what_is_tidy_r_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>What are the differences?</p>
+<div class="figure">
+<img src="assets/assignment.png" alt="In base R we stores intermediate results often." />
+<p class="caption">In base R we stores intermediate results often.</p>
+</div>
+<div class="figure">
+<img src="assets/pipes.png" alt="In tidy R a single data pipeline often gets us from raw data to finished result." />
+<p class="caption">In tidy R a single <em>data pipeline</em> often gets us from raw data to finished result.</p>
+</div>
+<div class="figure">
+<img src="assets/various_data_structures.png" alt="In base R data structures change often." />
+<p class="caption">In base R data structures change often.</p>
+</div>
+<div class="figure">
+<img src="assets/single_data_structure.png" alt="In tidy R the dataframe is the most important data structure." />
+<p class="caption">In tidy R the dataframe is the most important data structure.</p>
+</div>
+<div class="figure">
+<img src="assets/various_indexing_styles.png" alt="In base R we have to use various indexing styles." />
+<p class="caption">In base R we have to use various indexing styles.</p>
+</div>
+<div class="figure">
+<img src="assets/single_indexing_style.png" alt="In tidy R we use a single indexing style." />
+<p class="caption">In tidy R we use a single indexing style.</p>
+</div>
+<div class="figure">
+<img src="assets/info_in_rownames.png" alt="In base R important information is sometimes stored in row names." />
+<p class="caption">In base R important information is sometimes stored in row names.</p>
+</div>
+<div class="figure">
+<img src="assets/variable_in_its_own_column.png" alt="In tidy R all information exists in the form of data frame columns." />
+<p class="caption">In tidy R all information exists in the form of data frame columns.</p>
+</div>
 <div id="excercise-differences-between-tidy-and-base-r" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Excercise: Differences between tidy and base R</h3>
 <ul>
@@ -246,6 +287,7 @@ hmd_counts <span class="op">%&gt;%</span>
 </div>
 <div id="literate-programming-in-rmarkdown" class="section level2">
 <h2><span class="header-section-number">2.2</span> Literate programming in Rmarkdown</h2>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">The official Rmarkdown cheat sheet.</a></p>
 <div id="excercise-literate-programming-in-rmarkdown" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Excercise: Literate programming in Rmarkdown</h3>
 <ul>
@@ -297,7 +339,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["ced18-tidyr.pdf", "ced18-tidyr.epub"],
 "toc": {
 "collapse": "subsection"
 }

@@ -1,16 +1,22 @@
 ---
-title: 'Tidy R'
-author: 'Jonas Schöley'
+title: Tidy R
+author: Jonas Schöley
+date: 2018-07-16
 site: bookdown::bookdown_site
-output:
-  bookdown::gitbook: default
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: jschoeley/ced18-tidyr
 ---
 
 Before we start
 ===============
 
 ```{r setup, include=FALSE}
-options(tibble.print_max = 5, tibble.print_min = 5, tibble.max_extra_cols = 5)
+options(tibble.print_max = 5,
+        tibble.print_min = 5,
+        tibble.max_extra_cols = 5)
 ```
 
 These are the packages we will use during this course.

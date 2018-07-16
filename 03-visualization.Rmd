@@ -1,29 +1,10 @@
 Visualization
 =============
 
-```{r message=FALSE}
-library(tidyverse)
-library(gapminder)
-
-# hmd
-# Life tables by year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd.RData')
-
-# hmd_counts
-# Deaths and exposures by age, year, sex and country
-# source: Human Mortality Database
-load('data/hmd/hmd_counts.RData')
-
-# General social survey
-# source: http://gss.norc.org/s
-gss <- haven::read_stata('data/gss/GSS2016.DTA')
-
-# European timeuse survey
-load('data/eu_timeuse/eu_timeuse_tot.Rdata')
-
-# European regional population statistics
-load('data/euro_regio/euro_regio.Rdata')
+```{r setup, include=FALSE}
+options(tibble.print_max = 5,
+        tibble.print_min = 5,
+        tibble.max_extra_cols = 5)
 ```
 
 The "tidy" approach to data visualization
@@ -497,6 +478,8 @@ foo$sex
 ### Layers are plotted on top of each other
 
 ```{r}
+library(gapminder)
+
 gapminder %>%
   filter(year %in% c(1952, 2007)) %>%
   group_by(year) %>%
@@ -525,7 +508,7 @@ gapminder %>%
 Sometimes the row-order of a dataframe has implications for visualization. This is true for ggplots `geom_point()` which draws points in the order of occurence in a dataframe. In the example below we scale the points by the population size of a country. Arranging the dataframe by decreasing population size makes sure that the smaller points are drawn last, i.e. on top of the larger points.
 
 ```{r}
-gapminder::gapminder %>%
+gapminder %>%
   arrange(pop) %>%
   ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
   geom_point(fill = 'black', color = 'white', shape = 21) +
@@ -533,7 +516,7 @@ gapminder::gapminder %>%
   scale_size_area() +
   facet_wrap(~year)
 
-gapminder::gapminder %>%
+gapminder %>%
   arrange(desc(pop)) %>%
   ggplot(aes(x = gdpPercap, y = lifeExp, size = pop)) +
   geom_point(fill = 'black', color = 'white', shape = 21) +
@@ -543,14 +526,14 @@ gapminder::gapminder %>%
 ```
 
 ```{r}
-gapminder::gapminder %>%
+gapminder %>%
   filter(country == 'Afghanistan') %>%
   arrange(pop) %>%
   ggplot(aes(x = lifeExp, y = gdpPercap)) +
   geom_path() +
   geom_label(aes(label = year))
 
-gapminder::gapminder %>%
+gapminder %>%
   filter(country == 'Afghanistan') %>%
   arrange(year) %>%
   ggplot(aes(x = lifeExp, y = gdpPercap)) +
@@ -681,8 +664,8 @@ the_data2 %>%
   arrange(value) %>%
   mutate(count = 1:n()) %>%
   ggplot(aes(x = bin, y = count)) +
-  geom_point(aes(color = id), size = 11, color = 'grey80') +
-  geom_text(aes(label = id), size = 3.4) +
+  geom_point(aes(color = id), size = 6, color = 'grey80') +
+  geom_text(aes(label = id), size = 2) +
   scale_x_discrete(drop = FALSE) +
   theme_minimal() +
   coord_flip() +

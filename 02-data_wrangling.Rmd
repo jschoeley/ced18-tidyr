@@ -1,9 +1,14 @@
 Data Wrangling
 ==============
 
+```{r setup, include=FALSE}
+options(tibble.print_max = 5,
+        tibble.print_min = 5,
+        tibble.max_extra_cols = 5)
+```
+
 ```{r message=FALSE}
 library(tidyverse)
-
 
 # General social survey
 # source: http://gss.norc.org/s

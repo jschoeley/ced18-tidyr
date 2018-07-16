@@ -1,6 +1,12 @@
 What is tidy R?
 ===============
 
+```{r setup, include=FALSE}
+options(tibble.print_max = 5,
+        tibble.print_min = 5,
+        tibble.max_extra_cols = 5)
+```
+
 Differences between tidy and base R
 -----------------------------------
 
@@ -58,12 +64,32 @@ hmd_counts %>%
   labs(title = 'Gompertz correlation')
 ```
 
+What are the differences?
+
+![In base R we stores intermediate results often.](assets/assignment.png)
+
+![In tidy R a single *data pipeline* often gets us from raw data to finished result.](assets/pipes.png)
+
+![In base R data structures change often.](assets/various_data_structures.png)
+
+![In tidy R the dataframe is the most important data structure.](assets/single_data_structure.png)
+
+![In base R we have to use various indexing styles.](assets/various_indexing_styles.png)
+
+![In tidy R we use a single indexing style.](assets/single_indexing_style.png)
+
+![In base R important information is sometimes stored in row names.](assets/info_in_rownames.png)
+
+![In tidy R all information exists in the form of data frame columns.](assets/variable_in_its_own_column.png)
+
 ### Excercise: Differences between tidy and base R
 
 - Discuss the differences.
 
 Literate programming in Rmarkdown
 ---------------------------------
+
+[The official Rmarkdown cheat sheet.](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
 ### Excercise: Literate programming in Rmarkdown
 
