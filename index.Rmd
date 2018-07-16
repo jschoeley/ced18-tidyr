@@ -1,0 +1,37 @@
+---
+title: 'Tidy R'
+author: 'Jonas Schöley'
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook: default
+---
+
+Before we start
+===============
+
+```{r setup, include=FALSE}
+options(tibble.print_max = 5, tibble.print_min = 5, tibble.max_extra_cols = 5)
+```
+
+These are the packages we will use during this course.
+
+```{r eval=FALSE}
+install.packages('devtools')
+
+devtools::install_cran(
+  pkgs = c(
+    'tidyverse',     # tools for tidy data analysis
+    'rmarkdown',     # literate programming
+    'plotly',        # interactive visualization
+    'ggmap',         # use online map-tiles with ggplot
+    'eurostat',      # download data from eurostat
+    'sf',            # tidy geo-computing
+    'rnaturalearth', # download worldwide map data
+    'gapminder',     # data from the gapminder world project
+    'cowplot',       # ggplot multiple figures addon
+    'skimr'          # nice dataframe summaries
+  ),
+  repos = "https://cran.rstudio.com/"
+)
+
+```

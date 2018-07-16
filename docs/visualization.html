@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tidy R</title>
+  <meta name="description" content="Tidy R">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Tidy R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Tidy R" />
+  
+  
+  
+
+<meta name="author" content="Jonas Schöley">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="data-wrangling.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
+<li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1.1</b> Excercise: Differences between tidy and base R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Literate programming in Rmarkdown</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2.1</b> Excercise: Literate programming in Rmarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#first-steps-in-tidy-data-analysis"><i class="fa fa-check"></i><b>2.3</b> First steps in tidy data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#the-tidy-approach-to-data-wrangling"><i class="fa fa-check"></i><b>3.1</b> The “tidy” approach to data wrangling</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling.html"><a href="data-wrangling.html#transforming-data-using-verbs"><i class="fa fa-check"></i><b>3.2</b> Transforming data using verbs</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#column-based-transforms"><i class="fa fa-check"></i><b>3.2.1</b> Column based transforms</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#row-based-transforms"><i class="fa fa-check"></i><b>3.2.2</b> Row based transforms</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-basic-verbs"><i class="fa fa-check"></i><b>3.2.3</b> Excercise: Basic verbs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling.html"><a href="data-wrangling.html#pipes"><i class="fa fa-check"></i><b>3.3</b> Pipes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-pipes"><i class="fa fa-check"></i><b>3.3.1</b> Excercise: Pipes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>3.4</b> Tidy data</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling.html"><a href="data-wrangling.html#long-versus-wide-format-data"><i class="fa fa-check"></i><b>3.4.1</b> Long versus wide format data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling.html"><a href="data-wrangling.html#making-the-implicit-explicit"><i class="fa fa-check"></i><b>3.4.2</b> Making the implicit explicit</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-police-arrests"><i class="fa fa-check"></i><b>3.4.3</b> Tidying data on police arrests</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-anscombes-quartet"><i class="fa fa-check"></i><b>3.4.4</b> Tidying Anscombe’s quartet</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-test-retest-reliability"><i class="fa fa-check"></i><b>3.4.5</b> Tidying data on test-retest reliability</a></li>
+<li class="chapter" data-level="3.4.6" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-the-eu-time-use-survey"><i class="fa fa-check"></i><b>3.4.6</b> Tidying the EU time-use-survey</a></li>
+<li class="chapter" data-level="3.4.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-model-output"><i class="fa fa-check"></i><b>3.4.7</b> Tidying model output</a></li>
+<li class="chapter" data-level="3.4.8" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-tidy-data"><i class="fa fa-check"></i><b>3.4.8</b> Excercise: Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling.html"><a href="data-wrangling.html#joins"><i class="fa fa-check"></i><b>3.5</b> Joins</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-joins"><i class="fa fa-check"></i><b>3.5.1</b> Excercise: Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding"><i class="fa fa-check"></i><b>3.6</b> Recoding</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-recoding"><i class="fa fa-check"></i><b>3.6.1</b> Excercise: Recoding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-iteration"><i class="fa fa-check"></i><b>3.7</b> Tidy iteration</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-wise-operations"><i class="fa fa-check"></i><b>3.7.1</b> Group-wise operations</a></li>
+<li class="chapter" data-level="3.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#grouped-summarise"><i class="fa fa-check"></i><b>3.7.2</b> Grouped <code>summarise()</code></a></li>
+<li class="chapter" data-level="3.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#column-wise-operations"><i class="fa fa-check"></i><b>3.7.3</b> Column-wise operations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#the-tidy-approach-to-data-visualization"><i class="fa fa-check"></i><b>4.1</b> The “tidy” approach to data visualization</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> The Grammar of graphics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#aesthetics-geometries-and-layers"><i class="fa fa-check"></i><b>4.2.1</b> Aesthetics, geometries, and layers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#scales"><i class="fa fa-check"></i><b>4.2.2</b> Scales</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#excercise-the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2.3</b> Excercise: The grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#order"><i class="fa fa-check"></i><b>4.3</b> Order</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#factor-levels-control-the-order-of-discrete-scales"><i class="fa fa-check"></i><b>4.3.1</b> Factor levels control the order of discrete scales</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#layers-are-plotted-on-top-of-each-other"><i class="fa fa-check"></i><b>4.3.2</b> Layers are plotted on top of each other</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualization.html"><a href="visualization.html#sometimes-the-row-order-of-the-data-matters"><i class="fa fa-check"></i><b>4.3.3</b> Sometimes the row-order of the data matters</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#facets"><i class="fa fa-check"></i><b>4.4</b> Facets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#comparing-sub-groups-to-totals"><i class="fa fa-check"></i><b>4.4.1</b> Comparing sub-groups to totals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5</b> Chart type vocabulary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="visualization.html"><a href="visualization.html#visualizing-distributions"><i class="fa fa-check"></i><b>4.5.1</b> Visualizing distributions</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualization.html"><a href="visualization.html#visualizing-association"><i class="fa fa-check"></i><b>4.5.2</b> Visualizing association</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualization.html"><a href="visualization.html#visualizing-change"><i class="fa fa-check"></i><b>4.5.3</b> Visualizing change</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualization.html"><a href="visualization.html#visualizing-surfaces"><i class="fa fa-check"></i><b>4.5.4</b> Visualizing surfaces</a></li>
+<li class="chapter" data-level="4.5.5" data-path="visualization.html"><a href="visualization.html#excercise-chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5.5</b> Excercise: Chart type vocabulary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#polish-your-plot-for-publication"><i class="fa fa-check"></i><b>4.6</b> Polish your plot for publication</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="visualization.html"><a href="visualization.html#highlight"><i class="fa fa-check"></i><b>4.6.1</b> Highlight</a></li>
+<li class="chapter" data-level="4.6.2" data-path="visualization.html"><a href="visualization.html#annotate"><i class="fa fa-check"></i><b>4.6.2</b> Annotate</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
+<li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidy R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualization" class="section level1">
+<h1><span class="header-section-number">4</span> Visualization</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(gapminder)
+
+<span class="co"># hmd</span>
+<span class="co"># Life tables by year, sex and country</span>
+<span class="co"># source: Human Mortality Database</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd.RData&#39;</span>)
+
+<span class="co"># hmd_counts</span>
+<span class="co"># Deaths and exposures by age, year, sex and country</span>
+<span class="co"># source: Human Mortality Database</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
+
+<span class="co"># General social survey</span>
+<span class="co"># source: http://gss.norc.org/s</span>
+gss &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_stata</span>(<span class="st">&#39;data/gss/GSS2016.DTA&#39;</span>)
+
+<span class="co"># European timeuse survey</span>
+<span class="kw">load</span>(<span class="st">&#39;data/eu_timeuse/eu_timeuse_tot.Rdata&#39;</span>)
+
+<span class="co"># European regional population statistics</span>
+<span class="kw">load</span>(<span class="st">&#39;data/euro_regio/euro_regio.Rdata&#39;</span>)</code></pre></div>
+<div id="the-tidy-approach-to-data-visualization" class="section level2">
+<h2><span class="header-section-number">4.1</span> The “tidy” approach to data visualization</h2>
+<p>Data visualization in the <code>tidyverse</code> revolves around three concepts:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Tidy Data</strong> Data is stored is a data frame with cases as rows and variables as columns.</li>
+<li><strong>Mappings</strong> Variables are mapped to visual attributes, called <em>aesthetics</em>.</li>
+<li><strong>Layers</strong> Plots are build layer by layer. There are different types of layers, each changing a different aspect of a plot, i.e. coordinate system, scales, statistical transformations or visual marks.</li>
+</ol>
+<p>Part of the tidyverse is a package called <code>ggplot2</code> which is what we are going to use to produce plots. <code>ggplot2</code> is an implementation of the <em>Grammar of Graphics</em>, a domain specific language to specify visualizations.</p>
+</div>
+<div id="the-grammar-of-graphics" class="section level2">
+<h2><span class="header-section-number">4.2</span> The Grammar of graphics</h2>
+<p><em>Data</em>, <em>Statistics</em>, <em>Aestetics</em>, <em>Scales</em>, <em>Geometry</em>, <em>Coordinates</em>.</p>
+<dl>
+<dt>Data</dt>
+<dd>Observations of one or more variables.
+</dd>
+<dt>Statistics</dt>
+<dd><p>Transformations of the data prior to plotting.</p>
+<ul>
+<li>Algebraic transformations (log, exp, sqrt, identical…)</li>
+<li>Aggregating statistical transformations (mean, median, mode, bin, linear regression…)</li>
+<li>Non-aggregating statistical transformations (sort, rank, cut…)</li>
+</ul>
+</dd>
+<dt>Aesthetics</dt>
+<dd><p>The visual representation of a variable.</p>
+<ul>
+<li>Position. <code>x</code>, <code>y</code>, <code>xmin</code>, <code>xmax</code>, <code>ymin</code>, <code>ymax</code>, <code>xend</code>, <code>yend</code></li>
+<li>Colour. <code>colour</code>, <code>fill</code>, <code>alpha</code></li>
+<li>Size. <code>size</code></li>
+<li>Shape, Pattern. <code>shape</code>, <code>linetype</code></li>
+<li>Group. <code>group</code></li>
+<li>Angle, Slope, Intercept, Texture, …</li>
+</ul>
+</dd>
+<dt>Scales</dt>
+<dd><p>The way a variable is mapped to a visual representation.</p>
+<ul>
+<li>Discrete, Continous. e.g. <code>scale_x_discrete</code>, <code>scale_colour_continuous</code></li>
+<li>Concerning Position, Colour, Size, Shape… e.g. <code>scale_y_continuous</code>, <code>scale_size</code>, <code>scale_shape()</code></li>
+<li>Breakpoints, Labels</li>
+<li>Transformations (log, sqrt, reverse)</li>
+</ul>
+</dd>
+<dt>Geometry</dt>
+<dd><p>General “shape” or “type” of the graphic</p>
+<ul>
+<li>Scatterplots use <code>geom_point</code>,</li>
+<li>Timelines use <code>geom_line</code>,</li>
+<li>Area charts use <code>geom_area</code>,</li>
+<li>Heatmaps use <code>geom_tile</code>,</li>
+<li>Bar charts use <code>geom_bar</code>,</li>
+<li>there are many more…</li>
+</ul>
+</dd>
+<dt>Coordinates</dt>
+<dd><p>The coordinate system of the plot area.</p>
+<ul>
+<li>Cartesian coordinates</li>
+<li>Polar coordinates</li>
+</ul>
+</dd>
+</dl>
+<div id="aesthetics-geometries-and-layers" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Aesthetics, geometries, and layers</h3>
+<p>Interactive plots displayed in a web-browser have long arrived in the mainstream with <a href="http://www.gapminder.org/world">Gapminder World</a> being a true classic of the genre.</p>
+<div class="figure">
+<img src="assets/gapminder_world.png" alt="Gapminder World" />
+<p class="caption">Gapminder World</p>
+</div>
+<p>Today we shall recreate the above chart and in doing so learn the basics of ggplot. Key concepts we will tackle are <em>aesthetics</em>, <em>layers</em>, <em>scales</em>, and <em>facets</em>.</p>
+<p>Each ggplot starts with <em>data</em>. <strong>Data must be a data frame</strong>! Today we will use data which comes in form of an R package: The gapminder data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+<span class="kw">library</span>(gapminder)
+<span class="kw">is.data.frame</span>(gapminder)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## # ... with 1 more row</code></pre>
+<p>First step in plotting with ggplot – provide ggplot with a data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p>ggplot knows about our data but nothing happens yet. We need to add a <em>layer</em>. <strong>We add elements to a plot by adding them with a <code>+</code>.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p><code>aes</code> stands for <em>aesthetics</em>: Mappings between variables in our data and visual properties. Each column in our data frame is a variable. Visual properties are manifold and can be <code>x</code>, <code>y</code>, <code>colour</code>, <code>size</code>, <code>shape</code>, <code>alpha</code>, <code>fill</code>, <code>radius</code>, <code>linetype</code>, <code>group</code>…</p>
+<p>We use the <code>aes()</code> function to map <code>x</code>-position to the variable <code>Time</code> and <code>y</code>-position to the variable <code>weight</code>. <strong>Every time you map a variable to a visual property you do it inside <code>aes()</code></strong></p>
+<p>The plot looks strange. A single line is drawn across all data points. We want separate lines – one time series per country…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">group =</span> country))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p>Note that we don’t write <code>x = gapminder$year</code> or <code>y = &quot;lifeExp&quot;</code>. We simply spell out the name of the variable we wish to work with. ggplot is aware of the dataset we work with – it is <em>attached</em>. Quoting the variable names would actually produce unexpected results:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;lifeExp&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;country&quot;</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p>What happened? ggplot interpreted the quoted strings as raw data instead of variable names of our data frame. It then tries to plot it… <strong>Always use unquoted column names to address the variables in your data.</strong></p>
+<p>Let’s colour all of the lines blue.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">group =</span> country), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<p>We wrote <code>colour = &quot;blue&quot;</code> outside of the <code>aes()</code> function as we <em>set</em> the visual property to a fixed value instead of <em>mapping</em> a visual property to a variable in the data frame. For comparison, let’s move the colour specification into the <code>aes()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">group =</span> country, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p>Classic ggplot moment here… “blue” gets interpreted as raw data as we have written it inside of the <code>aes()</code> function. ggplot thinks all of our rows belong to group “blue”, mapped to the visual property colour. ggplot assigns a default colour scale of which the first colour is a light red. Here’s the same behaviour, but this time it makes sense as we map colour to an actual variable in our data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">group =</span> country, <span class="dt">colour =</span> continent))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p>Lesson to be learned: The difference between <em>mapping</em> and <em>setting</em> a visual property. <strong>You map visual properties to variables inside <code>aes()</code>, you set visual properties to a fixed value outside of <code>aes()</code>.</strong></p>
+<p>We can add more than a single layer to a plot. ggplot 2.0.0 comes with 27 <em>geometries</em> (<code>geom</code>). Some of them are super straightforward and just draw points or lines or rectangles. Some draw complex shapes after transforming your data in various ways. <strong>Think of geometries as flexible templates for different plot types.</strong> Combining different geometries is a common workflow in ggplot. E.g. adding <code>geom_point</code> to <code>geom_line</code> gives lines with points on them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># filter data to 4 countries only</span>
+gapminder_sub &lt;-
+<span class="st">  </span><span class="kw">filter</span>(gapminder,
+         country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;China&quot;</span>, <span class="st">&quot;Switzerland&quot;</span>, <span class="st">&quot;United States&quot;</span>, <span class="st">&quot;Somalia&quot;</span>))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder_sub) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> country)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> country))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p>Note that we did not need to specify the <code>group</code> argument in the last ggplot call. The have mapped colour to country and therefore implicitly specified the grouping structure of our data. We use <code>group</code> only if ggplot fails to correctly guess the grouping.</p>
+<p>If we use identical mappings in our layers we can move them into the <code>ggplot()</code> function. <strong>Everything inside the <code>ggplot()</code> function is passed down to all other plot elements.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder_sub, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> country)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p>We can still add arguments to the individual layers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder_sub, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> country)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> country)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> country))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<p>We also have the power to override commands from above:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder_sub, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeExp, <span class="dt">color =</span> country)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> country), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> country), <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+</div>
+<div id="scales" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Scales</h3>
+<p>We already know that <em>aesthetics</em> are mappings from data dimensions to visual properties. They tell ggplot what goes where. What are the aesthetics in <strong>Gapminder World</strong>?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Data dimension</th>
+<th align="left">Visual property</th>
+<th align="left">Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GDP per capita</td>
+<td align="left">position on x-axis (<code>x</code>)</td>
+<td align="left"><code>scale_x_*</code></td>
+</tr>
+<tr class="even">
+<td align="left">Life expectancy</td>
+<td align="left">position on y-axis (<code>y</code>)</td>
+<td align="left"><code>scale_y_*</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Population size</td>
+<td align="left">size of plotting symbols (<code>size</code>)</td>
+<td align="left"><code>scale_size_*</code></td>
+</tr>
+<tr class="even">
+<td align="left">Geographical Region</td>
+<td align="left">colour of plotting symbols (<code>colour</code>)</td>
+<td align="left"><code>scale_colour_*</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Each aesthetic has its own scale</strong></p>
+<p>The four aesthetics in <em>Gapminder World</em> are connected to four different scales. The scales are named after the corresponding aesthetic. The naming scheme is <code>scale_&lt;name of aesthetic&gt;_&lt;continuous|discrete|specialized&gt;</code>.</p>
+<p><strong>Aesthetics specify the <em>what</em>, scales specify the <em>how</em></strong></p>
+<p>Which colour to use for which level in the data? Where to put the labels on the axis? Which labels to put? The size of the largest plotting symbol, the name of the legends, log-transformation of the y-axis, the range of the axis… These are all examples of scale specifications – specifications on <em>how</em> to map a data dimension to a visual attribute.</p>
+<p>Off to work!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gapminder)
+<span class="kw">head</span>(gapminder)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## # ... with 1 more row</code></pre>
+<p>The data already looks tidy. All we have to do is to subset to a single year. Let’s see what ggplot produces if we simply specify the aesthetics to an appropriate geometry.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p>A solid foundation. But to close in on the <em>Gapminder World</em> chart we need to customize our scales.</p>
+<p><strong>When changing scale attributes we have to make sure to make the changes on the appropriate scale</strong>. Just ask yourself:</p>
+<ol style="list-style-type: decimal">
+<li>What aesthetic does the scale correspond to? <code>scale_&lt;name of aesthetic&gt;_*</code></li>
+<li>Am I dealing with a <em>discrete</em> or <em>continuous</em> variable? <code>scale_*_&lt;continuous|discrete&gt;</code></li>
+</ol>
+<div id="naming-scales" class="section level4">
+<h4><span class="header-section-number">4.2.2.1</span> Naming scales</h4>
+<p>Once you know which scales to use, names are trivial to change.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>You can also use mathematical annotation in your scale names. For further information consult <code>?plotmath</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="kw">expression</span>(<span class="kw">over</span>(GDP, capita))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="kw">expression</span>(e[<span class="dv">0</span>])) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+</div>
+<div id="scale-transformations" class="section level4">
+<h4><span class="header-section-number">4.2.2.2</span> Scale transformations</h4>
+<p>Next, we deal with <em>scale transformations</em>. In <strong>Gapminder World</strong> the x-axis is log-scaled meaning that the log of the x-axis data is taken before plotting. However, the labels remain on the linear scale. In that regard transforming scales is different from directly transforming the underlying data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>There are many different scale transformations built into ggplot. From the documentation:</p>
+<blockquote>
+<p>Built-in transformations include “asn”, “atanh”, “boxcox”, “exp”, “identity”, “log”, “log10”, “log1p”, “log2”, “logit”, “probability”, “probit”, “reciprocal”, “reverse” and “sqrt”.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;reverse&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>Note that the concept of scale transformations is not limited to position scales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>, <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+</div>
+<div id="scale-breaks-and-labels" class="section level4">
+<h4><span class="header-section-number">4.2.2.3</span> Scale breaks and labels</h4>
+<p>Next, we manually specify the axis <em>breaks</em> and <em>labels</em> to be the same as in <em>Gapminder World</em>. Axis breaks are the positions where tick-marks and grid-lines are drawn. Labels specify what text to put at the breaks. <strong>Breaks and labels have to be vectors of equal length.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>,
+                                <span class="dv">600</span>, <span class="dv">700</span>, <span class="dv">800</span>, <span class="dv">900</span>,
+                                <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>, <span class="dv">5000</span>,
+                                <span class="dv">6000</span>, <span class="dv">7000</span>, <span class="dv">8000</span>, <span class="dv">9000</span>,
+                                <span class="dv">10000</span>, <span class="dv">20000</span>, <span class="dv">30000</span>, <span class="dv">40000</span>, <span class="dv">50000</span>,
+                                <span class="dv">60000</span>, <span class="dv">70000</span>, <span class="dv">80000</span>, <span class="dv">90000</span>),
+                     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;200&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;400&quot;</span>, <span class="st">&quot;&quot;</span>,
+                                <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>,
+                                <span class="st">&quot;1000&quot;</span>, <span class="st">&quot;2000&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;4000&quot;</span>, <span class="st">&quot;&quot;</span>,
+                                <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>,
+                                <span class="st">&quot;10000&quot;</span>, <span class="st">&quot;20000&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;40000&quot;</span>, <span class="st">&quot;&quot;</span>,
+                                <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">40</span>, <span class="dv">45</span>, <span class="dv">50</span>,
+                                <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">80</span>, <span class="dv">85</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name  =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>OK, that was effective but clumsy. Luckily ggplot does not care <em>how</em> we generate the vector of breaks. We can use any R function as long as it outputs a vector. Even better, instead of manually spelling out the labels for each break we can write a short function that takes the breaks as input and formats them. Much nicer code – same result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">apply</span>(<span class="kw">expand.grid</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">10</span><span class="op">^</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>)), <span class="dv">1</span>, <span class="dt">FUN =</span> prod)[<span class="op">-</span><span class="dv">1</span>],
+                     <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&#39;^[124]&#39;</span>, x), x, <span class="st">&#39;&#39;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">25</span>, <span class="dv">85</span>, <span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p>The concept of <em>breaks</em> and <em>labels</em> does not only apply to continuous axis. <strong>All scales have breaks and labels</strong>. E.g. on a colour scale the breaks are the colour keys, the labels are – well – the labels. <strong>We reorder the items on our discrete scale by specifying the breaks in the required order.</strong> We also use an R function to capitalize the labels.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">apply</span>(<span class="kw">expand.grid</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">10</span><span class="op">^</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>)), <span class="dv">1</span>, <span class="dt">FUN =</span> prod)[<span class="op">-</span><span class="dv">1</span>],
+                     <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&quot;^[124]&quot;</span>, x), x, <span class="st">&quot;&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">25</span>, <span class="dv">85</span>, <span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>,
+                       <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Africa&quot;</span>, <span class="st">&quot;Americas&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Oceania&quot;</span>),
+                       <span class="dt">labels =</span> toupper) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<p>Finally, let’s choose some sensible breaks and labels for the size scale.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">apply</span>(<span class="kw">expand.grid</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">10</span><span class="op">^</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>)), <span class="dv">1</span>, <span class="dt">FUN =</span> prod)[<span class="op">-</span><span class="dv">1</span>],
+                     <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&quot;^[124]&quot;</span>, x), x, <span class="st">&quot;&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">25</span>, <span class="dv">85</span>, <span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>,
+                       <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Africa&quot;</span>, <span class="st">&quot;Americas&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Oceania&quot;</span>),
+                       <span class="dt">labels =</span> toupper) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>,
+                        <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">1E6</span>, <span class="fl">10E6</span>, <span class="fl">100E6</span>, <span class="fl">1E9</span>),
+                        <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">scientific =</span> <span class="ot">FALSE</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+</div>
+<div id="scale-limits" class="section level4">
+<h4><span class="header-section-number">4.2.2.4</span> Scale limits</h4>
+<p>We match the maximum and minimum value of our xy-scales with those of the <em>Gapminder World</em> chart by specifying the <em>limits</em> of the scales.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop, <span class="dt">colour =</span> continent)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Income per person (GDP/capita, PPP$ inflation-adjusted)&quot;</span>,
+                     <span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">apply</span>(<span class="kw">expand.grid</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dv">10</span><span class="op">^</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>)), <span class="dv">1</span>, <span class="dt">FUN =</span> prod)[<span class="op">-</span><span class="dv">1</span>],
+                     <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&quot;^[124]&quot;</span>, x), x, <span class="st">&quot;&quot;</span>),
+                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">90000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Life expectancy (years)&quot;</span>,
+                     <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">25</span>, <span class="dv">85</span>, <span class="dv">5</span>),
+                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">85</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Continent&quot;</span>,
+                       <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="st">&quot;Asia&quot;</span>, <span class="st">&quot;Africa&quot;</span>, <span class="st">&quot;Americas&quot;</span>, <span class="st">&quot;Europe&quot;</span>, <span class="st">&quot;Oceania&quot;</span>),
+                       <span class="dt">labels =</span> toupper) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Population, total&quot;</span>,
+                        <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="fl">1E6</span>, <span class="fl">10E6</span>, <span class="fl">100E6</span>, <span class="fl">1E9</span>),
+                        <span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">scientific =</span> <span class="ot">FALSE</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+</div>
+<div id="limiting-versus-zooming" class="section level4">
+<h4><span class="header-section-number">4.2.2.5</span> Limiting versus zooming</h4>
+<p>Note that values outside of the limits will be discarded. This is of importance if you want to zoom into a plot. Here we “zoom” by changing the limits of the scales…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">20</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">5000</span>, <span class="dv">20000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">80</span>))</code></pre></div>
+<pre><code>## Warning: Removed 104 rows containing missing values (geom_point).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p>…and here we zoom by changing the limits of the coordinate system</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">20</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">5000</span>, <span class="dv">20000</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">80</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+</div>
+</div>
+<div id="excercise-the-grammar-of-graphics" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Excercise: The grammar of graphics</h3>
+</div>
+</div>
+<div id="order" class="section level2">
+<h2><span class="header-section-number">4.3</span> Order</h2>
+<div id="factor-levels-control-the-order-of-discrete-scales" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Factor levels control the order of discrete scales</h3>
+<p>It is easy to order items on a numerical scale. One just puts them on the number line. Usually low on the left and hight to the right. But what about discrete items? ggplot orders them according to the order of their factor levels. An example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test data</span>
+foo &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id  =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,
+                  <span class="dt">sex =</span> <span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>))
+foo</code></pre></div>
+<pre><code>##   id    sex
+## 1  1 Female
+## 2  2 Female
+## 3  3   Male
+## 4  4   Male</code></pre>
+<p><code>data.frame</code>, just like ggplot, automatically converts a character vector to a factor using <code>as.factor</code>. The levels order of that factor follows the sequence of occurrence in the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(foo<span class="op">$</span>sex)</code></pre></div>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<p>ggplot constructs discrete scales in the order of the levels of the underlying factor variable. Here, Females first, males after.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(foo) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> id, <span class="dt">color =</span> sex))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p>If we reverse the level order of the sex variable we change the way ggplot orders the discrete items.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo<span class="op">$</span>sex</code></pre></div>
+<pre><code>## [1] Female Female Male   Male  
+## Levels: Female Male</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo<span class="op">$</span>sex &lt;-<span class="st"> </span><span class="kw">factor</span>(foo<span class="op">$</span>sex, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>))
+foo<span class="op">$</span>sex</code></pre></div>
+<pre><code>## [1] Female Female Male   Male  
+## Levels: Male Female</code></pre>
+<p>Now we have males first and females last.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(foo) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> id, <span class="dt">color =</span> sex))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(foo) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> id, <span class="dt">color =</span> sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>sex)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-109-2.png" width="672" /></p>
+<p><strong>NEVER OVERRIDE THE LEVELS DIRECTLY WHEN JUST MEANING TO CHANGE THE ORDER!</strong> You’ll screw up your data. In our case we just changed the sex of the participants.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">foo<span class="op">$</span>sex</code></pre></div>
+<pre><code>## [1] Female Female Male   Male  
+## Levels: Male Female</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(foo<span class="op">$</span>sex) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>)
+foo<span class="op">$</span>sex</code></pre></div>
+<pre><code>## [1] Male   Male   Female Female
+## Levels: Female Male</code></pre>
+</div>
+<div id="layers-are-plotted-on-top-of-each-other" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Layers are plotted on top of each other</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1952</span>, <span class="dv">2007</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">e0rank =</span> <span class="kw">n</span>() <span class="op">-</span><span class="st"> </span><span class="kw">rank</span>(lifeExp)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(e0rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> country, <span class="dt">color =</span> continent, <span class="dt">size =</span> pop)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1952</span>, <span class="dv">2007</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">e0rank =</span> <span class="kw">n</span>() <span class="op">-</span><span class="st"> </span><span class="kw">rank</span>(lifeExp)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(e0rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> country, <span class="dt">color =</span> continent, <span class="dt">size =</span> pop)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-111-2.png" width="672" /></p>
+</div>
+<div id="sometimes-the-row-order-of-the-data-matters" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Sometimes the row-order of the data matters</h3>
+<p>Sometimes the row-order of a dataframe has implications for visualization. This is true for ggplots <code>geom_point()</code> which draws points in the order of occurence in a dataframe. In the example below we scale the points by the population size of a country. Arranging the dataframe by decreasing population size makes sure that the smaller points are drawn last, i.e. on top of the larger points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(pop) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">fill =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">shape =</span> <span class="dv">21</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_area</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(pop)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">y =</span> lifeExp, <span class="dt">size =</span> pop)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">fill =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">color =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">shape =</span> <span class="dv">21</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_size_area</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-112-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;Afghanistan&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(pop) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> year))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;Afghanistan&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> year))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-113-2.png" width="672" /></p>
+</div>
+</div>
+<div id="facets" class="section level2">
+<h2><span class="header-section-number">4.4</span> Facets</h2>
+<div id="comparing-sub-groups-to-totals" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Comparing sub-groups to totals</h3>
+<p><a href="https://drsimonj.svbtle.com/plotting-background-data-for-groups-with-ggplot2" class="uri">https://drsimonj.svbtle.com/plotting-background-data-for-groups-with-ggplot2</a></p>
+</div>
+</div>
+<div id="chart-type-vocabulary" class="section level2">
+<h2><span class="header-section-number">4.5</span> Chart type vocabulary</h2>
+<div id="visualizing-distributions" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Visualizing distributions</h3>
+<p>Distribiutions are at the heart of statistics as they inform us about about the “typical” in a population, the degree of deviation from the typical, the “extreme”, and everything in between. Visualizing the distribution of a collection of values allows us to</p>
+<ul>
+<li>appreciate the diversity in our sample,</li>
+<li>understand the variability around a mean,</li>
+<li>choose the correct model specification,</li>
+<li>decide if the data is iid.</li>
+</ul>
+<div id="continuous" class="section level4">
+<h4><span class="header-section-number">4.5.1.1</span> Continuous</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># European regional population statistics</span>
+<span class="kw">load</span>(<span class="st">&#39;data/euro_regio/euro_regio_eu.Rdata&#39;</span>)</code></pre></div>
+<p>The most popular technique to visualize a distribution is the <strong>histogram</strong>. Here we use it to show how life-expectancy is distributed across the regions of the European Union in 2015.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp))</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p>A histogram is a visual representation of <em>binned data</em>: a variable gets cut into intervals, the cases tabulated over those intervals and the resulting counts plotted as a shaded region. This whole binning operation is performed by <code>geom_histogram()</code>. We can change the details of that data transformation, e.g. using single year bins.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp), <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p>By default ggplot picks a binwidth of 1/30th the range of the data, yet <strong>the optimal binwidth for a histogram depends on the range of your data, the number of observations, and the desired trade-off between detail and smoothing</strong>. The fewer the observations, the bigger the bins need to be in order to create a usefull histogram. Say we want to show the distribution of life-expectancy among the 29 French NUTS-2 regions in 2015. Below you see 3 variations of doing that, using a binwidth of A) 1 month, B) half a year, and C) a year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cowplot<span class="op">::</span><span class="kw">plot_grid</span>(
+  
+  euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, country_code <span class="op">==</span><span class="st"> &#39;FR&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp), <span class="dt">binwidth =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">12</span>),
+  
+  euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, country_code <span class="op">==</span><span class="st"> &#39;FR&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp), <span class="dt">binwidth =</span> <span class="dv">1</span>),
+  
+  euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, country_code <span class="op">==</span><span class="st"> &#39;FR&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp), <span class="dt">binwidth =</span> <span class="dv">5</span>),
+  
+  <span class="dt">labels =</span> <span class="st">&#39;AUTO&#39;</span>, <span class="dt">ncol =</span> <span class="dv">3</span>
+
+)</code></pre></div>
+<pre><code>## Warning: Removed 4 rows containing non-finite values (stat_bin).
+
+## Warning: Removed 4 rows containing non-finite values (stat_bin).
+
+## Warning: Removed 4 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p><strong>Consider using a dot-histogram when ovservations are few (&lt;100).</strong> A dot-histogram<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> draws a single point for each observation, located at the center of the respective bin. This makes for a very intuitive visualization as the individual observations are still visible despite being aggregated into bins. Sadly the implementation of dot-histograms in ggplot is a bit lacking at the time of writing which necessitates to use our data wrangling skills to get a nice result.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A trick I&#39;ve learned from John Tukey&#39;s EDA: Label individual cases in</span>
+<span class="co"># dot-histograms. Aggregate and individual view at once!</span>
+<span class="co"># Here&#39;s how you do it in R: (link)</span>
+
+the_data &lt;-
+<span class="st">  </span>euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, country_code <span class="op">==</span><span class="st"> &#39;ES&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">id =</span> nuts2_code, <span class="dt">value =</span> unemp)
+
+<span class="co"># Label by id -------------------------------------------------------------</span>
+
+the_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bin =</span> <span class="kw">cut</span>(value, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bin, <span class="dt">y =</span> count)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> id), <span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">color =</span> <span class="st">&#39;grey80&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> id), <span class="dt">size =</span> <span class="fl">3.4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Label by value ----------------------------------------------------------</span>
+
+ the_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bin =</span> <span class="kw">cut</span>(value, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bin, <span class="dt">y =</span> count)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> id), <span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">color =</span> <span class="st">&#39;grey80&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> value), <span class="dt">size =</span> <span class="fl">3.4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-118-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Works with grouping as well ---------------------------------------------</span>
+
+the_data2 &lt;-
+<span class="st">  </span>euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country_code <span class="op">==</span><span class="st"> &#39;ES&#39;</span>, year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2007</span>, <span class="dv">2012</span>, <span class="dv">2017</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">group =</span> year, <span class="dt">id =</span> nuts2_code, <span class="dt">value =</span> unemp)
+
+the_data2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bin =</span> <span class="kw">cut</span>(value, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">5</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(group, bin) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bin, <span class="dt">y =</span> count)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> id), <span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">color =</span> <span class="st">&#39;grey80&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> id), <span class="dt">size =</span> <span class="fl">3.4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>group)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-118-3.png" width="672" /></p>
+<p>Whenever a <code>geom</code> uses a statistical transformation, such as the binning in <code>geom_histogram()</code>, a number of new variables are internally computed by <code>ggplot</code> prior to plotting. In case of <code>geom_histogram()</code> these new variables are</p>
+<ul>
+<li><code>count</code>: number of points in bin</li>
+<li><code>density</code>: density of points in bin</li>
+<li><code>ncount</code>: count, scaled to a maximum of 1</li>
+<li><code>ndensity</code>: density, scaled to a maximum of 1<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
+</ul>
+<p>Via the <code>stat()</code> function we can use any of the computed variables in our plot. This makes it possible to draw histograms with <code>density</code> on the y axis instead of the default <code>count</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp, <span class="dt">y =</span> <span class="kw">stat</span>(density)), <span class="dt">binwidth =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p>An alternative to the histogram is the <strong>density plot</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp))</code></pre></div>
+<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_density).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+</div>
+<div id="discrete" class="section level4">
+<h4><span class="header-section-number">4.5.1.2</span> Discrete</h4>
+</div>
+<div id="multivariate" class="section level4">
+<h4><span class="header-section-number">4.5.1.3</span> Multivariate</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio_eu <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp, <span class="dt">y =</span> <span class="kw">stat</span>(count), <span class="dt">color =</span> region)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lifeexp, <span class="dt">y =</span> <span class="kw">stat</span>(count)))</code></pre></div>
+<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_density).
+
+## Warning: Removed 18 rows containing non-finite values (stat_density).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+</div>
+</div>
+<div id="visualizing-association" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Visualizing association</h3>
+<div id="continuous-vs.continuous" class="section level4">
+<h4><span class="header-section-number">4.5.2.1</span> continuous vs. continuous</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># scatterplot</span>
+
+<span class="co"># different symbols</span>
+
+<span class="co"># fill versus color</span>
+
+<span class="co"># white outline / overlap</span>
+
+<span class="co"># dot chart</span>
+
+<span class="co"># bubble chart</span>
+
+<span class="co"># dot density map</span></code></pre></div>
+</div>
+<div id="continuous-vs.discrete" class="section level4">
+<h4><span class="header-section-number">4.5.2.2</span> continuous vs. discrete</h4>
+</div>
+<div id="discrete-vs.discrete" class="section level4">
+<h4><span class="header-section-number">4.5.2.3</span> discrete vs. discrete</h4>
+</div>
+</div>
+<div id="visualizing-change" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Visualizing change</h3>
+<div id="lines" class="section level4">
+<h4><span class="header-section-number">4.5.3.1</span> Lines</h4>
+</div>
+<div id="slope" class="section level4">
+<h4><span class="header-section-number">4.5.3.2</span> Slope</h4>
+</div>
+<div id="connected-dots" class="section level4">
+<h4><span class="header-section-number">4.5.3.3</span> Connected dots</h4>
+</div>
+<div id="waterfall" class="section level4">
+<h4><span class="header-section-number">4.5.3.4</span> Waterfall</h4>
+</div>
+<div id="bump" class="section level4">
+<h4><span class="header-section-number">4.5.3.5</span> Bump</h4>
+</div>
+</div>
+<div id="visualizing-surfaces" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Visualizing surfaces</h3>
+<div id="contours" class="section level4">
+<h4><span class="header-section-number">4.5.4.1</span> Contours</h4>
+</div>
+<div id="heatmap" class="section level4">
+<h4><span class="header-section-number">4.5.4.2</span> Heatmap</h4>
+<p><code>geom_tile()</code> draws rectangles at specified xy-positions. A common use-case is to visualize the value of a variable across a surface by coloring the rectangles according to value. This plot type is also known as a <em>heatmap</em>. Demographers refer to heatmaps as <em>Lexis Surfaces</em> if the surface is defined by period/cohort and age. Here’s an example showing Swedish age specific, logged death rates over time:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_swe.RData&#39;</span>)
+swe &lt;-<span class="st"> </span><span class="kw">mutate</span>(hmd_swe, <span class="dt">nmx =</span> nDx<span class="op">/</span>nEx)
+
+<span class="kw">ggplot</span>(swe) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> <span class="kw">log</span>(nmx)))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p><code>geom_rect()</code> is an alternative to <code>geom_tile()</code> but we need to specify all four corners of each rectangle we wish to draw. As each age and period group is a single year wide, we specify rectangles which have a width and height of one unit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(swe) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_rect</span>(<span class="kw">aes</span>(<span class="dt">xmin =</span> period, <span class="dt">xmax =</span> period<span class="op">+</span><span class="dv">1</span>, <span class="dt">ymin =</span> age, <span class="dt">ymax =</span> age<span class="op">+</span><span class="dv">1</span>,
+                <span class="dt">fill =</span> <span class="kw">log</span>(nmx)))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p>Only specifying x and y position and omitting colour puts a grey rectangle at every xy position that appears in the data. The resulting plot gives us information about the period-ages where we have mortality data on Swedish females.</p>
+<p>By default the small rectangles have a width and height of 1 scale unit and are drawn over the mid-points of the corresponding x and y values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(swe) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="dv">1800</span><span class="op">:</span><span class="dv">1810</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="dv">100</span><span class="op">:</span><span class="dv">110</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">1800</span>, <span class="dv">1810</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">110</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p>Shifting the data by 0.5 in x and y aligns things neatly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(swe) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period<span class="fl">+0.5</span>, <span class="dt">y =</span> age<span class="fl">+0.5</span>),
+            <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="dv">1800</span><span class="op">:</span><span class="dv">1810</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="dv">100</span><span class="op">:</span><span class="dv">110</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">1800</span>, <span class="dv">1810</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">110</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
+<p>If our data does not come in 1 by 1 units we have to adjust the <code>width</code> and/or <code>height</code> of the rectangles. <code>width</code> and <code>height</code> are regular aesthetics and can be mapped to variables in the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/cod/cod.csv&#39;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Year = col_integer(),
+##   Age = col_integer(),
+##   AgeGr = col_character(),
+##   w = col_integer(),
+##   Sex = col_character(),
+##   COD = col_character()
+## )</code></pre>
+<p>The Cause of Death data features age groups of different sizes (1, 4, or 5 years). This is how it looks like if we plot it without any regard to the size of the age groups.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> Year <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> Age),
+            <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p>Now we shift the rectangles away from the age midpoint and scale them in height according to the width of the age group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> Year <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">Age =</span> Age <span class="op">+</span><span class="st"> </span>w<span class="op">/</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> Age, <span class="dt">height =</span> w),
+            <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>If we use discrete axis (happens automatically if we supply a non-numeric variable to the x or y aesthetic) we loose any control over the placement of the age or period groups. They will be equally spaced along the axis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Sex <span class="op">==</span><span class="st"> &quot;Female&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> Year <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">Age =</span> AgeGr) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> Age), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
+<p><strong>Avoid character or factor variables as your period or age groups.</strong> Whenever possible go with numeric “Start of Interval” and “Interval Width” variables.</p>
+<div id="sequential-colour-scales-plotting-magnitudes" class="section level5">
+<h5><span class="header-section-number">4.5.4.2.1</span> Sequential Colour Scales: Plotting Magnitudes</h5>
+<p>If we plot magnitudes we would like to use a colour scale which has an intrinsic ordering to it. Scales that vary from dark to light are suitable and we call them “sequential”. <code>scale_fill_brewer(type = &quot;seq&quot;)</code> provides you with such a scale.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">breaks_nmx &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.0001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="ot">Inf</span>)
+swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">nmx_cut =</span> <span class="kw">cut</span>(nmx, <span class="dt">breaks =</span> breaks_nmx)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx_cut),
+            <span class="dt">position =</span> <span class="kw">position_nudge</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;seq&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p>Continuous colour scales take the form of a smooth colour gradient. Getting the gradient to look like you want can be tricky.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p>Log transform the colour scale.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">trans =</span> <span class="st">&#39;log10&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>Make high values dark and low values light.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">trans =</span> <span class="st">&#39;log10&#39;</span>,
+                       <span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p>Rescale the colour gradient to increase contrast.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">trans =</span> <span class="st">&#39;log10&#39;</span>,
+                       <span class="dt">direction =</span> <span class="dv">-1</span>,
+                       <span class="dt">values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p>Throw away data outside of the limits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">trans =</span> <span class="st">&#39;log10&#39;</span>,
+                       <span class="dt">direction =</span> <span class="dv">-1</span>,
+                       <span class="dt">values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="dv">1</span>),
+                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p>Or instead <em>squish</em> the out-of-bounds data into the limits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> nmx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">trans =</span> <span class="st">&#39;log10&#39;</span>,
+                       <span class="dt">direction =</span> <span class="dv">-1</span>,
+                       <span class="dt">values =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="dv">1</span>),
+                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.1</span>),
+                       <span class="dt">oob =</span> scales<span class="op">::</span>squish) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+</div>
+<div id="divergent-colour-scales-plotting-differences-proportions" class="section level5">
+<h5><span class="header-section-number">4.5.4.2.2</span> Divergent colour scales: Plotting Differences &amp; Proportions</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd.RData&#39;</span>)
+breaks_prop_nmx &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>,
+                     <span class="fl">1.1</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="ot">Inf</span>)
+
+hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;SWE&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(sex, period, age, nmx) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(sex, nmx) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex_ratio =</span> Male<span class="op">/</span>Female,
+         <span class="dt">sex_ratio_disc =</span> <span class="kw">cut</span>(sex_ratio, breaks_prop_nmx)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> sex_ratio_disc)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;div&quot;</span>,
+                    <span class="dt">palette =</span> <span class="dv">5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
+<p>Continuous variant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;SWE&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(sex, period, age, nmx) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(sex, nmx) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex_ratio =</span> Male<span class="op">/</span>Female) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">fill =</span> sex_ratio)) <span class="op">+</span>
+<span class="st">  </span><span class="co"># takes 6 colours from a brewer palette and interpolates</span>
+<span class="st">  </span><span class="kw">scale_fill_distiller</span>(<span class="dt">type =</span> <span class="st">&quot;div&quot;</span>,
+                       <span class="dt">palette =</span> <span class="st">&quot;RdBu&quot;</span>,
+                       <span class="dt">trans =</span> <span class="st">&quot;log2&quot;</span>,
+                       <span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span>),
+                       <span class="dt">direction =</span> <span class="dv">1</span>,
+                       <span class="dt">oob =</span> scales<span class="op">::</span>squish) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
+</div>
+<div id="qualitative-colour-scales-plotting-group-membership" class="section level5">
+<h5><span class="header-section-number">4.5.4.2.3</span> Qualitative colour scales: Plotting Group Membership</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cod <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> Year <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dt">Age =</span> Age <span class="op">+</span><span class="st"> </span>w<span class="op">/</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> Age, <span class="dt">height =</span> w, <span class="dt">fill =</span> COD)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Sex, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="st">&quot;Dominant cause of death&quot;</span>,
+                    <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;Infections&quot;</span> =<span class="st"> &quot;#63C46A&quot;</span>,
+                               <span class="st">&quot;Neoplasms&quot;</span> =<span class="st"> &quot;#E7CC60&quot;</span>,
+                               <span class="st">&quot;Circulatory diseases&quot;</span> =<span class="st"> &quot;#FF4B56&quot;</span>,
+                               <span class="st">&quot;External&quot;</span> =<span class="st"> &quot;#C463AF&quot;</span>,
+                               <span class="st">&quot;Other&quot;</span> =<span class="st"> &quot;#969696&quot;</span>))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
+</div>
+</div>
+<div id="tables" class="section level4">
+<h4><span class="header-section-number">4.5.4.3</span> Tables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;DEUTE&#39;</span>, sex <span class="op">==</span><span class="st"> &#39;Female&#39;</span>,
+         (period <span class="op">%%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, (age <span class="op">%%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age, <span class="dt">alpha =</span> lx, <span class="dt">size =</span> lx)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> ex<span class="op">%/%</span><span class="dv">10</span>),
+            <span class="dt">family =</span> <span class="st">&#39;mono&#39;</span>, <span class="dt">fontface =</span> <span class="st">&#39;bold&#39;</span>,
+            <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1900</span>, <span class="dv">2010</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">110</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Decades left to live.&#39;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;DEUTE&#39;</span>, <span class="st">&#39;DEUTW&#39;</span>), sex <span class="op">==</span><span class="st"> &#39;Female&#39;</span>,
+         (period <span class="op">%%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, (age <span class="op">%%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(country, period, age, ex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(country, ex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">d_ex =</span> DEUTE <span class="op">-</span><span class="st"> </span>DEUTW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> period, <span class="dt">y =</span> age)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> d_ex<span class="op">%/%</span><span class="dv">1</span>, <span class="dt">alpha =</span> <span class="kw">abs</span>(d_ex<span class="op">%/%</span><span class="dv">1</span>)),
+            <span class="dt">family =</span> <span class="st">&#39;mono&#39;</span>, <span class="dt">fontface =</span> <span class="st">&#39;bold&#39;</span>,
+            <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1900</span>, <span class="dv">2010</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">110</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;East-West German difference</span><span class="ch">\n</span><span class="st">in years of remaining life-expectancy.&#39;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+</div>
+</div>
+<div id="excercise-chart-type-vocabulary" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Excercise: Chart type vocabulary</h3>
+<ol style="list-style-type: decimal">
+<li><p>Using <code>ggplot2</code>, plot a population pyramid using data of your choice.</p></li>
+<li><p>Calculate the differences of Danish and Swedish remaining male life-expectancies by period and age. Visualize the result as a Lexis surface with a discrete divergent color scale. The choice of breaks is up to you.</p></li>
+</ol>
+</div>
+</div>
+<div id="polish-your-plot-for-publication" class="section level2">
+<h2><span class="header-section-number">4.6</span> Polish your plot for publication</h2>
+<div id="highlight" class="section level3">
+<h3><span class="header-section-number">4.6.1</span> Highlight</h3>
+</div>
+<div id="annotate" class="section level3">
+<h3><span class="header-section-number">4.6.2</span> Annotate</h3>
+</div>
+</div>
+<div id="maps" class="section level2">
+<h2><span class="header-section-number">4.7</span> Maps</h2>
+</div>
+<div id="networks" class="section level2">
+<h2><span class="header-section-number">4.8</span> Networks</h2>
+
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Wilkinson, L. (1999). Dot Plots. The American Statistician, 53(3), 276. <a href="https://doi.org/10.2307/2686111" class="uri">https://doi.org/10.2307/2686111</a><a href="visualization.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>you can find out about the computed variables by looking into the help page of a <code>geom</code>.<a href="visualization.html#fnref2">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

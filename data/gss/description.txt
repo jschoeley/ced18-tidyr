@@ -1,0 +1,5 @@
+---
+title: The General Social Survey, year 2016 data (cross-section only)
+author: NORC at the University of Chicago
+date_downloaded: 2018-07-02
+...

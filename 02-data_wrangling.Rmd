@@ -1,0 +1,1033 @@
+Data Wrangling
+==============
+
+```{r message=FALSE}
+library(tidyverse)
+
+
+# General social survey
+# source: http://gss.norc.org/s
+gss <- haven::read_stata('data/gss/GSS2016.DTA')
+```
+
+The "tidy" approach to data wrangling
+-------------------------------------
+
+"Data wrangling" is the process of transforming raw data into a form fit for analysis. This may include operations like filtering, sorting, joining, splitting, recoding or reshaping, nearly always performed in conjuction with each other. The tidy approach to data wrangling aims to make this often mundane but critical task as clear and fast as possible. Tidy data wrangling revolves around 4 concepts:
+
+1) **Verbs** A small collection of "verbs" provides basic transformation operations.
+2) **Pipes** Transformations can be chained together via a "pipe".
+3) **Tidy Data** Everything is a data frame with cases as rows and variables as columns.
+4) **Tidy iteration** Transformations can be repeatedly applied to different row or column subsets without the use of a for loop.
+
+Transforming data using verbs
+-----------------------------
+
+The `tidyverse` provides us with an array of *verbs* for data transformation such as `filter()`, `mutate()`, `summarise()` and many more. While each of those verbs performs a distinct action they all have a common design. All verbs...
+
+- ...have as their first argument a data frame:
+
+All verbs *operate on data frames only*. This is one of the helpful restrictions of the tidyverse because you don't need to consider data structures beyond the tabular form of a data frame. If your data does not come in a data frame, it needs to be converted.
+
+```{r error=TRUE}
+# this fails because "WorldPhones" is a matrix and not a data frame
+select(WorldPhones, 3)
+# converting World Phones to a data frame resolves the issue
+select(as.data.frame(WorldPhones), 3)
+```
+
+The data frame to operate on is always the first argument in any of the *verb* functions. Here we `select()` the first variable of the data frame `hmd_counts`.
+
+```{r}
+# hmd_counts
+# Deaths and exposures by age, year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd_counts.RData')
+
+select(hmd_counts, 1)
+```
+
+Due to the data frame always coming first we can use the `%>%` (pipe) operator to pass data into any of the verbs.
+
+```{r}
+hmd_counts %>% select(1)
+```
+
+- ...don't change the data frame unless you explicitly want to
+
+Note that none of the verbs permanently change the content of a data frame. You need to assign the output of a verb to an object in order to permanently store your computations.
+
+```{r}
+# display the result of rename() without changing the data
+rename(hmd_counts, deaths = nDx, exposures = nEx)
+hmd_counts
+# permanently store the results of rename() in a new object called `hmd_counts_new`
+hmd_counts_new <- rename(hmd_counts, deaths = nDx, exposures = nEx)
+hmd_counts_new
+```
+
+- ...let you address columns within the data frame by simply typing the name
+
+The tidyverse functions always work within the context of a data frame -- specified as first argument -- and columns within that data frame can be adressed by simply typing their name (without quotes).
+
+```{r}
+# this returns life-tables entries for Australia, 1921 ages 20 to 25
+filter(hmd_counts, country == 'AUS', period == 1921, age %in% 20:25)
+# this is the same, but much more cumbersome to write and read
+hmd_counts[hmd_counts$country == 'AUS' &
+             hmd_counts$period == 1921 &
+             hmd_counts$age %in% 20:25,]
+```
+
+- ...output a data frame
+
+### Column based transforms
+
+#### `mutate()` columns
+
+`mutate()` adds a column to a data frame or changes an existing column.
+
+```{r}
+hmd_counts %>%
+  # calculate new column with death rates from
+  # columns nDx and nEx
+  mutate(nmx = nDx/nEx)
+
+hmd_counts %>%
+  # change unit of exposure variable from person-years
+  # to person months
+  mutate(nEx = nEx*12)
+```
+
+Within a single `mutate()` statement multiple new variables can be created.
+
+```{r}
+hmd_counts %>%
+  mutate(
+    # add discrete age variable
+    age_group = cut(age, seq(0, 90, 10), include.lowest = TRUE),
+    # add mortality rate
+    nmx = nDx/nEx
+  )
+```
+
+Newly created variables can immediately be used in the creation of additional variables.
+
+```{r}
+hmd_counts %>%
+  mutate(
+    nmx = nDx/nEx,
+    # convert death rates to death probability
+    nqx = 1-exp(-nmx),
+    # and survival probability
+    npx = 1-nqx
+  )
+```
+
+#### `select()` columns
+
+Using `select()` we can specify which columns to keep and which columns to delete from a data frame. Let's have a look at a typical panel data set: The [General Social Survey](http://gss.norc.org/). We can see that the `gss` data features 960 columns.
+
+```{r}
+# General social survey
+# source: http://gss.norc.org/s
+gss <- haven::read_stata('data/gss/GSS2016.DTA')
+gss
+```
+
+Here we just select the two columns named `id` and `age`.
+
+```{r}
+gss %>% select(id, age)
+```
+
+We can also select by column position.
+
+```{r}
+gss %>% select(312, 28)
+```
+
+The column operator `:` selects a range of columns. We can use it to select all variables from `mar1` to `mar14`, the marriage status of up to 14 persons in a household.
+
+```{r}
+gss %>% select(mar1:mar14)
+```
+
+Again, the same is possible by specifying the column position, in this case the first 14 columns.
+
+```{r}
+gss %>% select(1:14)
+```
+
+A minus preceeding a selection returns all columns *apart* from those specified. Notice that a selection of columns like `mar1:mar14` must be surrounded by parantheses in order to be removed.
+
+```{r}
+# select everything apart from mar1
+gss %>% select(-mar1)
+
+# select everything apart from mar1 to mar14
+gss %>% select(-(mar1:mar14))
+```
+
+You can use functions inside of `select()` as long as they return either a column name or a column position. The standard R function `which()` is handy in that context as it returns the index of the elements for which a conditions holds true.
+
+```{r}
+# return all columns of gss which names are 3 characters or less
+gss %>% select(which(str_length(names(.)) <= 3))
+```
+
+There are a number of functions provided by the `tidyverse` which are designed to help with column selection.
+
+```{r}
+# select all columns where name starts with 'age'
+gss %>% select(starts_with('age'))
+
+# select columns named mar1, mar2, mar3, mar4, mar5
+gss %>% select(num_range('mar', 1:5))
+
+# select all columns where name contains 'sex'
+gss %>% select(contains('sex'))
+```
+
+You can also use [regular expressions](http://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) when selecting columns.
+
+```{r}
+# select columns where the name contains a number
+gss %>% select(matches('[0-9]'))
+```
+
+`select()` returns the columns in the order it selects them. It can therefore be used to reorder the columns of a dataframe.
+
+```{r}
+# reverse the order of the columns
+gss %>% select(rev(names(.)))
+
+# reorder the columns in reverse alphabetical order
+gss %>% select(order(names(.), decreasing = TRUE))
+
+# reorder the columns in increasing length of their names
+gss %>% select(order(str_length(names(.))))
+
+# reorder the columns randomly
+gss %>% select(sample(ncol(.)))
+```
+
+Selected columns can be renamed.
+
+```{r}
+gss %>% select(ID = id, EDUCATION = educ)
+```
+
+#### `rename()` columns
+
+There's not much to `rename()`. We use it to change the names of the columns in a dataframe. Unlike `select()`, which can also change names, `rename()` keeps all columns. We write `new_column_name = old_column_name`.
+
+```{r}
+hmd_counts %>% rename(Age = age, Exposure = nEx, Deaths = nDx)
+```
+
+If we want to use spaces in the column names (not recomended though) we have to surround the new name with \`backticks\`.
+
+```{r}
+hmd_counts %>% rename(`Person-years exposure` = nEx, `Number of deaths` = nDx)
+```
+
+### Row based transforms
+
+#### `filter()` rows
+
+You can create subsets of the rows in your data using `filter()`.
+
+```{r}
+# euro_regio
+# European regional population statistics
+load('data/euro_regio/euro_regio.Rdata')
+
+# return rows of `euro_regio` where year is equal to 2016
+euro_regio %>% filter(year == 2016)
+```
+
+In `filter()` you specify logical tests which are evaluated for each row. If the condition evaluates to `TRUE` for a row, the row is returned, if it evaluates to `FALSE` the row is not returned. A row is also not returned if the condition evaluates to `NA`
+
+Multiple filtering conditions are separated by a comma. The comma acts as a logical "AND", i.e. the `&` operator, which only returns `TRUE` if *all* the conditions are `TRUE`.
+
+```{r}
+# return rows where year is equal to 2016 and region is Catalonia
+euro_regio %>% filter(year == 2016, nuts2_code == 'ES51')
+# this is the same as above
+euro_regio %>% filter(year == 2016 & nuts2_code == 'ES51')
+```
+
+All of R's logical operators can be used in `filter()` as well. You use `<`, `>`, `>=`, `<=` for magnitude comparisons.
+
+```{r}
+# is 1,2,3,4 larger than 1?
+1:4 > 1
+# return all rows where unemployment is higher than 30%
+euro_regio %>% filter(unemp > 30)
+
+# is 1,2,3,4 smaller than 1?
+1:4 < 1
+# return all rows where net-migration rate is lower than -20%
+euro_regio %>% filter(netmigrate < -20)
+
+# is 1,2,3,4 smaller or equal to 1?
+1:4 <= 1
+# return all rows where life-expectancy is 75 years or less
+euro_regio %>% filter(lifeexp <= 75)
+
+# is 1,2,3,4 greater than or equal to 1?
+1:4 >= 1
+# return all rows where life-expectancy is 85 years or more
+euro_regio %>% filter(lifeexp >= 85)
+```
+
+Boolean logic is implemented via `&` (and), `|` (or), and `xor()` (exclusive or).
+
+```{r}
+# is 1,2,3,4 greater than 1 AND is 1,2,3,4 smaller than 1?
+(1:4 > 1) & (1:4 < 1)
+
+# return all rows where unempolyment is higher than 15% and
+# netmigration is lower than -15%
+euro_regio %>% filter(unemp > 15, netmigrate < -15)
+
+# is 1,2,3,4 greater than 1 OR is 1,2,3,4 smaller than 1?
+(1:4 > 1) | (1:4 < 1)
+# return all rows where unempolyment is higher than 15% or
+# netmigration is lower than -15%
+euro_regio %>% filter(unemp > 15 | netmigrate < -15)
+
+# is only one of those statements true?
+# 1,2,3,4 greater than 1; 1,2,3,4 smaller than 5
+xor(1:4 > 1, 1:4 < 5)
+# return all rows where unempolyment is higher than 15% or
+# netmigration is lower than -15% but not both
+euro_regio %>% filter(xor(unemp > 15, netmigrate < -15))
+```
+
+The `%in%` operator lets you filter rows based on membership `%in%` a set.
+
+```{r}
+# is 1,2,3,4 part of the set (2,4)
+1:4 %in% c(2,4)
+# return all rows for Germany, United Kingdom and France
+euro_regio %>% filter(country_code %in% c('DE', 'UK', 'FR'))
+```
+
+You can use any combination of functions within `filter()` as long as they return a logical vector as long as the input data frame. This makes it possible to...
+
+```{r}
+# ... return the region with the highest population count in 2015
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(pop == max(pop, na.rm = TRUE))
+
+# ... return the regions with the lowest per head income in 2015, ranks 1 to 3
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(min_rank(income) <= 3)
+
+# ... return the regions with the highest per head income in 2015, ranks 1 to 3
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(min_rank(desc(income)) <= 3)
+
+# ... return the regions with the highest absolute net-migration rate in 2015, 
+# ranks 1 to 3
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(min_rank(desc(abs(netmigrate))) <= 3)
+
+# ... return the >99 percentile regions by life expectancy in 2015
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(cume_dist(lifeexp) >= 0.99)
+```
+
+Special care has to be taken when filtering `NA` values. One may be inclined to return all rows including `NA` in the variable `pop` by writing 
+
+```{r}
+euro_regio %>% filter(pop == NA)
+```
+
+Zero rows are returned because for R `NA == NA` always returns `NA` instead of `TRUE` and `filter()` does not return rows for which a condition evaluates to `NA`. If we want to test for `NA` we must use the function `is.na()` which returns `TRUE` whenever an NA is encountered and `FALSE` otherwise.
+
+```{r}
+euro_regio %>% filter(is.na(pop))
+```
+
+#### `arrange()` rows
+
+`arrange()` re-orders the rows of a dataframe according to the values of one or more variables within that dataframe.
+
+```{r}
+# eu_timeuse_tot
+# European timeuse survey
+# source: Eurostat
+load('data/eu_timeuse/eu_timeuse_tot.Rdata')
+
+# order data frame by increasing date
+eu_timeuse_tot %>% arrange(year)
+```
+
+If multiple variables are specified, the dataframe is re-ordered in the sequence of specification. This behavior makes it possible to design useful tables, i.e. our `eu_timeuse` data contains the time spent each day on different activities by type of activity, country, and year. Sorting by `activity`, `country` and (at last position) `year` gives a table that allows for quick comparisions along the time axis. Having `country` last would allow for quick comparisions among coutries and so on.
+
+```{r}
+# order data frame by activity, country and year
+eu_timeuse_tot %>% arrange(activity_name, country_name, year)
+
+# order data frame by activity, year, and country
+eu_timeuse_tot %>% arrange(activity_name, year, country_name)
+```
+
+By default character variables are ordered in increasing alphabetical order and numeric variables in increasing numerical order. The `desc()` function allows to reverse that behavior.
+
+```{r}
+# order data frame by reverse alphabetical activity, and alphabetical country
+eu_timeuse_tot %>% arrange(desc(activity_name), country_name)
+```
+
+#### `slice()` rows
+
+```{r}
+#random shuffle
+gss %>% slice(sample(1:n()))
+```
+
+### Excercise: Basic verbs
+
+- Fix the following code:
+
+```{r eval=FALSE, comment=FALSE}
+hmd_counts %>%
+  filter(country = 'AUS', age = '0', sex = 'Female') %>%
+  mutate(hmd_counts, period_width = diff(period))
+#hmd_counts %>%
+#  filter(country == 'AUS', age == 0, sex == 'Female') %>%
+#  mutate(period_width = c(diff(period), NA))
+
+gss %>% filter(bigbang == NA)
+#gss %>% filter(is.na(NA))
+```
+
+- Filter `hmd_counts` such that it contains all Swedish life-tables and only life-tables for years 2000+ for countries other than Sweden.
+
+```{r include=FALSE}
+#filter(hmd_counts, period >= 2000 | country == 'SWE')
+```
+
+- Why do the results differ?
+
+```{r eval=FALSE}
+euro_regio %>% filter(year == 2015, rank(-income) <= 3)
+euro_regio %>%
+  filter(year == 2015) %>%
+  filter(rank(-income) <= 3)
+```
+
+- With `gss` select
+  - the first 10 columns
+  - the last 10 columns
+  - every 5th column from 1 to 100
+  - every column where the name does not contain a number
+  - all columns where the names contain a phrase of your choice
+
+```{r include=FALSE}
+gss %>% select(1:10)
+gss %>% select(rev(names(.))[10:1])
+gss %>% select(seq(1, 100, 5))
+gss %>% select(-matches('[1-9]'))
+gss %>% select(contains('pol'))
+```
+
+Pipes
+-----
+
+We can chain multiple function and transformations steps into a *data analysis pipeline*. This is a great approach for clear, fast, interactive data analysis.
+
+This is what we need to know in order to build pipelines:
+
+* The object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right
+* If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`)
+
+Here's a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.
+
+```{r}
+# the raw data...
+WorldPhones %>%
+  # ...is converted to a data frame...
+  as.data.frame() %>%
+  # ...the rownames are added as the column `year`...
+  # (note that I use the dot here to explicitly refer to the input data)
+  mutate(year = as.integer(rownames(.))) %>%
+  # ...the data gets transformed from wide to long format...
+  gather(key = cont, value = n, -year) %>%
+  # ...and finally plotted
+  # (note that I can pipe the tidy data frame directly into ggplot)
+  ggplot() +
+  geom_line(aes(x = year, y = n, colour = cont))
+```
+
+The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.
+
+### Excercise: Pipes
+
+Rewrite the following expressions as pipes:
+
+```{r comment=FALSE}
+sum(1:100)
+#1:100 %>% sum()
+
+sum(cumsum(1:100))
+#1:100 %>% cumsum() %>% sum()
+
+hist(colMeans(replicate(1000, runif(100))))
+#replicate(1000, runif(100)) %>% colMeans() %>% hist()
+
+any(is.na(mtcars$cyl))
+#mtcars$cyl %>% is.na() %>% any()
+
+cor.test(~hp+mpg, data = mtcars)
+#mtcars %>% cor.test(~ hp+mpg, data = .)
+
+cor.test(~hp+mpg, data = mtcars[1:10])
+#mtcars %>% {cor.test(~ hp+mpg, data = .[1:10])}
+
+cor(x = mtcars$mpg, y = mtcars$hp)
+#mtcars %>% {cor(x = .$mpg, y = .$hp)}
+
+xtabs(~ gear + cyl, data = mtcars, subset = mtcars$gear > 4)
+#mtcars %>% xtabs(~gear + cyl, data = ., subset = .$gear > 4)
+```
+
+Tidy data
+---------
+
+Many programming tasks become easier once the data is in a tidy format. But what is tidy data? Our working definition: **data needs to be a data frame** and **every variable of interest needs to be a separate column**. Let's explore what that means.
+
+```{r}
+head(WorldPhones)
+```
+
+Here's the number of telephone connections over time by continent. The data is not *tidy* because its not a *data frame*, it's a matrix with row and column names. This gives us headaches if we want to use ggplot to plot the data.
+
+```{r error=TRUE}
+ggplot(WorldPhones)
+```
+
+We can easily fix this problem by converting the matrix to a data frame.
+
+```{r}
+phones <- as.data.frame(WorldPhones)
+```
+
+Say we we want to plot the number of telephone connections over time by continent. This implies the following *variables of interest*:
+
+    * the number of telephone connections `n`
+    * the continent `cont`
+    * the year `year`
+
+Problem is, *none* of these variables are explicitly given in our data frame. Of course the data is all there, just not in a format we can use (with ggplot). So the question is how to reshape the data into a form where all the variables of interest are separate columns in the data frame.
+
+To reshape we are going to use the libraries [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html) and [tidyr](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html). Both are loaded when you load `library(tidyverse)`.
+
+The easiest variable to make explicit is the year. It is given as rownames of the data frame. We take the rownames, convert them from character to integer type, and add them as the variable `year` to the data frame. We use the `tidyverse` function `mutate()` to add a new variable to a data frame.
+
+```{r}
+phones <- mutate(phones, year = as.integer(rownames(phones)))
+phones
+```
+
+That leaves us with the variables *"number of telephone connections"* and *"continent"* to make explicit. They shall become separate columns in the data frame. With the help of `gather()` we **transform from wide to long format**.
+
+```{r}
+phones <- gather(phones, key = cont, value = n, -year)
+phones
+```
+
+We told the computer to look at all columns apart from `year` and transform them into the columns `cont` and `n`. `cont` holds the continent names for the variable `n`, the number of telephone connections. The continent names are taken from the original column names we *gathered* over. We now can plot our data easily.
+
+```{r}
+ggplot(phones) +
+  geom_line(aes(x = year, y = n, colour = cont))
+```
+
+### Long versus wide format data
+
+Each table has a *wide format* and a long format representation. The information content is the same in both formats. It's the layout that differs.
+
+Here's a wide format table containing the explicit variables `Female` and `Male`.
+
+```{r}
+wide <- data_frame(group = c("a", "b"), Female = 1:2, Male = 3:4)
+```
+
+The same table in long format representation containing the explicit variables `Sex` and `N`.
+
+```{r}
+long <- gather(wide, key = Sex, value = N, -group)
+long
+```
+
+If we want to go back to a wide format we can achieve that by using the function `spread()`.
+
+```{r}
+spread(long, key = Sex, value = N)
+```
+
+```{r error=TRUE}
+# hmd
+# Life tables by year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd.RData')
+
+# common problems: no matching row was found
+hmd %>%
+  filter(period > 2005, country == 'RUS', age == 0) %>%
+  spread(sex, ex) %>%
+  select(country, period, age, Female, Male)
+
+# solution
+hmd %>%
+  filter(period > 2005, country == 'RUS', age == 0) %>%
+  select(-(nDx:Tx)) %>%
+  spread(sex, ex) %>%
+  select(country, period, age, Female, Male)
+```
+
+### Making the implicit explicit
+
+```{r}
+# turn implicit NAs into explicit NAs
+eu_timeuse_tot %>% skimr::n_missing()
+eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_missing()
+```
+
+```{r}
+USArrests %>% rownames_to_column('state')
+```
+
+### Tidying data on police arrests
+
+Before we start plotting we need to ask ourselves: *What do we need to do with our data in order to get the plot we want?* Here are some examples.
+
+```{r}
+# we start with raw data...
+USArrests %>%
+  mutate(
+    # ...and add the new variable `state` from the rownames...
+    state = rownames(.),
+    # ...we then reorder the levels of `state` according to the percentage of
+    # people living in urban areas...
+    state = reorder(state, UrbanPop)) %>%
+  # ...and make a dotplot of the percentage of urban population by state...
+  ggplot() +
+  geom_point(aes(x = UrbanPop, y = state))
+```
+
+```{r}
+# we start with raw data...
+USArrests %>%
+  mutate(
+    # ...and add the new variable `state` from the rownames...
+    state = rownames(.),
+    # ...we then reorder the levels of `state` according to the combined
+    # murder, assault and crime rates...
+    state = reorder(state, Murder+Assault+Rape)) %>%
+  # ...we convert to long format, gathering "Assault", "Murder" and "Rape"
+  # into "crime"...
+  gather(key = crime, value = rate, -state, -UrbanPop) %>%
+  # ...and make a dotplot of the crime-rate by crime and state
+  ggplot() +
+  geom_point(aes(x = rate, y = state, colour = crime))
+```
+
+```{r include=FALSE, eval=FALSE}
+library(ggrepel) # brilliant package for labelling points in a scatterplot
+# we start with raw data...
+USArrests %>%
+  # ...and add the new variable `state` from the rownames...
+  mutate(state = rownames(.)) %>%
+  # ...andmake a labelled scatterplot of Murder versus Rape
+  ggplot(aes(x = Murder, y = Rape)) +
+  geom_text_repel(aes(label = state),
+                  colour = "grey",
+                  segment.color = "grey",
+                  size = 3) +
+  geom_point()
+```
+
+### Tidying Anscombe's quartet
+
+Can you figure out what happens here? Try running the code yourself line by line.
+
+```{r}
+anscombe %>%
+  mutate(id = seq_along(x1)) %>%
+  gather(... = -id) %>%
+  separate(key, sep = 1, into = c("axis", "panel")) %>%
+  spread(key = axis, value = value) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_point() +
+  facet_wrap(~panel)
+```
+
+### Tidying data on test-retest reliability
+
+```{r message=FALSE}
+wide <- read_csv("https://raw.githubusercontent.com/jschoeley/idem_viz/master/ggplot_practical/03-tidy_data/wide_data.csv")
+wide
+```
+
+```{r}
+long <-
+  wide %>%
+  # add a unique identifier to each row (each patient)
+  mutate(id = 1:nrow(.)) %>%
+  gather(key = type, value = value, -id, -name_rater1, -name_rater2) %>%
+  separate(col = type, into = c("measurement", "method"), sep = "_") %>%
+  mutate(rater = ifelse(grepl('1', method), name_rater1, name_rater2)) %>%
+  separate(col = method, into = c("method", "test"), sep = "\\d") %>%
+  mutate(test = ifelse(test == "", "a", test)) %>%
+  # beautification
+  select(id, rater, test, measurement, method, value) %>%
+  arrange(id, measurement, rater, test)
+long
+
+long %>%
+  filter(method == "camera") %>%
+  ggplot(aes(x = test, y = value)) +
+  geom_line(aes(color= rater, group = id)) +
+  facet_grid(rater~measurement)
+```
+
+Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
+
+```{r}
+long %>%
+  filter(method == "camera") %>%
+  ggplot(aes(x = test, y = value)) +
+  geom_line(aes(color= rater, group = id)) +
+  facet_grid(measurement~rater)
+```
+
+Differences are seen most clearly when plotted directly.
+
+```{r}
+long %>%
+  filter(method == "camera") %>%
+  spread(test, value = value) %>%
+  mutate(diff = a-b) %>%
+  ggplot() +
+  geom_dotplot(aes(x = diff)) +
+  facet_wrap(~rater)
+```
+
+### Tidying the EU time-use-survey
+
+```{r message=FALSE, cache=TRUE}
+library(lubridate)
+library(eurostat)
+
+# Eurostat table "tus_00selfstat"
+eu_timeuse_complete <- get_eurostat('tus_00selfstat', type = 'label',
+                                    stringsAsFactors = FALSE)
+
+eu_timeuse <-
+  eu_timeuse_complete %>%
+  filter(sex == 'Total', wstatus == 'Population') %>%
+  spread(unit, values) %>%
+  mutate(year = year(time),
+         prtcp_time_min = `Participation time (hh:mm)` %>%
+           str_pad(width = 4, side = 'left', pad = '0') %>%
+           {str_c(str_sub(., 1, 2), ':', str_sub(., 3, 4))} %>%
+           hm() %>% time_length(unit = 'minutes'),
+         time_spent_min = `Time spent (hh:mm)` %>%
+           str_pad(width = 4, side = 'left', pad = '0') %>%
+           {str_c(str_sub(., 1, 2), ':', str_sub(., 3, 4))} %>%
+           hm() %>% time_length(unit = 'minutes')
+         ) %>%
+  select(activity = acl00, country = geo, year,
+         prtcp_rate = `Participation rate (%)`,
+         prtcp_time_min, time_spent_min)
+
+eu_timeuse
+```
+
+### Tidying model output
+
+We "tidy" the output of the `survfit` function via the "broom" package.
+
+```{r}
+library(survival)
+surv <- survfit(
+  Surv(time = heart$start,
+       time2 = heart$stop,
+       event = heart$event) ~ heart$transplant
+)
+surv
+broom::tidy(surv) %>%
+  ggplot(aes(x = time, y = estimate)) +
+  geom_step(aes(colour = strata))
+```
+
+Dobson (1990) Page 93: Randomized Controlled Trial.
+
+```{r}
+dat <- data_frame(
+  counts = c(18,17,15,20,10,20,25,13,12),
+  outcome = gl(3,1,9),
+  treatment = gl(3,3)
+)
+
+dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
+
+broom::tidy(dat_fit)
+broom::glance(dat_fit)
+```
+
+### Excercise: Tidy data
+
+- Download `get_eurostat('t2020_10', time_format = 'raw')` and write a pipe that calculates the difference between the current value and the target value over time for each country.
+
+```{r include=FALSE, cache=TRUE}
+foo <- get_eurostat('t2020_10', time_format = 'raw')
+foo %>%
+  spread(time, values) %>%
+  mutate_at(vars(`1993`:`2017`), funs(.-TARGET)) %>%
+  gather(... = -c(1:5, 'TARGET')) %>%
+  filter(!is.na(value)) %>%
+  select(geo, year = key, employment = value, target = TARGET) %>%
+  mutate(year = as.integer(year),
+         ontarget = ifelse(employment < 0, 'no', 'yes')) %>%
+  ggplot(aes(year, employment)) +
+  geom_col(aes(fill = ontarget), show.legend = FALSE,
+           position = position_nudge(x = 0.5), width = 1) +
+  geom_step() +
+  coord_cartesian(ylim = c(-10, 10)) +
+  facet_wrap(~geo) +
+  theme_minimal()
+```
+
+Joins
+-----
+
+```{r cache=TRUE}
+# population change
+income <-
+  get_eurostat('tgs00026', stringsAsFactors = FALSE) %>%
+  select(geo, time, income = values)
+
+# unemployment rate
+unemp <-
+  get_eurostat('tgs00010', stringsAsFactors = FALSE) %>%
+  filter(sex == 'T') %>%
+  select(geo, time, unemp = values)
+
+# total fertility rate
+totfert <-
+  get_eurostat('tgs00100', stringsAsFactors = FALSE) %>%
+  select(geo, time, totfert = values)
+
+# total life-expectancy
+lifeexp <-
+  get_eurostat('tgs00101', stringsAsFactors = FALSE) %>%
+  filter(sex == 'T') %>%
+  select(geo, time, lifeexp = values)
+
+# population change
+popchange <-
+  get_eurostat('tgs00099', stringsAsFactors = FALSE) %>%
+  spread(indic_de, values) %>%
+  select(geo, time,
+         netmigrate = CNMIGRATRT,
+         growthrate = GROWRT,
+         natgrowthrate = NATGROWRT)
+
+# 
+eu_regional_indicators <-
+  unemp %>%
+  full_join(totfert) %>%
+  full_join(lifeexp) %>%
+  full_join(popchange) %>%
+  full_join(income) %>%
+  filter(str_length(geo) == 4) %>%
+  mutate(country = str_sub(geo, end = 2)) %>%
+  arrange(geo, time)
+```
+
+### Excercise: Joins
+
+- Create a dataset to a single topic of your choice by joining eurostat tables.
+
+Recoding
+--------
+
+### Excercise: Recoding
+
+- Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
+
+Tidy iteration
+--------------
+
+### Group-wise operations
+
+#### Grouped `mutate()`
+
+If we want to transform some columns in the data frame on a group-by-group basis we can use the `group_by()` together with `mutate()`.
+
+Biologists sometimes express age not in years but in shares of total life-expectancy, i.e. the age of quarter life-expectancy, the age of half life-expectancy... Let's add this *relative* age to each life-table in the data. We need to
+
+1. group our data into sub-groups defined by the values of country, sex and year
+2. for each sub-group add a new column "relative age" to the life-table calculated as age over total life-expectancy
+3. Re-combine the results of 2 into a data frame with columns identifying the sub-groups
+
+```{r}
+# hmd
+# Life tables by year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd.RData')
+
+hmd %>%
+  group_by(country, sex, period) %>%
+  mutate(relAge = age / ex[1]) %>%
+  select(-(nx:ex))
+```
+
+Let's plot the life-table survivor function over relative age by sex for Sweden across periods.
+
+```{r}
+hmd %>%
+  group_by(country, sex, period) %>%
+  mutate(relAge = age / ex[1]) %>%
+  ungroup() %>%
+  filter(country == 'SWE') %>%
+  ggplot() +
+  geom_line(aes(x = relAge, y = lx, group = period, color = period)) +
+  facet_wrap(~sex)
+```
+
+#### Grouped `filter()`
+
+#### Grouped `slice()`
+
+`slice()` selects rows by index. Using `slice()` in a grouped fashion we can return the first and last row for each group -- this comes in handy as a quick check for data structure and coverage.
+
+```{r}
+# euro_regio
+# European regional population statistics
+load('data/euro_regio/euro_regio.Rdata')
+
+euro_regio %>%
+  # for each country...
+  group_by(country_name) %>%
+  # ...return the first and last row
+  slice(c(1, n()))
+```
+
+We can use grouped `slice()` to have a closer look at outliers within groups. This replicates the Oeppen-Vaupel line for European regions.
+
+```{r}
+euro_regio %>%
+  # for each year
+  group_by(year) %>%
+  #...select the row (region) with the highest life-expectancy
+  slice(which.max(lifeexp)) %>%
+  # ...and plot the results
+  ggplot() +
+  geom_line(aes(x = year, y = lifeexp), color = 'grey') +
+  geom_label(aes(x = year, y = lifeexp,
+                label = nuts2_name, color = nuts2_name),
+            show.legend = FALSE, size = 3)
+```
+
+### Grouped `summarise()`
+
+Say we have a collection of life-tables by country, sex, and year and we want to calculate the coefficient of variation for the life-table distribution of deaths. In other words we want to
+
+1. group our data into subgroups defined by the values of country, sex and year (so a single sub-group may be Danish females in 2010)
+2. extract total life-expectancy from each sub-group life-table
+3. calculate the coefficient of variation for each sub-group
+4. Re-combine the results of 2 and 3 into a data frame with columns identifying the sub-groups
+
+All of the above is achieved by the data pipeline below.
+
+```{r}
+hmd %>%
+  group_by(country, sex, period) %>%
+  summarise(
+    e0 = first(ex),
+    cv = sqrt(sum(ndx/100000*(age+nax-e0)^2)) / e0
+  )
+```
+
+We use the `group_by()` function to group our data into sub-groups, then we use the `summarise()` command to calculate the "summary statistics" for each sub-group. The `ungroup()` function in the end is optional but its good practive to ungroup after you're done with the group-wise operations.
+
+Let's plot the results (for a subset of all countries):
+
+```{r}
+hmd %>%
+  filter(sex != 'Total') %>%
+  group_by(country, sex, period) %>%
+  summarise(
+    e0 = first(ex),
+    cv = sqrt(sum(ndx/100000*(age+nax-e0)^2)) / e0
+  ) %>% ungroup() %>% 
+  filter(country %in% c('SWE', 'RUS', 'ITA', 'DNK', 'USA', 'ESP')) %>%
+  ggplot() +
+  geom_path(aes(x = e0, y = cv, color = sex)) +
+  facet_wrap(~country, scales = 'free')
+```
+
+#### Grouped `do()`
+
+#### Fitting and summarising many models
+
+#### Excercise: Group-wise operations
+
+- Calculate five year abridged mortality rates for the whole `hmd_counts` data.
+
+```{r include=FALSE, eval=FALSE}
+# hmd_counts
+# Deaths and exposures by age, year, sex and country
+# source: Human Mortality Database
+load('data/hmd/hmd_counts.RData')
+
+hmd_counts %>%
+  mutate(x5 = age%/%5*5) %>%
+  group_by(country, sex, x5) %>%
+  summarise(nmx = sum(nDx/sum(nEx))) %>%
+  ungroup()
+
+# ungroup key can't be modified because it's a grouping variable
+```
+
+### Column-wise operations
+
+#### `*_at()`
+
+```{r}
+# apply function "toupper()" to the columns country, sex
+mutate_at(hmd_counts, vars(country, sex), toupper)
+# this returns the same as above
+mutate(hmd_counts,
+       country = toupper(country),
+       sex = toupper(sex))
+```
+
+#### `*_if()`
+
+```{r}
+# convert any character variable to a factor
+mutate_if(hmd_counts, is.character, as.factor)
+# this returns the same as above
+mutate(hmd_counts,
+       country = as.factor(country),
+       sex = as.factor(sex))
+```
+
+#### `*_all()`
+
+

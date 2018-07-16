@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tidy R</title>
+  <meta name="description" content="Tidy R">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Tidy R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Tidy R" />
+  
+  
+  
+
+<meta name="author" content="Jonas Schöley">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="what-is-tidy-r.html">
+<link rel="next" href="visualization.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
+<li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1.1</b> Excercise: Differences between tidy and base R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Literate programming in Rmarkdown</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2.1</b> Excercise: Literate programming in Rmarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#first-steps-in-tidy-data-analysis"><i class="fa fa-check"></i><b>2.3</b> First steps in tidy data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#the-tidy-approach-to-data-wrangling"><i class="fa fa-check"></i><b>3.1</b> The “tidy” approach to data wrangling</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling.html"><a href="data-wrangling.html#transforming-data-using-verbs"><i class="fa fa-check"></i><b>3.2</b> Transforming data using verbs</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#column-based-transforms"><i class="fa fa-check"></i><b>3.2.1</b> Column based transforms</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#row-based-transforms"><i class="fa fa-check"></i><b>3.2.2</b> Row based transforms</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-basic-verbs"><i class="fa fa-check"></i><b>3.2.3</b> Excercise: Basic verbs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling.html"><a href="data-wrangling.html#pipes"><i class="fa fa-check"></i><b>3.3</b> Pipes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-pipes"><i class="fa fa-check"></i><b>3.3.1</b> Excercise: Pipes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>3.4</b> Tidy data</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling.html"><a href="data-wrangling.html#long-versus-wide-format-data"><i class="fa fa-check"></i><b>3.4.1</b> Long versus wide format data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling.html"><a href="data-wrangling.html#making-the-implicit-explicit"><i class="fa fa-check"></i><b>3.4.2</b> Making the implicit explicit</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-police-arrests"><i class="fa fa-check"></i><b>3.4.3</b> Tidying data on police arrests</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-anscombes-quartet"><i class="fa fa-check"></i><b>3.4.4</b> Tidying Anscombe’s quartet</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-test-retest-reliability"><i class="fa fa-check"></i><b>3.4.5</b> Tidying data on test-retest reliability</a></li>
+<li class="chapter" data-level="3.4.6" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-the-eu-time-use-survey"><i class="fa fa-check"></i><b>3.4.6</b> Tidying the EU time-use-survey</a></li>
+<li class="chapter" data-level="3.4.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-model-output"><i class="fa fa-check"></i><b>3.4.7</b> Tidying model output</a></li>
+<li class="chapter" data-level="3.4.8" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-tidy-data"><i class="fa fa-check"></i><b>3.4.8</b> Excercise: Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling.html"><a href="data-wrangling.html#joins"><i class="fa fa-check"></i><b>3.5</b> Joins</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-joins"><i class="fa fa-check"></i><b>3.5.1</b> Excercise: Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding"><i class="fa fa-check"></i><b>3.6</b> Recoding</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-recoding"><i class="fa fa-check"></i><b>3.6.1</b> Excercise: Recoding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-iteration"><i class="fa fa-check"></i><b>3.7</b> Tidy iteration</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-wise-operations"><i class="fa fa-check"></i><b>3.7.1</b> Group-wise operations</a></li>
+<li class="chapter" data-level="3.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#grouped-summarise"><i class="fa fa-check"></i><b>3.7.2</b> Grouped <code>summarise()</code></a></li>
+<li class="chapter" data-level="3.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#column-wise-operations"><i class="fa fa-check"></i><b>3.7.3</b> Column-wise operations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#the-tidy-approach-to-data-visualization"><i class="fa fa-check"></i><b>4.1</b> The “tidy” approach to data visualization</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> The Grammar of graphics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#aesthetics-geometries-and-layers"><i class="fa fa-check"></i><b>4.2.1</b> Aesthetics, geometries, and layers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#scales"><i class="fa fa-check"></i><b>4.2.2</b> Scales</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#excercise-the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2.3</b> Excercise: The grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#order"><i class="fa fa-check"></i><b>4.3</b> Order</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#factor-levels-control-the-order-of-discrete-scales"><i class="fa fa-check"></i><b>4.3.1</b> Factor levels control the order of discrete scales</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#layers-are-plotted-on-top-of-each-other"><i class="fa fa-check"></i><b>4.3.2</b> Layers are plotted on top of each other</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualization.html"><a href="visualization.html#sometimes-the-row-order-of-the-data-matters"><i class="fa fa-check"></i><b>4.3.3</b> Sometimes the row-order of the data matters</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#facets"><i class="fa fa-check"></i><b>4.4</b> Facets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#comparing-sub-groups-to-totals"><i class="fa fa-check"></i><b>4.4.1</b> Comparing sub-groups to totals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5</b> Chart type vocabulary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="visualization.html"><a href="visualization.html#visualizing-distributions"><i class="fa fa-check"></i><b>4.5.1</b> Visualizing distributions</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualization.html"><a href="visualization.html#visualizing-association"><i class="fa fa-check"></i><b>4.5.2</b> Visualizing association</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualization.html"><a href="visualization.html#visualizing-change"><i class="fa fa-check"></i><b>4.5.3</b> Visualizing change</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualization.html"><a href="visualization.html#visualizing-surfaces"><i class="fa fa-check"></i><b>4.5.4</b> Visualizing surfaces</a></li>
+<li class="chapter" data-level="4.5.5" data-path="visualization.html"><a href="visualization.html#excercise-chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5.5</b> Excercise: Chart type vocabulary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#polish-your-plot-for-publication"><i class="fa fa-check"></i><b>4.6</b> Polish your plot for publication</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="visualization.html"><a href="visualization.html#highlight"><i class="fa fa-check"></i><b>4.6.1</b> Highlight</a></li>
+<li class="chapter" data-level="4.6.2" data-path="visualization.html"><a href="visualization.html#annotate"><i class="fa fa-check"></i><b>4.6.2</b> Annotate</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
+<li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidy R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-wrangling" class="section level1">
+<h1><span class="header-section-number">3</span> Data Wrangling</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+
+<span class="co"># General social survey</span>
+<span class="co"># source: http://gss.norc.org/s</span>
+gss &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_stata</span>(<span class="st">&#39;data/gss/GSS2016.DTA&#39;</span>)</code></pre></div>
+<div id="the-tidy-approach-to-data-wrangling" class="section level2">
+<h2><span class="header-section-number">3.1</span> The “tidy” approach to data wrangling</h2>
+<p>“Data wrangling” is the process of transforming raw data into a form fit for analysis. This may include operations like filtering, sorting, joining, splitting, recoding or reshaping, nearly always performed in conjuction with each other. The tidy approach to data wrangling aims to make this often mundane but critical task as clear and fast as possible. Tidy data wrangling revolves around 4 concepts:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Verbs</strong> A small collection of “verbs” provides basic transformation operations.</li>
+<li><strong>Pipes</strong> Transformations can be chained together via a “pipe”.</li>
+<li><strong>Tidy Data</strong> Everything is a data frame with cases as rows and variables as columns.</li>
+<li><strong>Tidy iteration</strong> Transformations can be repeatedly applied to different row or column subsets without the use of a for loop.</li>
+</ol>
+</div>
+<div id="transforming-data-using-verbs" class="section level2">
+<h2><span class="header-section-number">3.2</span> Transforming data using verbs</h2>
+<p>The <code>tidyverse</code> provides us with an array of <em>verbs</em> for data transformation such as <code>filter()</code>, <code>mutate()</code>, <code>summarise()</code> and many more. While each of those verbs performs a distinct action they all have a common design. All verbs…</p>
+<ul>
+<li>…have as their first argument a data frame:</li>
+</ul>
+<p>All verbs <em>operate on data frames only</em>. This is one of the helpful restrictions of the tidyverse because you don’t need to consider data structures beyond the tabular form of a data frame. If your data does not come in a data frame, it needs to be converted.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this fails because &quot;WorldPhones&quot; is a matrix and not a data frame</span>
+<span class="kw">select</span>(WorldPhones, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## Error in UseMethod(&quot;select_&quot;): no applicable method for &#39;select_&#39; applied to an object of class &quot;c(&#39;matrix&#39;, &#39;double&#39;, &#39;numeric&#39;)&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># converting World Phones to a data frame resolves the issue</span>
+<span class="kw">select</span>(<span class="kw">as.data.frame</span>(WorldPhones), <span class="dv">3</span>)</code></pre></div>
+<pre><code>##      Asia
+## 1951 2876
+## 1956 4708
+## 1957 5230
+## 1958 6662
+## 1959 6856
+## 1960 8220
+## 1961 9053</code></pre>
+<p>The data frame to operate on is always the first argument in any of the <em>verb</em> functions. Here we <code>select()</code> the first variable of the data frame <code>hmd_counts</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hmd_counts</span>
+<span class="co"># Deaths and exposures by age, year, sex and country</span>
+<span class="co"># source: Human Mortality Database</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
+
+<span class="kw">select</span>(hmd_counts, <span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 1
+##   country
+##   &lt;chr&gt;  
+## 1 AUS    
+## 2 AUS    
+## 3 AUS    
+## 4 AUS    
+## 5 AUS    
+## # ... with 1.305e+06 more rows</code></pre>
+<p>Due to the data frame always coming first we can use the <code>%&gt;%</code> (pipe) operator to pass data into any of the verbs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">1</span>)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 1
+##   country
+##   &lt;chr&gt;  
+## 1 AUS    
+## 2 AUS    
+## 3 AUS    
+## 4 AUS    
+## 5 AUS    
+## # ... with 1.305e+06 more rows</code></pre>
+<ul>
+<li>…don’t change the data frame unless you explicitly want to</li>
+</ul>
+<p>Note that none of the verbs permanently change the content of a data frame. You need to assign the output of a verb to an object in order to permanently store your computations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># display the result of rename() without changing the data</span>
+<span class="kw">rename</span>(hmd_counts, <span class="dt">deaths =</span> nDx, <span class="dt">exposures =</span> nEx)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx deaths exposures
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1  3842.    64052.
+## 2 AUS     Female   1921     1     1   719.    59619.
+## 3 AUS     Female   1921     2     1   330.    57126.
+## 4 AUS     Female   1921     3     1   166.    57484.
+## 5 AUS     Female   1921     4     1   190.    58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052.
+## 2 AUS     Female   1921     1     1  719. 59619.
+## 3 AUS     Female   1921     2     1  330. 57126.
+## 4 AUS     Female   1921     3     1  166. 57484.
+## 5 AUS     Female   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># permanently store the results of rename() in a new object called `hmd_counts_new`</span>
+hmd_counts_new &lt;-<span class="st"> </span><span class="kw">rename</span>(hmd_counts, <span class="dt">deaths =</span> nDx, <span class="dt">exposures =</span> nEx)
+hmd_counts_new</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx deaths exposures
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1  3842.    64052.
+## 2 AUS     Female   1921     1     1   719.    59619.
+## 3 AUS     Female   1921     2     1   330.    57126.
+## 4 AUS     Female   1921     3     1   166.    57484.
+## 5 AUS     Female   1921     4     1   190.    58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<ul>
+<li>…let you address columns within the data frame by simply typing the name</li>
+</ul>
+<p>The tidyverse functions always work within the context of a data frame – specified as first argument – and columns within that data frame can be adressed by simply typing their name (without quotes).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this returns life-tables entries for Australia, 1921 ages 20 to 25</span>
+<span class="kw">filter</span>(hmd_counts, country <span class="op">==</span><span class="st"> &#39;AUS&#39;</span>, period <span class="op">==</span><span class="st"> </span><span class="dv">1921</span>, age <span class="op">%in%</span><span class="st"> </span><span class="dv">20</span><span class="op">:</span><span class="dv">25</span>)</code></pre></div>
+<pre><code>## # A tibble: 18 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     Female   1921    20     1  138. 46387.
+## 2 AUS     Female   1921    21     1  118. 46437.
+## 3 AUS     Female   1921    22     1  116. 45769.
+## 4 AUS     Female   1921    23     1  149. 45746.
+## 5 AUS     Female   1921    24     1  146. 46524.
+## # ... with 13 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is the same, but much more cumbersome to write and read</span>
+hmd_counts[hmd_counts<span class="op">$</span>country <span class="op">==</span><span class="st"> &#39;AUS&#39;</span> <span class="op">&amp;</span>
+<span class="st">             </span>hmd_counts<span class="op">$</span>period <span class="op">==</span><span class="st"> </span><span class="dv">1921</span> <span class="op">&amp;</span>
+<span class="st">             </span>hmd_counts<span class="op">$</span>age <span class="op">%in%</span><span class="st"> </span><span class="dv">20</span><span class="op">:</span><span class="dv">25</span>,]</code></pre></div>
+<pre><code>## # A tibble: 18 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     Female   1921    20     1  138. 46387.
+## 2 AUS     Female   1921    21     1  118. 46437.
+## 3 AUS     Female   1921    22     1  116. 45769.
+## 4 AUS     Female   1921    23     1  149. 45746.
+## 5 AUS     Female   1921    24     1  146. 46524.
+## # ... with 13 more rows</code></pre>
+<ul>
+<li>…output a data frame</li>
+</ul>
+<div id="column-based-transforms" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Column based transforms</h3>
+<div id="mutate-columns" class="section level4">
+<h4><span class="header-section-number">3.2.1.1</span> <code>mutate()</code> columns</h4>
+<p><code>mutate()</code> adds a column to a data frame or changes an existing column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># calculate new column with death rates from</span>
+<span class="st">  </span><span class="co"># columns nDx and nEx</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">nmx =</span> nDx<span class="op">/</span>nEx)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 8
+##   country sex    period   age    nx   nDx    nEx     nmx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052. 0.0600 
+## 2 AUS     Female   1921     1     1  719. 59619. 0.0121 
+## 3 AUS     Female   1921     2     1  330. 57126. 0.00578
+## 4 AUS     Female   1921     3     1  166. 57484. 0.00289
+## 5 AUS     Female   1921     4     1  190. 58407. 0.00325
+## # ... with 1.305e+06 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># change unit of exposure variable from person-years</span>
+<span class="st">  </span><span class="co"># to person months</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">nEx =</span> nEx<span class="op">*</span><span class="dv">12</span>)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx     nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 768626.
+## 2 AUS     Female   1921     1     1  719. 715431.
+## 3 AUS     Female   1921     2     1  330. 685512.
+## 4 AUS     Female   1921     3     1  166. 689806.
+## 5 AUS     Female   1921     4     1  190. 700884.
+## # ... with 1.305e+06 more rows</code></pre>
+<p>Within a single <code>mutate()</code> statement multiple new variables can be created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="co"># add discrete age variable</span>
+    <span class="dt">age_group =</span> <span class="kw">cut</span>(age, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">90</span>, <span class="dv">10</span>), <span class="dt">include.lowest =</span> <span class="ot">TRUE</span>),
+    <span class="co"># add mortality rate</span>
+    <span class="dt">nmx =</span> nDx<span class="op">/</span>nEx
+  )</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 9
+##   country sex    period   age    nx   nDx    nEx age_group     nmx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052. [0,10]    0.0600 
+## 2 AUS     Female   1921     1     1  719. 59619. [0,10]    0.0121 
+## 3 AUS     Female   1921     2     1  330. 57126. [0,10]    0.00578
+## 4 AUS     Female   1921     3     1  166. 57484. [0,10]    0.00289
+## 5 AUS     Female   1921     4     1  190. 58407. [0,10]    0.00325
+## # ... with 1.305e+06 more rows</code></pre>
+<p>Newly created variables can immediately be used in the creation of additional variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">nmx =</span> nDx<span class="op">/</span>nEx,
+    <span class="co"># convert death rates to death probability</span>
+    <span class="dt">nqx =</span> <span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>nmx),
+    <span class="co"># and survival probability</span>
+    <span class="dt">npx =</span> <span class="dv">1</span><span class="op">-</span>nqx
+  )</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 10
+##   country sex    period   age    nx   nDx    nEx     nmx     nqx   npx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052. 0.0600  0.0582  0.942
+## 2 AUS     Female   1921     1     1  719. 59619. 0.0121  0.0120  0.988
+## 3 AUS     Female   1921     2     1  330. 57126. 0.00578 0.00576 0.994
+## 4 AUS     Female   1921     3     1  166. 57484. 0.00289 0.00288 0.997
+## 5 AUS     Female   1921     4     1  190. 58407. 0.00325 0.00325 0.997
+## # ... with 1.305e+06 more rows</code></pre>
+</div>
+<div id="select-columns" class="section level4">
+<h4><span class="header-section-number">3.2.1.2</span> <code>select()</code> columns</h4>
+<p>Using <code>select()</code> we can specify which columns to keep and which columns to delete from a data frame. Let’s have a look at a typical panel data set: The <a href="http://gss.norc.org/">General Social Survey</a>. We can see that the <code>gss</code> data features 960 columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># General social survey</span>
+<span class="co"># source: http://gss.norc.org/s</span>
+gss &lt;-<span class="st"> </span>haven<span class="op">::</span><span class="kw">read_stata</span>(<span class="st">&#39;data/gss/GSS2016.DTA&#39;</span>)
+gss</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      1     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 4      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     5     4     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 948 more variables: mar13 &lt;dbl+lbl&gt;,
+## #   mar14 &lt;dbl+lbl&gt;, abany &lt;dbl+lbl&gt;, abdefect &lt;dbl+lbl&gt;,
+## #   abhlth &lt;dbl+lbl&gt;, …</code></pre>
+<p>Here we just select the two columns named <code>id</code> and <code>age</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(id, age)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 2
+##      id age      
+##   &lt;dbl&gt; &lt;dbl+lbl&gt;
+## 1     1 47       
+## 2     2 61       
+## 3     3 72       
+## 4     4 43       
+## 5     5 55       
+## # ... with 2,862 more rows</code></pre>
+<p>We can also select by column position.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">312</span>, <span class="dv">28</span>)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 2
+##      id age      
+##   &lt;dbl&gt; &lt;dbl+lbl&gt;
+## 1     1 47       
+## 2     2 61       
+## 3     3 72       
+## 4     4 43       
+## 5     5 55       
+## # ... with 2,862 more rows</code></pre>
+<p>The column operator <code>:</code> selects a range of columns. We can use it to select all variables from <code>mar1</code> to <code>mar14</code>, the marriage status of up to 14 persons in a household.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(mar1<span class="op">:</span>mar14)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 14
+##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      1     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 4      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     5     4     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 2 more variables: mar13 &lt;dbl+lbl&gt;,
+## #   mar14 &lt;dbl+lbl&gt;</code></pre>
+<p>Again, the same is possible by specifying the column position, in this case the first 14 columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 14
+##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      1     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 4      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     5     4     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 2 more variables: mar13 &lt;dbl+lbl&gt;,
+## #   mar14 &lt;dbl+lbl&gt;</code></pre>
+<p>A minus preceeding a selection returns all columns <em>apart</em> from those specified. Notice that a selection of columns like <code>mar1:mar14</code> must be surrounded by parantheses in order to be removed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select everything apart from mar1</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>mar1)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 959
+##   mar2   mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12 mar13
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 1      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      5     4     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 947 more variables: mar14 &lt;dbl+lbl&gt;,
+## #   abany &lt;dbl+lbl&gt;, abdefect &lt;dbl+lbl&gt;, abhlth &lt;dbl+lbl&gt;,
+## #   abnomore &lt;dbl+lbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select everything apart from mar1 to mar14</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>(mar1<span class="op">:</span>mar14))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 946
+##   abany  abdefect abhlth abnomore abpoor abrape absingle acqntsex adforjob
+##   &lt;dbl+&gt; &lt;dbl+lb&gt; &lt;dbl+&gt; &lt;dbl+lb&gt; &lt;dbl+&gt; &lt;dbl+&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
+## 1 1      1        1      1        1      1      1        &lt;NA&gt;     &lt;NA&gt;    
+## 2 &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     2        &lt;NA&gt;    
+## 3 2      2        1      2        2      1      2        &lt;NA&gt;     &lt;NA&gt;    
+## 4 2      2        1      2        2      1      2        &lt;NA&gt;     &lt;NA&gt;    
+## 5 1      1        1      1        1      1      1        &lt;NA&gt;     &lt;NA&gt;    
+## # ... with 2,862 more rows, and 937 more variables: adults &lt;dbl+lbl&gt;,
+## #   advfront &lt;dbl+lbl&gt;, advsched &lt;dbl+lbl&gt;, affrmact &lt;dbl+lbl&gt;,
+## #   age &lt;dbl+lbl&gt;, …</code></pre>
+<p>You can use functions inside of <code>select()</code> as long as they return either a column name or a column position. The standard R function <code>which()</code> is handy in that context as it returns the index of the elements for which a conditions holds true.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all columns of gss which names are 3 characters or less</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">which</span>(<span class="kw">str_length</span>(<span class="kw">names</span>(.)) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 6
+##   age       god          id jew       sex       tax      
+##   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
+## 1 47        2             1 &lt;NA&gt;      1         2        
+## 2 61        &lt;NA&gt;          2 &lt;NA&gt;      1         &lt;NA&gt;     
+## 3 72        6             3 &lt;NA&gt;      1         1        
+## 4 43        6             4 &lt;NA&gt;      2         1        
+## 5 55        1             5 &lt;NA&gt;      2         1        
+## # ... with 2,862 more rows</code></pre>
+<p>There are a number of functions provided by the <code>tidyverse</code> which are designed to help with column selection.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all columns where name starts with &#39;age&#39;</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&#39;age&#39;</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 6
+##   age       age3      aged      agedchld  agedpar   agekdbrn 
+##   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
+## 1 47        &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      3         29       
+## 2 61        &lt;NA&gt;      1         &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;     
+## 3 72        &lt;NA&gt;      1         &lt;NA&gt;      &lt;NA&gt;      24       
+## 4 43        &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      1         19       
+## 5 55        &lt;NA&gt;      1         &lt;NA&gt;      &lt;NA&gt;      31       
+## # ... with 2,862 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select columns named mar1, mar2, mar3, mar4, mar5</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">num_range</span>(<span class="st">&#39;mar&#39;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 5
+##   mar1      mar2      mar3      mar4      mar5     
+##   &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;
+## 1 1         1         5         5         &lt;NA&gt;     
+## 2 4         &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;     
+## 3 1         1         &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;     
+## 4 1         1         5         4         5        
+## 5 1         1         5         &lt;NA&gt;      &lt;NA&gt;     
+## # ... with 2,862 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all columns where name contains &#39;sex&#39;</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">contains</span>(<span class="st">&#39;sex&#39;</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 17
+##   acqntsex  frndsex  homosex  intsex   matesex  othersex paidsex  pikupsex
+##   &lt;dbl+lbl&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt; &lt;dbl+lb&gt;
+## 1 &lt;NA&gt;      &lt;NA&gt;     4        2        &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 2 2         1        &lt;NA&gt;     2        2        2        2        2       
+## 3 &lt;NA&gt;      &lt;NA&gt;     4        2        1        &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 4 &lt;NA&gt;      &lt;NA&gt;     4        2        &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## 5 &lt;NA&gt;      &lt;NA&gt;     4        2        1        &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    
+## # ... with 2,862 more rows, and 9 more variables: relatsex &lt;dbl+lbl&gt;,
+## #   sex &lt;dbl+lbl&gt;, sexeduc &lt;dbl+lbl&gt;, sexfreq &lt;dbl+lbl&gt;,
+## #   sexornt &lt;dbl+lbl&gt;, …</code></pre>
+<p>You can also use <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html">regular expressions</a> when selecting columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select columns where the name contains a number</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&#39;[0-9]&#39;</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 323
+##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      1     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 4      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     5     4     5     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 311 more variables: mar13 &lt;dbl+lbl&gt;,
+## #   mar14 &lt;dbl+lbl&gt;, age3 &lt;dbl+lbl&gt;, artatt1 &lt;dbl+lbl&gt;, artatt2 &lt;dbl+lbl&gt;,
+## #   …</code></pre>
+<p><code>select()</code> returns the columns in the order it selects them. It can therefore be used to reorder the columns of a dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reverse the order of the columns</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">rev</span>(<span class="kw">names</span>(.)))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##   cogradtounder cobarate  coeftotlt cosector  spgradtounder spbarate 
+##   &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;     &lt;dbl+lbl&gt;
+## 1 &lt;NA&gt;          &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      2             3        
+## 2 &lt;NA&gt;          &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;          &lt;NA&gt;     
+## 3 &lt;NA&gt;          &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;          &lt;NA&gt;     
+## 4 &lt;NA&gt;          &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;          &lt;NA&gt;     
+## 5 &lt;NA&gt;          &lt;NA&gt;      &lt;NA&gt;      &lt;NA&gt;      1             1        
+## # ... with 2,862 more rows, and 954 more variables: speftotlt &lt;dbl+lbl&gt;,
+## #   spsector &lt;dbl+lbl&gt;, gradtounder &lt;dbl+lbl&gt;, barate &lt;dbl+lbl&gt;,
+## #   eftotlt &lt;dbl+lbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reorder the columns in reverse alphabetical order</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">order</span>(<span class="kw">names</span>(.), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##   zodiac  year xnorcsiz xmovie xmarsex xhaustn wwwmin wwwhr wtssnr wtssall
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl+lb&gt; &lt;dbl+&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl+&gt; &lt;dbl+l&gt;
+## 1 11      2016 6        &lt;NA&gt;   2       &lt;NA&gt;    0      15    1.260… 0.9569…
+## 2 8       2016 6        2      &lt;NA&gt;    &lt;NA&gt;    0      5     0.630… 0.4784…
+## 3 12      2016 6        2      1       &lt;NA&gt;    &lt;NA&gt;   &lt;NA&gt;  1.260… 0.9569…
+## 4 4       2016 6        &lt;NA&gt;   1       &lt;NA&gt;    0      7     2.520… 1.9139…
+## 5 8       2016 6        2      1       3       &lt;NA&gt;   &lt;NA&gt;  1.890… 1.4354…
+## # ... with 2,862 more rows, and 950 more variables: wtss &lt;dbl+lbl&gt;,
+## #   wrkwayup &lt;dbl+lbl&gt;, wrkstat &lt;dbl+lbl&gt;, wrkslf &lt;dbl+lbl&gt;,
+## #   wrkshift &lt;dbl+lbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reorder the columns in increasing length of their names</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">order</span>(<span class="kw">str_length</span>(<span class="kw">names</span>(.))))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##      id age    god   jew   sex   tax   mar1  mar2  mar3  mar4  mar5  mar6 
+##   &lt;dbl&gt; &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1 47     2     &lt;NA&gt;  1     2     1     1     5     5     &lt;NA&gt;  &lt;NA&gt; 
+## 2     2 61     &lt;NA&gt;  &lt;NA&gt;  1     &lt;NA&gt;  4     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3     3 72     6     &lt;NA&gt;  1     1     1     1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4     4 43     6     &lt;NA&gt;  2     1     1     1     5     4     5     5    
+## 5     5 55     1     &lt;NA&gt;  2     1     1     1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 948 more variables: mar7 &lt;dbl+lbl&gt;,
+## #   mar8 &lt;dbl+lbl&gt;, mar9 &lt;dbl+lbl&gt;, age3 &lt;dbl+lbl&gt;, aged &lt;dbl+lbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reorder the columns randomly</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">sample</span>(<span class="kw">ncol</span>(.)))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##   away11  parborn  prfmwhy5  rintjob  relsp4 old4  sparms gender1 copres10
+##   &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lbl&gt; &lt;dbl+lb&gt; &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl+&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt;
+## 1 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     4      15    4      1       &lt;NA&gt;    
+## 2 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  4      1       &lt;NA&gt;    
+## 3 &lt;NA&gt;    0        3         &lt;NA&gt;     &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;   1       &lt;NA&gt;    
+## 4 &lt;NA&gt;    0        &lt;NA&gt;      &lt;NA&gt;     41     21    2      1       &lt;NA&gt;    
+## 5 &lt;NA&gt;    0        &lt;NA&gt;      3        &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;   1       &lt;NA&gt;    
+## # ... with 2,862 more rows, and 951 more variables: inthisp &lt;dbl+lbl&gt;,
+## #   relate4 &lt;dbl+lbl&gt;, wkwkends &lt;dbl+lbl&gt;, wrkshift &lt;dbl+lbl&gt;,
+## #   courts &lt;dbl+lbl&gt;, …</code></pre>
+<p>Selected columns can be renamed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dt">ID =</span> id, <span class="dt">EDUCATION =</span> educ)</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 2
+##      ID EDUCATION
+##   &lt;dbl&gt; &lt;dbl+lbl&gt;
+## 1     1 16       
+## 2     2 12       
+## 3     3 16       
+## 4     4 12       
+## 5     5 18       
+## # ... with 2,862 more rows</code></pre>
+</div>
+<div id="rename-columns" class="section level4">
+<h4><span class="header-section-number">3.2.1.3</span> <code>rename()</code> columns</h4>
+<p>There’s not much to <code>rename()</code>. We use it to change the names of the columns in a dataframe. Unlike <code>select()</code>, which can also change names, <code>rename()</code> keeps all columns. We write <code>new_column_name = old_column_name</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">Age =</span> age, <span class="dt">Exposure =</span> nEx, <span class="dt">Deaths =</span> nDx)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   Age    nx Deaths Exposure
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1  3842.   64052.
+## 2 AUS     Female   1921     1     1   719.   59619.
+## 3 AUS     Female   1921     2     1   330.   57126.
+## 4 AUS     Female   1921     3     1   166.   57484.
+## 5 AUS     Female   1921     4     1   190.   58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<p>If we want to use spaces in the column names (not recomended though) we have to surround the new name with `backticks`.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">Person-years exposure</span><span class="st">`</span> =<span class="st"> </span>nEx, <span class="st">`</span><span class="dt">Number of deaths</span><span class="st">`</span> =<span class="st"> </span>nDx)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx `Number of deaths` `Person-years expo…
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;              &lt;dbl&gt;               &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1              3842.              64052.
+## 2 AUS     Female   1921     1     1               719.              59619.
+## 3 AUS     Female   1921     2     1               330.              57126.
+## 4 AUS     Female   1921     3     1               166.              57484.
+## 5 AUS     Female   1921     4     1               190.              58407.
+## # ... with 1.305e+06 more rows</code></pre>
+</div>
+</div>
+<div id="row-based-transforms" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Row based transforms</h3>
+<div id="filter-rows" class="section level4">
+<h4><span class="header-section-number">3.2.2.1</span> <code>filter()</code> rows</h4>
+<p>You can create subsets of the rows in your data using <code>filter()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># euro_regio</span>
+<span class="co"># European regional population statistics</span>
+<span class="kw">load</span>(<span class="st">&#39;data/euro_regio/euro_regio.Rdata&#39;</span>)
+
+<span class="co"># return rows of `euro_regio` where year is equal to 2016</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>)</code></pre></div>
+<pre><code>## # A tibble: 342 x 21
+##   country_code country_name nuts2_code nuts2_name     year     pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AL           Albania      AL01       Veri           2016  848059    NA  
+## 2 AL           Albania      AL02       Qender         2016 1110562    NA  
+## 3 AL           Albania      AL03       Jug            2016  927405    NA  
+## 4 AL           Albania      ALXX       ALXX Not reg…  2016      NA    NA  
+## 5 AT           Austria      AT11       Burgenland (…  2016  291011    77.1
+## # ... with 337 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<p>In <code>filter()</code> you specify logical tests which are evaluated for each row. If the condition evaluates to <code>TRUE</code> for a row, the row is returned, if it evaluates to <code>FALSE</code> the row is not returned. A row is also not returned if the condition evaluates to <code>NA</code></p>
+<p>Multiple filtering conditions are separated by a comma. The comma acts as a logical “AND”, i.e. the <code>&amp;</code> operator, which only returns <code>TRUE</code> if <em>all</em> the conditions are <code>TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return rows where year is equal to 2016 and region is Catalonia</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span>, nuts2_code <span class="op">==</span><span class="st"> &#39;ES51&#39;</span>)</code></pre></div>
+<pre><code>## # A tibble: 1 x 21
+##   country_code country_name nuts2_code nuts2_name  year     pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ES           Spain        ES51       Cataluña    2016 7408290    232.
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is the same as above</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2016</span> <span class="op">&amp;</span><span class="st"> </span>nuts2_code <span class="op">==</span><span class="st"> &#39;ES51&#39;</span>)</code></pre></div>
+<pre><code>## # A tibble: 1 x 21
+##   country_code country_name nuts2_code nuts2_name  year     pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ES           Spain        ES51       Cataluña    2016 7408290    232.
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<p>All of R’s logical operators can be used in <code>filter()</code> as well. You use <code>&lt;</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;=</code> for magnitude comparisons.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 larger than 1?</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where unemployment is higher than 30%</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(unemp <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</code></pre></div>
+<pre><code>## # A tibble: 27 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 EL           Greece       EL52       Kentriki Make…  2013 1.91e6    99.6
+## 2 EL           Greece       EL53       Dytiki Makedo…  2013 2.81e5    29.6
+## 3 EL           Greece       EL53       Dytiki Makedo…  2015 2.76e5    29.1
+## 4 EL           Greece       EL53       Dytiki Makedo…  2016 2.74e5    29.5
+## 5 ES           Spain        ES43       Extremadura     2012 1.10e6    27.1
+## # ... with 22 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 smaller than 1?</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where net-migration rate is lower than -20%</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(netmigrate <span class="op">&lt;</span><span class="st"> </span><span class="dv">-20</span>)</code></pre></div>
+<pre><code>## # A tibble: 13 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 LT           Lithuania    LT00       Lietuva (NUTS…  2010 3.14e6    49.4
+## 2 TR           Turkey       TR33       Manisa, Afyon…  2011 3.01e6    66.5
+## 3 TR           Turkey       TR81       Zonguldak, Ka…  2011 1.04e6   108. 
+## 4 TR           Turkey       TRA1       Erzurum, Erzi…  2013 1.07e6    26.2
+## 5 TR           Turkey       TRA2       Agri, Kars, I…  2009 1.14e6    37.9
+## # ... with 8 more rows, and 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 smaller or equal to 1?</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where life-expectancy is 75 years or less</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(lifeexp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">75</span>)</code></pre></div>
+<pre><code>## # A tibble: 274 x 21
+##   country_code country_name nuts2_code nuts2_name     year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 BG           Bulgaria     BG31       Severozapaden  2005     NA    49.5
+## 2 BG           Bulgaria     BG31       Severozapaden  2006 934755    48.5
+## 3 BG           Bulgaria     BG31       Severozapaden  2007 916308    47.6
+## 4 BG           Bulgaria     BG31       Severozapaden  2008 898371    46.7
+## 5 BG           Bulgaria     BG31       Severozapaden  2009 881573    45.8
+## # ... with 269 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 greater than or equal to 1?</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where life-expectancy is 85 years or more</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(lifeexp <span class="op">&gt;=</span><span class="st"> </span><span class="dv">85</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 CH           Switzerland  CH07       Ticino          2016 3.52e5    129.
+## 2 ES           Spain        ES30       Comunidad de …  2016 6.42e6    809.
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<p>Boolean logic is implemented via <code>&amp;</code> (and), <code>|</code> (or), and <code>xor()</code> (exclusive or).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 greater than 1 AND is 1,2,3,4 smaller than 1?</span>
+(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">&amp;</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where unempolyment is higher than 15% and</span>
+<span class="co"># netmigration is lower than -15%</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(unemp <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>, netmigrate <span class="op">&lt;</span><span class="st"> </span><span class="dv">-15</span>)</code></pre></div>
+<pre><code>## # A tibble: 6 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 CY           Cyprus       CY00       Kypros          2014 8.58e5    92.5
+## 2 LT           Lithuania    LT00       Lietuva (NUTS…  2010 3.14e6    49.4
+## 3 LV           Latvia       LV00       Latvija         2009 2.16e6    34.4
+## 4 LV           Latvia       LV00       Latvija         2010 2.12e6    33.7
+## 5 TR           Turkey       TRB2       Van, Mus, Bit…  2010 2.01e6    48.5
+## # ... with 1 more row, and 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 greater than 1 OR is 1,2,3,4 smaller than 1?</span>
+(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">|</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where unempolyment is higher than 15% or</span>
+<span class="co"># netmigration is lower than -15%</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(unemp <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span> <span class="op">|</span><span class="st"> </span>netmigrate <span class="op">&lt;</span><span class="st"> </span><span class="dv">-15</span>)</code></pre></div>
+<pre><code>## # A tibble: 462 x 21
+##   country_code country_name nuts2_code nuts2_name     year     pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AL           Albania      AL01       Veri           2014      NA     NA 
+## 2 AL           Albania      AL03       Jug            2014      NA     NA 
+## 3 BE           Belgium      BE10       Région de Br…  2006 1018804   6366.
+## 4 BE           Belgium      BE10       Région de Br…  2007 1031215   6459.
+## 5 BE           Belgium      BE10       Région de Br…  2008 1048491   6575.
+## # ... with 457 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is only one of those statements true?</span>
+<span class="co"># 1,2,3,4 greater than 1; 1,2,3,4 smaller than 5</span>
+<span class="kw">xor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows where unempolyment is higher than 15% or</span>
+<span class="co"># netmigration is lower than -15% but not both</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">xor</span>(unemp <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>, netmigrate <span class="op">&lt;</span><span class="st"> </span><span class="dv">-15</span>))</code></pre></div>
+<pre><code>## # A tibble: 404 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 BE           Belgium      BE10       Région de Bru…  2006 1.02e6   6366.
+## 2 BE           Belgium      BE10       Région de Bru…  2007 1.03e6   6459.
+## 3 BE           Belgium      BE10       Région de Bru…  2008 1.05e6   6575.
+## 4 BE           Belgium      BE10       Région de Bru…  2009 1.07e6   6702.
+## 5 BE           Belgium      BE10       Région de Bru…  2010 1.09e6   6902 
+## # ... with 399 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<p>The <code>%in%</code> operator lets you filter rows based on membership <code>%in%</code> a set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># is 1,2,3,4 part of the set (2,4)</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">4</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)</code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all rows for Germany, United Kingdom and France</span>
+euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(country_code <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;DE&#39;</span>, <span class="st">&#39;UK&#39;</span>, <span class="st">&#39;FR&#39;</span>))</code></pre></div>
+<pre><code>## # A tibble: 1,404 x 21
+##   country_code country_name    nuts2_code nuts2_name  year     pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 DE           Germany (until… DE11       Stuttgart   2005      NA    379.
+## 2 DE           Germany (until… DE11       Stuttgart   2006 4007373    380.
+## 3 DE           Germany (until… DE11       Stuttgart   2007 4005380    380.
+## 4 DE           Germany (until… DE11       Stuttgart   2008 4007095    380.
+## 5 DE           Germany (until… DE11       Stuttgart   2009 4006313    379.
+## # ... with 1,399 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<p>You can use any combination of functions within <code>filter()</code> as long as they return a logical vector as long as the input data frame. This makes it possible to…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... return the region with the highest population count in 2015</span>
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(pop <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(pop, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 21
+##   country_code country_name nuts2_code nuts2_name  year      pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 TR           Turkey       TR10       Istanbul    2015 14377018   2794.
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... return the regions with the lowest per head income in 2015, ranks 1 to 3</span>
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(income) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 BG           Bulgaria     BG31       Severozapaden   2015 7.97e5    42.5
+## 2 BG           Bulgaria     BG42       Yuzhen tsentr…  2015 1.45e6    66  
+## 3 FR           France       FRA5       Mayotte (NUTS…  2015 2.30e5   628. 
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... return the regions with the highest per head income in 2015, ranks 1 to 3</span>
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="kw">desc</span>(income)) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 21
+##   country_code country_name     nuts2_code nuts2_name  year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 DE           Germany (until … DE21       Oberbayern  2015 4.52e6    260.
+## 2 LU           Luxembourg       LU00       Luxembourg  2015 5.63e5    220.
+## 3 UK           United Kingdom   UKI3       Inner Lon…  2015 1.13e6  10469.
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... return the regions with the highest absolute net-migration rate in 2015, </span>
+<span class="co"># ranks 1 to 3</span>
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="kw">desc</span>(<span class="kw">abs</span>(netmigrate))) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 21
+##   country_code country_name    nuts2_code nuts2_name   year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 DE           Germany (until… DEB2       Trier        2015 5.22e5   107. 
+## 2 MT           Malta           MT00       Malta        2015 4.40e5  1408. 
+## 3 TR           Turkey          TRA2       Agri, Kars…  2015 1.14e6    37.8
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ... return the &gt;99 percentile regions by life expectancy in 2015</span>
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">cume_dist</span>(lifeexp) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.99</span>)</code></pre></div>
+<pre><code>## # A tibble: 4 x 21
+##   country_code country_name nuts2_code nuts2_name      year    pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 ES           Spain        ES22       Comunidad For…  2015 6.36e5    61.6
+## 2 ES           Spain        ES30       Comunidad de …  2015 6.39e6   804  
+## 3 FR           France       FR10       Île de France   2015 1.21e7  1008. 
+## 4 IT           Italy        ITH2       Provincia Aut…  2015 5.37e5    86.6
+## # ... with 14 more variables: births &lt;dbl&gt;, deaths &lt;dbl&gt;,
+## #   natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;, …</code></pre>
+<p>Special care has to be taken when filtering <code>NA</code> values. One may be inclined to return all rows including <code>NA</code> in the variable <code>pop</code> by writing</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(pop <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>)</code></pre></div>
+<pre><code>## # A tibble: 0 x 21
+## # ... with 21 variables: country_code &lt;chr&gt;, country_name &lt;chr&gt;,
+## #   nuts2_code &lt;chr&gt;, nuts2_name &lt;chr&gt;, year &lt;int&gt;, …</code></pre>
+<p>Zero rows are returned because for R <code>NA == NA</code> always returns <code>NA</code> instead of <code>TRUE</code> and <code>filter()</code> does not return rows for which a condition evaluates to <code>NA</code>. If we want to test for <code>NA</code> we must use the function <code>is.na()</code> which returns <code>TRUE</code> whenever an NA is encountered and <code>FALSE</code> otherwise.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">is.na</span>(pop))</code></pre></div>
+<pre><code>## # A tibble: 683 x 21
+##   country_code country_name nuts2_code nuts2_name  year   pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AL           Albania      AL01       Veri        2005    NA      NA
+## 2 AL           Albania      AL01       Veri        2006    NA      NA
+## 3 AL           Albania      AL01       Veri        2007    NA      NA
+## 4 AL           Albania      AL01       Veri        2008    NA      NA
+## 5 AL           Albania      AL01       Veri        2009    NA      NA
+## # ... with 678 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+</div>
+<div id="arrange-rows" class="section level4">
+<h4><span class="header-section-number">3.2.2.2</span> <code>arrange()</code> rows</h4>
+<p><code>arrange()</code> re-orders the rows of a dataframe according to the values of one or more variables within that dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># eu_timeuse_tot</span>
+<span class="co"># European timeuse survey</span>
+<span class="co"># source: Eurostat</span>
+<span class="kw">load</span>(<span class="st">&#39;data/eu_timeuse/eu_timeuse_tot.Rdata&#39;</span>)
+
+<span class="co"># order data frame by increasing date</span>
+eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(year)</code></pre></div>
+<pre><code>## # A tibble: 1,671 x 8
+##   country_code country_name  year activity_code activity_name   prtcp_rate
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt;
+## 1 BE           Belgium       2000 AC0           Personal care        100  
+## 2 BE           Belgium       2000 AC01          Sleep                100  
+## 3 BE           Belgium       2000 AC02          Eating                99.5
+## 4 BE           Belgium       2000 AC03          Other and/or u…       97.6
+## 5 BE           Belgium       2000 AC1_TR        Employment, re…       34.5
+## # ... with 1,666 more rows, and 2 more variables: prtcp_time_min &lt;dbl&gt;,
+## #   time_spent_min &lt;dbl&gt;</code></pre>
+<p>If multiple variables are specified, the dataframe is re-ordered in the sequence of specification. This behavior makes it possible to design useful tables, i.e. our <code>eu_timeuse</code> data contains the time spent each day on different activities by type of activity, country, and year. Sorting by <code>activity</code>, <code>country</code> and (at last position) <code>year</code> gives a table that allows for quick comparisions along the time axis. Having <code>country</code> last would allow for quick comparisions among coutries and so on.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># order data frame by activity, country and year</span>
+eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(activity_name, country_name, year)</code></pre></div>
+<pre><code>## # A tibble: 1,671 x 8
+##   country_code country_name  year activity_code activity_name   prtcp_rate
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt;
+## 1 AT           Austria       2010 AC1B          Activities rel…       22.6
+## 2 BE           Belgium       2000 AC1B          Activities rel…        1.4
+## 3 BE           Belgium       2010 AC1B          Activities rel…       12.5
+## 4 BG           Bulgaria      2000 AC1B          Activities rel…        7.1
+## 5 EE           Estonia       2000 AC1B          Activities rel…       10.9
+## # ... with 1,666 more rows, and 2 more variables: prtcp_time_min &lt;dbl&gt;,
+## #   time_spent_min &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># order data frame by activity, year, and country</span>
+eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(activity_name, year, country_name)</code></pre></div>
+<pre><code>## # A tibble: 1,671 x 8
+##   country_code country_name  year activity_code activity_name   prtcp_rate
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt;
+## 1 BE           Belgium       2000 AC1B          Activities rel…        1.4
+## 2 BG           Bulgaria      2000 AC1B          Activities rel…        7.1
+## 3 EE           Estonia       2000 AC1B          Activities rel…       10.9
+## 4 FI           Finland       2000 AC1B          Activities rel…        7.2
+## 5 FR           France        2000 AC1B          Activities rel…        1.6
+## # ... with 1,666 more rows, and 2 more variables: prtcp_time_min &lt;dbl&gt;,
+## #   time_spent_min &lt;dbl&gt;</code></pre>
+<p>By default character variables are ordered in increasing alphabetical order and numeric variables in increasing numerical order. The <code>desc()</code> function allows to reverse that behavior.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># order data frame by reverse alphabetical activity, and alphabetical country</span>
+eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(activity_name), country_name)</code></pre></div>
+<pre><code>## # A tibble: 1,671 x 8
+##   country_code country_name  year activity_code activity_name   prtcp_rate
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt;
+## 1 AT           Austria       2010 AC344         Walking the dog        6.5
+## 2 BE           Belgium       2000 AC344         Walking the dog        7.1
+## 3 BE           Belgium       2010 AC344         Walking the dog        8.1
+## 4 BG           Bulgaria      2000 AC344         Walking the dog        2.2
+## 5 EE           Estonia       2000 AC344         Walking the dog        8.5
+## # ... with 1,666 more rows, and 2 more variables: prtcp_time_min &lt;dbl&gt;,
+## #   time_spent_min &lt;dbl&gt;</code></pre>
+</div>
+<div id="slice-rows" class="section level4">
+<h4><span class="header-section-number">3.2.2.3</span> <code>slice()</code> rows</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#random shuffle</span>
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</code></pre></div>
+<pre><code>## # A tibble: 2,867 x 960
+##   mar1   mar2  mar3  mar4  mar5  mar6  mar7  mar8  mar9  mar10 mar11 mar12
+##   &lt;dbl+&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 1      1     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 2 1      1     5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 3 5      5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 4 1      1     5     &lt;NA&gt;  &lt;NA&gt;  5     &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## 5 3      &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt; 
+## # ... with 2,862 more rows, and 948 more variables: mar13 &lt;dbl+lbl&gt;,
+## #   mar14 &lt;dbl+lbl&gt;, abany &lt;dbl+lbl&gt;, abdefect &lt;dbl+lbl&gt;,
+## #   abhlth &lt;dbl+lbl&gt;, …</code></pre>
+</div>
+</div>
+<div id="excercise-basic-verbs" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Excercise: Basic verbs</h3>
+<ul>
+<li>Fix the following code:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="dt">country =</span> <span class="st">&#39;AUS&#39;</span>, <span class="dt">age =</span> <span class="st">&#39;0&#39;</span>, <span class="dt">sex =</span> <span class="st">&#39;Female&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(hmd_counts, <span class="dt">period_width =</span> <span class="kw">diff</span>(period))
+<span class="co">#hmd_counts %&gt;%</span>
+<span class="co">#  filter(country == &#39;AUS&#39;, age == 0, sex == &#39;Female&#39;) %&gt;%</span>
+<span class="co">#  mutate(period_width = c(diff(period), NA))</span>
+
+gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(bigbang <span class="op">==</span><span class="st"> </span><span class="ot">NA</span>)
+<span class="co">#gss %&gt;% filter(is.na(NA))</span></code></pre></div>
+<ul>
+<li><p>Filter <code>hmd_counts</code> such that it contains all Swedish life-tables and only life-tables for years 2000+ for countries other than Sweden.</p></li>
+<li><p>Why do the results differ?</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, <span class="kw">rank</span>(<span class="op">-</span>income) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>)
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">rank</span>(<span class="op">-</span>income) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<ul>
+<li>With <code>gss</code> select</li>
+<li>the first 10 columns</li>
+<li>the last 10 columns</li>
+<li>every 5th column from 1 to 100</li>
+<li>every column where the name does not contain a number</li>
+<li>all columns where the names contain a phrase of your choice</li>
+</ul>
+</div>
+</div>
+<div id="pipes" class="section level2">
+<h2><span class="header-section-number">3.3</span> Pipes</h2>
+<p>We can chain multiple function and transformations steps into a <em>data analysis pipeline</em>. This is a great approach for clear, fast, interactive data analysis.</p>
+<p>This is what we need to know in order to build pipelines:</p>
+<ul>
+<li>The object on the left of the pipe operator (<code>%&gt;%</code>) is passed onto the first argument of the function on the right</li>
+<li>If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (<code>.</code>)</li>
+</ul>
+<p>Here’s a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the raw data...</span>
+WorldPhones <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...is converted to a data frame...</span>
+<span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...the rownames are added as the column `year`...</span>
+<span class="st">  </span><span class="co"># (note that I use the dot here to explicitly refer to the input data)</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">as.integer</span>(<span class="kw">rownames</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...the data gets transformed from wide to long format...</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> cont, <span class="dt">value =</span> n, <span class="op">-</span>year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...and finally plotted</span>
+<span class="st">  </span><span class="co"># (note that I can pipe the tidy data frame directly into ggplot)</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">colour =</span> cont))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>The LHS of the pipe will always be the first argument of the RHS function, with a single exeption: When you use the dot variable on its own (non-nested) on the RHS.</p>
+<div id="excercise-pipes" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Excercise: Pipes</h3>
+<p>Rewrite the following expressions as pipes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)</code></pre></div>
+<pre><code>FALSE [1] 5050</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1:100 %&gt;% sum()</span>
+
+<span class="kw">sum</span>(<span class="kw">cumsum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))</code></pre></div>
+<pre><code>FALSE [1] 171700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1:100 %&gt;% cumsum() %&gt;% sum()</span>
+
+<span class="kw">hist</span>(<span class="kw">colMeans</span>(<span class="kw">replicate</span>(<span class="dv">1000</span>, <span class="kw">runif</span>(<span class="dv">100</span>))))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#replicate(1000, runif(100)) %&gt;% colMeans() %&gt;% hist()</span>
+
+<span class="kw">any</span>(<span class="kw">is.na</span>(mtcars<span class="op">$</span>cyl))</code></pre></div>
+<pre><code>FALSE [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mtcars$cyl %&gt;% is.na() %&gt;% any()</span>
+
+<span class="kw">cor.test</span>(<span class="op">~</span>hp<span class="op">+</span>mpg, <span class="dt">data =</span> mtcars)</code></pre></div>
+<pre><code>FALSE 
+FALSE   Pearson&#39;s product-moment correlation
+FALSE 
+FALSE data:  hp and mpg
+FALSE t = -6.7424, df = 30, p-value = 1.788e-07
+FALSE alternative hypothesis: true correlation is not equal to 0
+FALSE 95 percent confidence interval:
+FALSE  -0.8852686 -0.5860994
+FALSE sample estimates:
+FALSE        cor 
+FALSE -0.7761684</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mtcars %&gt;% cor.test(~ hp+mpg, data = .)</span>
+
+<span class="kw">cor.test</span>(<span class="op">~</span>hp<span class="op">+</span>mpg, <span class="dt">data =</span> mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
+<pre><code>FALSE 
+FALSE   Pearson&#39;s product-moment correlation
+FALSE 
+FALSE data:  hp and mpg
+FALSE t = -6.7424, df = 30, p-value = 1.788e-07
+FALSE alternative hypothesis: true correlation is not equal to 0
+FALSE 95 percent confidence interval:
+FALSE  -0.8852686 -0.5860994
+FALSE sample estimates:
+FALSE        cor 
+FALSE -0.7761684</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mtcars %&gt;% {cor.test(~ hp+mpg, data = .[1:10])}</span>
+
+<span class="kw">cor</span>(<span class="dt">x =</span> mtcars<span class="op">$</span>mpg, <span class="dt">y =</span> mtcars<span class="op">$</span>hp)</code></pre></div>
+<pre><code>FALSE [1] -0.7761684</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mtcars %&gt;% {cor(x = .$mpg, y = .$hp)}</span>
+
+<span class="kw">xtabs</span>(<span class="op">~</span><span class="st"> </span>gear <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars, <span class="dt">subset =</span> mtcars<span class="op">$</span>gear <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
+<pre><code>FALSE     cyl
+FALSE gear 4 6 8
+FALSE    5 2 1 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mtcars %&gt;% xtabs(~gear + cyl, data = ., subset = .$gear &gt; 4)</span></code></pre></div>
+</div>
+</div>
+<div id="tidy-data" class="section level2">
+<h2><span class="header-section-number">3.4</span> Tidy data</h2>
+<p>Many programming tasks become easier once the data is in a tidy format. But what is tidy data? Our working definition: <strong>data needs to be a data frame</strong> and <strong>every variable of interest needs to be a separate column</strong>. Let’s explore what that means.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WorldPhones)</code></pre></div>
+<pre><code>##      N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+## 1951  45939  21574 2876   1815    1646     89      555
+## 1956  60423  29990 4708   2568    2366   1411      733
+## 1957  64721  32510 5230   2695    2526   1546      773
+## 1958  68484  35218 6662   2845    2691   1663      836
+## 1959  71799  37598 6856   3000    2868   1769      911
+## 1960  76036  40341 8220   3145    3054   1905     1008</code></pre>
+<p>Here’s the number of telephone connections over time by continent. The data is not <em>tidy</em> because its not a <em>data frame</em>, it’s a matrix with row and column names. This gives us headaches if we want to use ggplot to plot the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(WorldPhones)</code></pre></div>
+<pre><code>## Error: `data` must be a data frame, or other object coercible by `fortify()`, not a numeric vector</code></pre>
+<p>We can easily fix this problem by converting the matrix to a data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phones &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(WorldPhones)</code></pre></div>
+<p>Say we we want to plot the number of telephone connections over time by continent. This implies the following <em>variables of interest</em>:</p>
+<pre><code>* the number of telephone connections `n`
+* the continent `cont`
+* the year `year`</code></pre>
+<p>Problem is, <em>none</em> of these variables are explicitly given in our data frame. Of course the data is all there, just not in a format we can use (with ggplot). So the question is how to reshape the data into a form where all the variables of interest are separate columns in the data frame.</p>
+<p>To reshape we are going to use the libraries <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">dplyr</a> and <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidyr</a>. Both are loaded when you load <code>library(tidyverse)</code>.</p>
+<p>The easiest variable to make explicit is the year. It is given as rownames of the data frame. We take the rownames, convert them from character to integer type, and add them as the variable <code>year</code> to the data frame. We use the <code>tidyverse</code> function <code>mutate()</code> to add a new variable to a data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phones &lt;-<span class="st"> </span><span class="kw">mutate</span>(phones, <span class="dt">year =</span> <span class="kw">as.integer</span>(<span class="kw">rownames</span>(phones)))
+phones</code></pre></div>
+<pre><code>##   N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer year
+## 1  45939  21574 2876   1815    1646     89      555 1951
+## 2  60423  29990 4708   2568    2366   1411      733 1956
+## 3  64721  32510 5230   2695    2526   1546      773 1957
+## 4  68484  35218 6662   2845    2691   1663      836 1958
+## 5  71799  37598 6856   3000    2868   1769      911 1959
+## 6  76036  40341 8220   3145    3054   1905     1008 1960
+## 7  79831  43173 9053   3338    3224   2005     1076 1961</code></pre>
+<p>That leaves us with the variables <em>“number of telephone connections”</em> and <em>“continent”</em> to make explicit. They shall become separate columns in the data frame. With the help of <code>gather()</code> we <strong>transform from wide to long format</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phones &lt;-<span class="st"> </span><span class="kw">gather</span>(phones, <span class="dt">key =</span> cont, <span class="dt">value =</span> n, <span class="op">-</span>year)
+phones</code></pre></div>
+<pre><code>##    year     cont     n
+## 1  1951   N.Amer 45939
+## 2  1956   N.Amer 60423
+## 3  1957   N.Amer 64721
+## 4  1958   N.Amer 68484
+## 5  1959   N.Amer 71799
+## 6  1960   N.Amer 76036
+## 7  1961   N.Amer 79831
+## 8  1951   Europe 21574
+## 9  1956   Europe 29990
+## 10 1957   Europe 32510
+## 11 1958   Europe 35218
+## 12 1959   Europe 37598
+## 13 1960   Europe 40341
+## 14 1961   Europe 43173
+## 15 1951     Asia  2876
+## 16 1956     Asia  4708
+## 17 1957     Asia  5230
+## 18 1958     Asia  6662
+## 19 1959     Asia  6856
+## 20 1960     Asia  8220
+## 21 1961     Asia  9053
+## 22 1951   S.Amer  1815
+## 23 1956   S.Amer  2568
+## 24 1957   S.Amer  2695
+## 25 1958   S.Amer  2845
+## 26 1959   S.Amer  3000
+## 27 1960   S.Amer  3145
+## 28 1961   S.Amer  3338
+## 29 1951  Oceania  1646
+## 30 1956  Oceania  2366
+## 31 1957  Oceania  2526
+## 32 1958  Oceania  2691
+## 33 1959  Oceania  2868
+## 34 1960  Oceania  3054
+## 35 1961  Oceania  3224
+## 36 1951   Africa    89
+## 37 1956   Africa  1411
+## 38 1957   Africa  1546
+## 39 1958   Africa  1663
+## 40 1959   Africa  1769
+## 41 1960   Africa  1905
+## 42 1961   Africa  2005
+## 43 1951 Mid.Amer   555
+## 44 1956 Mid.Amer   733
+## 45 1957 Mid.Amer   773
+## 46 1958 Mid.Amer   836
+## 47 1959 Mid.Amer   911
+## 48 1960 Mid.Amer  1008
+## 49 1961 Mid.Amer  1076</code></pre>
+<p>We told the computer to look at all columns apart from <code>year</code> and transform them into the columns <code>cont</code> and <code>n</code>. <code>cont</code> holds the continent names for the variable <code>n</code>, the number of telephone connections. The continent names are taken from the original column names we <em>gathered</em> over. We now can plot our data easily.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(phones) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> n, <span class="dt">colour =</span> cont))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div id="long-versus-wide-format-data" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Long versus wide format data</h3>
+<p>Each table has a <em>wide format</em> and a long format representation. The information content is the same in both formats. It’s the layout that differs.</p>
+<p>Here’s a wide format table containing the explicit variables <code>Female</code> and <code>Male</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">group =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="dt">Female =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">Male =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)</code></pre></div>
+<p>The same table in long format representation containing the explicit variables <code>Sex</code> and <code>N</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long &lt;-<span class="st"> </span><span class="kw">gather</span>(wide, <span class="dt">key =</span> Sex, <span class="dt">value =</span> N, <span class="op">-</span>group)
+long</code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   group Sex        N
+##   &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
+## 1 a     Female     1
+## 2 b     Female     2
+## 3 a     Male       3
+## 4 b     Male       4</code></pre>
+<p>If we want to go back to a wide format we can achieve that by using the function <code>spread()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spread</span>(long, <span class="dt">key =</span> Sex, <span class="dt">value =</span> N)</code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   group Female  Male
+##   &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+## 1 a          1     3
+## 2 b          2     4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hmd</span>
+<span class="co"># Life tables by year, sex and country</span>
+<span class="co"># source: Human Mortality Database</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd.RData&#39;</span>)
+
+<span class="co"># common problems: no matching row was found</span>
+hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(period <span class="op">&gt;</span><span class="st"> </span><span class="dv">2005</span>, country <span class="op">==</span><span class="st"> &#39;RUS&#39;</span>, age <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(sex, ex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(country, period, age, Female, Male)</code></pre></div>
+<pre><code>## # A tibble: 27 x 5
+##   country period   age Female  Male
+##   &lt;chr&gt;    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 RUS       2006     0   73.3    NA
+## 2 RUS       2007     0   74.0    NA
+## 3 RUS       2008     0   74.2    NA
+## 4 RUS       2009     0   74.8    NA
+## 5 RUS       2010     0   74.9    NA
+## # ... with 22 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solution</span>
+hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(period <span class="op">&gt;</span><span class="st"> </span><span class="dv">2005</span>, country <span class="op">==</span><span class="st"> &#39;RUS&#39;</span>, age <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(nDx<span class="op">:</span>Tx)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(sex, ex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(country, period, age, Female, Male)</code></pre></div>
+<pre><code>## # A tibble: 9 x 5
+##   country period   age Female  Male
+##   &lt;chr&gt;    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 RUS       2006     0   73.3  60.4
+## 2 RUS       2007     0   74.0  61.4
+## 3 RUS       2008     0   74.2  61.9
+## 4 RUS       2009     0   74.8  62.8
+## 5 RUS       2010     0   74.9  63.1
+## # ... with 4 more rows</code></pre>
+</div>
+<div id="making-the-implicit-explicit" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Making the implicit explicit</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn implicit NAs into explicit NAs</span>
+eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span>skimr<span class="op">::</span><span class="kw">n_missing</span>()</code></pre></div>
+<pre><code>## [1] 17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">complete</span>(activity_code, country_code, year) <span class="op">%&gt;%</span><span class="st"> </span>skimr<span class="op">::</span><span class="kw">n_missing</span>()</code></pre></div>
+<pre><code>## [1] 2862</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USArrests <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="st">&#39;state&#39;</span>)</code></pre></div>
+<pre><code>##             state Murder Assault UrbanPop Rape
+## 1         Alabama   13.2     236       58 21.2
+## 2          Alaska   10.0     263       48 44.5
+## 3         Arizona    8.1     294       80 31.0
+## 4        Arkansas    8.8     190       50 19.5
+## 5      California    9.0     276       91 40.6
+## 6        Colorado    7.9     204       78 38.7
+## 7     Connecticut    3.3     110       77 11.1
+## 8        Delaware    5.9     238       72 15.8
+## 9         Florida   15.4     335       80 31.9
+## 10        Georgia   17.4     211       60 25.8
+## 11         Hawaii    5.3      46       83 20.2
+## 12          Idaho    2.6     120       54 14.2
+## 13       Illinois   10.4     249       83 24.0
+## 14        Indiana    7.2     113       65 21.0
+## 15           Iowa    2.2      56       57 11.3
+## 16         Kansas    6.0     115       66 18.0
+## 17       Kentucky    9.7     109       52 16.3
+## 18      Louisiana   15.4     249       66 22.2
+## 19          Maine    2.1      83       51  7.8
+## 20       Maryland   11.3     300       67 27.8
+## 21  Massachusetts    4.4     149       85 16.3
+## 22       Michigan   12.1     255       74 35.1
+## 23      Minnesota    2.7      72       66 14.9
+## 24    Mississippi   16.1     259       44 17.1
+## 25       Missouri    9.0     178       70 28.2
+## 26        Montana    6.0     109       53 16.4
+## 27       Nebraska    4.3     102       62 16.5
+## 28         Nevada   12.2     252       81 46.0
+## 29  New Hampshire    2.1      57       56  9.5
+## 30     New Jersey    7.4     159       89 18.8
+## 31     New Mexico   11.4     285       70 32.1
+## 32       New York   11.1     254       86 26.1
+## 33 North Carolina   13.0     337       45 16.1
+## 34   North Dakota    0.8      45       44  7.3
+## 35           Ohio    7.3     120       75 21.4
+## 36       Oklahoma    6.6     151       68 20.0
+## 37         Oregon    4.9     159       67 29.3
+## 38   Pennsylvania    6.3     106       72 14.9
+## 39   Rhode Island    3.4     174       87  8.3
+## 40 South Carolina   14.4     279       48 22.5
+## 41   South Dakota    3.8      86       45 12.8
+## 42      Tennessee   13.2     188       59 26.9
+## 43          Texas   12.7     201       80 25.5
+## 44           Utah    3.2     120       80 22.9
+## 45        Vermont    2.2      48       32 11.2
+## 46       Virginia    8.5     156       63 20.7
+## 47     Washington    4.0     145       73 26.2
+## 48  West Virginia    5.7      81       39  9.3
+## 49      Wisconsin    2.6      53       66 10.8
+## 50        Wyoming    6.8     161       60 15.6</code></pre>
+</div>
+<div id="tidying-data-on-police-arrests" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Tidying data on police arrests</h3>
+<p>Before we start plotting we need to ask ourselves: <em>What do we need to do with our data in order to get the plot we want?</em> Here are some examples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we start with raw data...</span>
+USArrests <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="co"># ...and add the new variable `state` from the rownames...</span>
+    <span class="dt">state =</span> <span class="kw">rownames</span>(.),
+    <span class="co"># ...we then reorder the levels of `state` according to the percentage of</span>
+    <span class="co"># people living in urban areas...</span>
+    <span class="dt">state =</span> <span class="kw">reorder</span>(state, UrbanPop)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...and make a dotplot of the percentage of urban population by state...</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> UrbanPop, <span class="dt">y =</span> state))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we start with raw data...</span>
+USArrests <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="co"># ...and add the new variable `state` from the rownames...</span>
+    <span class="dt">state =</span> <span class="kw">rownames</span>(.),
+    <span class="co"># ...we then reorder the levels of `state` according to the combined</span>
+    <span class="co"># murder, assault and crime rates...</span>
+    <span class="dt">state =</span> <span class="kw">reorder</span>(state, Murder<span class="op">+</span>Assault<span class="op">+</span>Rape)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...we convert to long format, gathering &quot;Assault&quot;, &quot;Murder&quot; and &quot;Rape&quot;</span>
+<span class="st">  </span><span class="co"># into &quot;crime&quot;...</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> crime, <span class="dt">value =</span> rate, <span class="op">-</span>state, <span class="op">-</span>UrbanPop) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...and make a dotplot of the crime-rate by crime and state</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rate, <span class="dt">y =</span> state, <span class="dt">colour =</span> crime))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+</div>
+<div id="tidying-anscombes-quartet" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Tidying Anscombe’s quartet</h3>
+<p>Can you figure out what happens here? Try running the code yourself line by line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anscombe <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">seq_along</span>(x1)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">... =</span> <span class="op">-</span>id) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(key, <span class="dt">sep =</span> <span class="dv">1</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;axis&quot;</span>, <span class="st">&quot;panel&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> axis, <span class="dt">value =</span> value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>panel)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+</div>
+<div id="tidying-data-on-test-retest-reliability" class="section level3">
+<h3><span class="header-section-number">3.4.5</span> Tidying data on test-retest reliability</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/jschoeley/idem_viz/master/ggplot_practical/03-tidy_data/wide_data.csv&quot;</span>)
+wide</code></pre></div>
+<pre><code>## # A tibble: 48 x 20
+##   name_rater1 area2d_camera1a area2d_camera1b area3d_camera1a
+##   &lt;chr&gt;                 &lt;dbl&gt;           &lt;dbl&gt;           &lt;dbl&gt;
+## 1 John                  2.03            2.08            2.51 
+## 2 Paul                  0.300           0.420           0.510
+## 3 John                  4.24            4.46            5.53 
+## 4 John                  2.87            3.08            4.03 
+## 5 John                  5.60            5.83            8.13 
+## # ... with 43 more rows, and 16 more variables: area3d_camera1b &lt;dbl&gt;,
+## #   volume_camera1a &lt;dbl&gt;, volume_camera1b &lt;dbl&gt;, volume_gel1 &lt;dbl&gt;,
+## #   circum_camera1a &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long &lt;-
+<span class="st">  </span>wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># add a unique identifier to each row (each patient)</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> type, <span class="dt">value =</span> value, <span class="op">-</span>id, <span class="op">-</span>name_rater1, <span class="op">-</span>name_rater2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> type, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;measurement&quot;</span>, <span class="st">&quot;method&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rater =</span> <span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&#39;1&#39;</span>, method), name_rater1, name_rater2)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> method, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;method&quot;</span>, <span class="st">&quot;test&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test =</span> <span class="kw">ifelse</span>(test <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="st">&quot;a&quot;</span>, test)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># beautification</span>
+<span class="st">  </span><span class="kw">select</span>(id, rater, test, measurement, method, value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(id, measurement, rater, test)
+long</code></pre></div>
+<pre><code>## # A tibble: 864 x 6
+##      id rater test  measurement method value
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;
+## 1     1 John  a     area2d      camera  2.03
+## 2     1 John  b     area2d      camera  2.08
+## 3     1 Paul  a     area2d      camera  1.95
+## 4     1 Paul  b     area2d      camera NA   
+## 5     1 John  a     area3d      camera  2.51
+## # ... with 859 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> test, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(rater<span class="op">~</span>measurement)</code></pre></div>
+<pre><code>## Warning: Removed 30 rows containing missing values (geom_path).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> test, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(measurement<span class="op">~</span>rater)</code></pre></div>
+<pre><code>## Warning: Removed 54 rows containing missing values (geom_path).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>Differences are seen most clearly when plotted directly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(test, <span class="dt">value =</span> value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">diff =</span> a<span class="op">-</span>b) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> diff)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>rater)</code></pre></div>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 39 rows containing non-finite values (stat_bindot).</code></pre>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+</div>
+<div id="tidying-the-eu-time-use-survey" class="section level3">
+<h3><span class="header-section-number">3.4.6</span> Tidying the EU time-use-survey</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(eurostat)
+
+<span class="co"># Eurostat table &quot;tus_00selfstat&quot;</span>
+eu_timeuse_complete &lt;-<span class="st"> </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tus_00selfstat&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;label&#39;</span>,
+                                    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+eu_timeuse &lt;-
+<span class="st">  </span>eu_timeuse_complete <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;Total&#39;</span>, wstatus <span class="op">==</span><span class="st"> &#39;Population&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(unit, values) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(time),
+         <span class="dt">prtcp_time_min =</span> <span class="st">`</span><span class="dt">Participation time (hh:mm)</span><span class="st">`</span> <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">str_pad</span>(<span class="dt">width =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&#39;left&#39;</span>, <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span>{<span class="kw">str_c</span>(<span class="kw">str_sub</span>(., <span class="dv">1</span>, <span class="dv">2</span>), <span class="st">&#39;:&#39;</span>, <span class="kw">str_sub</span>(., <span class="dv">3</span>, <span class="dv">4</span>))} <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">hm</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&#39;minutes&#39;</span>),
+         <span class="dt">time_spent_min =</span> <span class="st">`</span><span class="dt">Time spent (hh:mm)</span><span class="st">`</span> <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">str_pad</span>(<span class="dt">width =</span> <span class="dv">4</span>, <span class="dt">side =</span> <span class="st">&#39;left&#39;</span>, <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span>{<span class="kw">str_c</span>(<span class="kw">str_sub</span>(., <span class="dv">1</span>, <span class="dv">2</span>), <span class="st">&#39;:&#39;</span>, <span class="kw">str_sub</span>(., <span class="dv">3</span>, <span class="dv">4</span>))} <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">hm</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">time_length</span>(<span class="dt">unit =</span> <span class="st">&#39;minutes&#39;</span>)
+         ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">activity =</span> acl00, <span class="dt">country =</span> geo, year,
+         <span class="dt">prtcp_rate =</span> <span class="st">`</span><span class="dt">Participation rate (%)</span><span class="st">`</span>,
+         prtcp_time_min, time_spent_min)</code></pre></div>
+<pre><code>## Warning in .parse_hms(..., order = &quot;HM&quot;, quiet = quiet): Some strings
+## failed to parse, or all strings are NAs</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eu_timeuse</code></pre></div>
+<pre><code>## # A tibble: 1,671 x 6
+##   activity          country  year prtcp_rate prtcp_time_min time_spent_min
+##   &lt;chr&gt;             &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+## 1 Activities relat… Austria  2010       22.6             48             11
+## 2 Activities relat… Belgium  2000        1.4             88              1
+## 3 Activities relat… Belgium  2010       12.5             46              6
+## 4 Activities relat… Bulgar…  2000        7.1             39              3
+## 5 Activities relat… Estonia  2000       10.9             44              5
+## # ... with 1,666 more rows</code></pre>
+</div>
+<div id="tidying-model-output" class="section level3">
+<h3><span class="header-section-number">3.4.7</span> Tidying model output</h3>
+<p>We “tidy” the output of the <code>survfit</code> function via the “broom” package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(survival)
+surv &lt;-<span class="st"> </span><span class="kw">survfit</span>(
+  <span class="kw">Surv</span>(<span class="dt">time =</span> heart<span class="op">$</span>start,
+       <span class="dt">time2 =</span> heart<span class="op">$</span>stop,
+       <span class="dt">event =</span> heart<span class="op">$</span>event) <span class="op">~</span><span class="st"> </span>heart<span class="op">$</span>transplant
+)
+surv</code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(time = heart$start, time2 = heart$stop, 
+##     event = heart$event) ~ heart$transplant)
+## 
+##                    records n.max n.start events median 0.95LCL 0.95UCL
+## heart$transplant=0     103   103       0     30    149      69      NA
+## heart$transplant=1      69    45       0     45     90      53     334</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">broom<span class="op">::</span><span class="kw">tidy</span>(surv) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> estimate)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_step</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> strata))</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>Dobson (1990) Page 93: Randomized Controlled Trial.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
+  <span class="dt">counts =</span> <span class="kw">c</span>(<span class="dv">18</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">13</span>,<span class="dv">12</span>),
+  <span class="dt">outcome =</span> <span class="kw">gl</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">9</span>),
+  <span class="dt">treatment =</span> <span class="kw">gl</span>(<span class="dv">3</span>,<span class="dv">3</span>)
+)
+
+dat_fit &lt;-<span class="st"> </span><span class="kw">glm</span>(counts <span class="op">~</span><span class="st"> </span>outcome <span class="op">+</span><span class="st"> </span>treatment, <span class="dt">family =</span> <span class="kw">poisson</span>(), <span class="dt">data =</span> dat)
+
+broom<span class="op">::</span><span class="kw">tidy</span>(dat_fit)</code></pre></div>
+<pre><code>##          term      estimate std.error     statistic      p.value
+## 1 (Intercept)  3.044522e+00 0.1708987  1.781478e+01 5.426767e-71
+## 2    outcome2 -4.542553e-01 0.2021708 -2.246889e+00 2.464711e-02
+## 3    outcome3 -2.929871e-01 0.1927423 -1.520097e+00 1.284865e-01
+## 4  treatment2  1.337909e-15 0.2000000  6.689547e-15 1.000000e+00
+## 5  treatment3  1.421085e-15 0.2000000  7.105427e-15 1.000000e+00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">broom<span class="op">::</span><span class="kw">glance</span>(dat_fit)</code></pre></div>
+<pre><code>##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
+## 1      10.58145       8 -23.38066 56.76132 57.74744 5.129141           4</code></pre>
+</div>
+<div id="excercise-tidy-data" class="section level3">
+<h3><span class="header-section-number">3.4.8</span> Excercise: Tidy data</h3>
+<ul>
+<li>Download <code>get_eurostat('t2020_10', time_format = 'raw')</code> and write a pipe that calculates the difference between the current value and the target value over time for each country.</li>
+</ul>
+</div>
+</div>
+<div id="joins" class="section level2">
+<h2><span class="header-section-number">3.5</span> Joins</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># population change</span>
+income &lt;-
+<span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00026&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">income =</span> values)</code></pre></div>
+<pre><code>## Table tgs00026 cached at /tmp/RtmpqqFFj5/eurostat/tgs00026_date_code_FF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># unemployment rate</span>
+unemp &lt;-
+<span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00010&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">unemp =</span> values)</code></pre></div>
+<pre><code>## Table tgs00010 cached at /tmp/RtmpqqFFj5/eurostat/tgs00010_date_code_FF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total fertility rate</span>
+totfert &lt;-
+<span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00100&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">totfert =</span> values)</code></pre></div>
+<pre><code>## Table tgs00100 cached at /tmp/RtmpqqFFj5/eurostat/tgs00100_date_code_FF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total life-expectancy</span>
+lifeexp &lt;-
+<span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00101&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">lifeexp =</span> values)</code></pre></div>
+<pre><code>## Table tgs00101 cached at /tmp/RtmpqqFFj5/eurostat/tgs00101_date_code_FF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># population change</span>
+popchange &lt;-
+<span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00099&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(indic_de, values) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(geo, time,
+         <span class="dt">netmigrate =</span> CNMIGRATRT,
+         <span class="dt">growthrate =</span> GROWRT,
+         <span class="dt">natgrowthrate =</span> NATGROWRT)</code></pre></div>
+<pre><code>## Table tgs00099 cached at /tmp/RtmpqqFFj5/eurostat/tgs00099_date_code_FF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span>
+eu_regional_indicators &lt;-
+<span class="st">  </span>unemp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">full_join</span>(totfert) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">full_join</span>(lifeexp) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">full_join</span>(popchange) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">full_join</span>(income) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_length</span>(geo) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country =</span> <span class="kw">str_sub</span>(geo, <span class="dt">end =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(geo, time)</code></pre></div>
+<pre><code>## Joining, by = c(&quot;geo&quot;, &quot;time&quot;)</code></pre>
+<pre><code>## Joining, by = c(&quot;geo&quot;, &quot;time&quot;)
+## Joining, by = c(&quot;geo&quot;, &quot;time&quot;)
+## Joining, by = c(&quot;geo&quot;, &quot;time&quot;)</code></pre>
+<div id="excercise-joins" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Excercise: Joins</h3>
+<ul>
+<li>Create a dataset to a single topic of your choice by joining eurostat tables.</li>
+</ul>
+</div>
+</div>
+<div id="recoding" class="section level2">
+<h2><span class="header-section-number">3.6</span> Recoding</h2>
+<div id="excercise-recoding" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Excercise: Recoding</h3>
+<ul>
+<li>Recode the activity variable in dataset <code>eu_timeuse</code> into less than 10 meaningful categories of your own choice (make sure to filter out the “Total” values first). Visualize.</li>
+</ul>
+</div>
+</div>
+<div id="tidy-iteration" class="section level2">
+<h2><span class="header-section-number">3.7</span> Tidy iteration</h2>
+<div id="group-wise-operations" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Group-wise operations</h3>
+<div id="grouped-mutate" class="section level4">
+<h4><span class="header-section-number">3.7.1.1</span> Grouped <code>mutate()</code></h4>
+<p>If we want to transform some columns in the data frame on a group-by-group basis we can use the <code>group_by()</code> together with <code>mutate()</code>.</p>
+<p>Biologists sometimes express age not in years but in shares of total life-expectancy, i.e. the age of quarter life-expectancy, the age of half life-expectancy… Let’s add this <em>relative</em> age to each life-table in the data. We need to</p>
+<ol style="list-style-type: decimal">
+<li>group our data into sub-groups defined by the values of country, sex and year</li>
+<li>for each sub-group add a new column “relative age” to the life-table calculated as age over total life-expectancy</li>
+<li>Re-combine the results of 2 into a data frame with columns identifying the sub-groups</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># hmd</span>
+<span class="co"># Life tables by year, sex and country</span>
+<span class="co"># source: Human Mortality Database</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd.RData&#39;</span>)
+
+hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(country, sex, period) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relAge =</span> age <span class="op">/</span><span class="st"> </span>ex[<span class="dv">1</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>(nx<span class="op">:</span>ex))</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 6
+## # Groups:   country, sex, period [11,754]
+##   country country_name sex    period   age relAge
+##   &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+## 1 AUS     Australia    Female   1921     0 0     
+## 2 AUS     Australia    Female   1921     1 0.0158
+## 3 AUS     Australia    Female   1921     2 0.0317
+## 4 AUS     Australia    Female   1921     3 0.0475
+## 5 AUS     Australia    Female   1921     4 0.0633
+## # ... with 1.305e+06 more rows</code></pre>
+<p>Let’s plot the life-table survivor function over relative age by sex for Sweden across periods.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(country, sex, period) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relAge =</span> age <span class="op">/</span><span class="st"> </span>ex[<span class="dv">1</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &#39;SWE&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> relAge, <span class="dt">y =</span> lx, <span class="dt">group =</span> period, <span class="dt">color =</span> period)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>sex)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+</div>
+<div id="grouped-filter" class="section level4">
+<h4><span class="header-section-number">3.7.1.2</span> Grouped <code>filter()</code></h4>
+</div>
+<div id="grouped-slice" class="section level4">
+<h4><span class="header-section-number">3.7.1.3</span> Grouped <code>slice()</code></h4>
+<p><code>slice()</code> selects rows by index. Using <code>slice()</code> in a grouped fashion we can return the first and last row for each group – this comes in handy as a quick check for data structure and coverage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># euro_regio</span>
+<span class="co"># European regional population statistics</span>
+<span class="kw">load</span>(<span class="st">&#39;data/euro_regio/euro_regio.Rdata&#39;</span>)
+
+euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># for each country...</span>
+<span class="st">  </span><span class="kw">group_by</span>(country_name) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...return the first and last row</span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">n</span>()))</code></pre></div>
+<pre><code>## # A tibble: 72 x 21
+## # Groups:   country_name [36]
+##   country_code country_name nuts2_code nuts2_name       year   pop popdens
+##   &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AL           Albania      AL01       Veri             2005    NA    NA  
+## 2 AL           Albania      ALXX       ALXX Not regio…  2017    NA    NA  
+## 3 AT           Austria      AT11       Burgenland (AT)  2005    NA    75.7
+## 4 AT           Austria      ATZZ       ATZZ Extra-Reg…  2017    NA    NA  
+## 5 BE           Belgium      BE10       Région de Brux…  2005    NA  6290. 
+## # ... with 67 more rows, and 14 more variables: births &lt;dbl&gt;,
+## #   deaths &lt;dbl&gt;, natgrowthrate &lt;dbl&gt;, growthrate &lt;dbl&gt;, netmigrate &lt;dbl&gt;,
+## #   …</code></pre>
+<p>We can use grouped <code>slice()</code> to have a closer look at outliers within groups. This replicates the Oeppen-Vaupel line for European regions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># for each year</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co">#...select the row (region) with the highest life-expectancy</span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="kw">which.max</span>(lifeexp)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...and plot the results</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeexp), <span class="dt">color =</span> <span class="st">&#39;grey&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeexp,
+                <span class="dt">label =</span> nuts2_name, <span class="dt">color =</span> nuts2_name),
+            <span class="dt">show.legend =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+</div>
+</div>
+<div id="grouped-summarise" class="section level3">
+<h3><span class="header-section-number">3.7.2</span> Grouped <code>summarise()</code></h3>
+<p>Say we have a collection of life-tables by country, sex, and year and we want to calculate the coefficient of variation for the life-table distribution of deaths. In other words we want to</p>
+<ol style="list-style-type: decimal">
+<li>group our data into subgroups defined by the values of country, sex and year (so a single sub-group may be Danish females in 2010)</li>
+<li>extract total life-expectancy from each sub-group life-table</li>
+<li>calculate the coefficient of variation for each sub-group</li>
+<li>Re-combine the results of 2 and 3 into a data frame with columns identifying the sub-groups</li>
+</ol>
+<p>All of the above is achieved by the data pipeline below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(country, sex, period) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">e0 =</span> <span class="kw">first</span>(ex),
+    <span class="dt">cv =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(ndx<span class="op">/</span><span class="dv">100000</span><span class="op">*</span>(age<span class="op">+</span>nax<span class="op">-</span>e0)<span class="op">^</span><span class="dv">2</span>)) <span class="op">/</span><span class="st"> </span>e0
+  )</code></pre></div>
+<pre><code>## # A tibble: 11,754 x 5
+## # Groups:   country, sex [?]
+##   country sex    period    e0    cv
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 AUS     Female   1921  63.2 0.409
+## 2 AUS     Female   1922  65.1 0.370
+## 3 AUS     Female   1923  63.7 0.388
+## 4 AUS     Female   1924  64.5 0.383
+## 5 AUS     Female   1925  65.4 0.370
+## # ... with 1.175e+04 more rows</code></pre>
+<p>We use the <code>group_by()</code> function to group our data into sub-groups, then we use the <code>summarise()</code> command to calculate the “summary statistics” for each sub-group. The <code>ungroup()</code> function in the end is optional but its good practive to ungroup after you’re done with the group-wise operations.</p>
+<p>Let’s plot the results (for a subset of all countries):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sex <span class="op">!=</span><span class="st"> &#39;Total&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(country, sex, period) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">e0 =</span> <span class="kw">first</span>(ex),
+    <span class="dt">cv =</span> <span class="kw">sqrt</span>(<span class="kw">sum</span>(ndx<span class="op">/</span><span class="dv">100000</span><span class="op">*</span>(age<span class="op">+</span>nax<span class="op">-</span>e0)<span class="op">^</span><span class="dv">2</span>)) <span class="op">/</span><span class="st"> </span>e0
+  ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SWE&#39;</span>, <span class="st">&#39;RUS&#39;</span>, <span class="st">&#39;ITA&#39;</span>, <span class="st">&#39;DNK&#39;</span>, <span class="st">&#39;USA&#39;</span>, <span class="st">&#39;ESP&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">x =</span> e0, <span class="dt">y =</span> cv, <span class="dt">color =</span> sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<div id="grouped-do" class="section level4">
+<h4><span class="header-section-number">3.7.2.1</span> Grouped <code>do()</code></h4>
+</div>
+<div id="fitting-and-summarising-many-models" class="section level4">
+<h4><span class="header-section-number">3.7.2.2</span> Fitting and summarising many models</h4>
+</div>
+<div id="excercise-group-wise-operations" class="section level4">
+<h4><span class="header-section-number">3.7.2.3</span> Excercise: Group-wise operations</h4>
+<ul>
+<li>Calculate five year abridged mortality rates for the whole <code>hmd_counts</code> data.</li>
+</ul>
+</div>
+</div>
+<div id="column-wise-operations" class="section level3">
+<h3><span class="header-section-number">3.7.3</span> Column-wise operations</h3>
+<div id="at" class="section level4">
+<h4><span class="header-section-number">3.7.3.1</span> <code>*_at()</code></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># apply function &quot;toupper()&quot; to the columns country, sex</span>
+<span class="kw">mutate_at</span>(hmd_counts, <span class="kw">vars</span>(country, sex), toupper)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     FEMALE   1921     0     1 3842. 64052.
+## 2 AUS     FEMALE   1921     1     1  719. 59619.
+## 3 AUS     FEMALE   1921     2     1  330. 57126.
+## 4 AUS     FEMALE   1921     3     1  166. 57484.
+## 5 AUS     FEMALE   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this returns the same as above</span>
+<span class="kw">mutate</span>(hmd_counts,
+       <span class="dt">country =</span> <span class="kw">toupper</span>(country),
+       <span class="dt">sex =</span> <span class="kw">toupper</span>(sex))</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     FEMALE   1921     0     1 3842. 64052.
+## 2 AUS     FEMALE   1921     1     1  719. 59619.
+## 3 AUS     FEMALE   1921     2     1  330. 57126.
+## 4 AUS     FEMALE   1921     3     1  166. 57484.
+## 5 AUS     FEMALE   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows</code></pre>
+</div>
+<div id="if" class="section level4">
+<h4><span class="header-section-number">3.7.3.2</span> <code>*_if()</code></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert any character variable to a factor</span>
+<span class="kw">mutate_if</span>(hmd_counts, is.character, as.factor)</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;fct&gt;   &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052.
+## 2 AUS     Female   1921     1     1  719. 59619.
+## 3 AUS     Female   1921     2     1  330. 57126.
+## 4 AUS     Female   1921     3     1  166. 57484.
+## 5 AUS     Female   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this returns the same as above</span>
+<span class="kw">mutate</span>(hmd_counts,
+       <span class="dt">country =</span> <span class="kw">as.factor</span>(country),
+       <span class="dt">sex =</span> <span class="kw">as.factor</span>(sex))</code></pre></div>
+<pre><code>## # A tibble: 1,304,694 x 7
+##   country sex    period   age    nx   nDx    nEx
+##   &lt;fct&gt;   &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 AUS     Female   1921     0     1 3842. 64052.
+## 2 AUS     Female   1921     1     1  719. 59619.
+## 3 AUS     Female   1921     2     1  330. 57126.
+## 4 AUS     Female   1921     3     1  166. 57484.
+## 5 AUS     Female   1921     4     1  190. 58407.
+## # ... with 1.305e+06 more rows</code></pre>
+</div>
+<div id="all" class="section level4">
+<h4><span class="header-section-number">3.7.3.3</span> <code>*_all()</code></h4>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="what-is-tidy-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

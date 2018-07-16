@@ -1,0 +1,10 @@
+---
+title: Age-specific mortality rates by period/cohort and sex for various countries
+author: Jonas Schöley
+date: 2017-06-10
+contact: jschoeley@health.sdu.dk
+raw_data:
+    title: The Human Mortality Database
+    author: Vladimir Shkolnikov etal.
+    location: www.mortality.org
+...

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tidy R</title>
+  <meta name="description" content="Tidy R">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Tidy R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Tidy R" />
+  
+  
+  
+
+<meta name="author" content="Jonas Schöley">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="data-wrangling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Before we start</a></li>
+<li class="chapter" data-level="2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html"><i class="fa fa-check"></i><b>2</b> What is tidy R?</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1</b> Differences between tidy and base R</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-differences-between-tidy-and-base-r"><i class="fa fa-check"></i><b>2.1.1</b> Excercise: Differences between tidy and base R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Literate programming in Rmarkdown</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#excercise-literate-programming-in-rmarkdown"><i class="fa fa-check"></i><b>2.2.1</b> Excercise: Literate programming in Rmarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="what-is-tidy-r.html"><a href="what-is-tidy-r.html#first-steps-in-tidy-data-analysis"><i class="fa fa-check"></i><b>2.3</b> First steps in tidy data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#the-tidy-approach-to-data-wrangling"><i class="fa fa-check"></i><b>3.1</b> The “tidy” approach to data wrangling</a></li>
+<li class="chapter" data-level="3.2" data-path="data-wrangling.html"><a href="data-wrangling.html#transforming-data-using-verbs"><i class="fa fa-check"></i><b>3.2</b> Transforming data using verbs</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#column-based-transforms"><i class="fa fa-check"></i><b>3.2.1</b> Column based transforms</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#row-based-transforms"><i class="fa fa-check"></i><b>3.2.2</b> Row based transforms</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-basic-verbs"><i class="fa fa-check"></i><b>3.2.3</b> Excercise: Basic verbs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-wrangling.html"><a href="data-wrangling.html#pipes"><i class="fa fa-check"></i><b>3.3</b> Pipes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-pipes"><i class="fa fa-check"></i><b>3.3.1</b> Excercise: Pipes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>3.4</b> Tidy data</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-wrangling.html"><a href="data-wrangling.html#long-versus-wide-format-data"><i class="fa fa-check"></i><b>3.4.1</b> Long versus wide format data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-wrangling.html"><a href="data-wrangling.html#making-the-implicit-explicit"><i class="fa fa-check"></i><b>3.4.2</b> Making the implicit explicit</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-police-arrests"><i class="fa fa-check"></i><b>3.4.3</b> Tidying data on police arrests</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-anscombes-quartet"><i class="fa fa-check"></i><b>3.4.4</b> Tidying Anscombe’s quartet</a></li>
+<li class="chapter" data-level="3.4.5" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-data-on-test-retest-reliability"><i class="fa fa-check"></i><b>3.4.5</b> Tidying data on test-retest reliability</a></li>
+<li class="chapter" data-level="3.4.6" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-the-eu-time-use-survey"><i class="fa fa-check"></i><b>3.4.6</b> Tidying the EU time-use-survey</a></li>
+<li class="chapter" data-level="3.4.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidying-model-output"><i class="fa fa-check"></i><b>3.4.7</b> Tidying model output</a></li>
+<li class="chapter" data-level="3.4.8" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-tidy-data"><i class="fa fa-check"></i><b>3.4.8</b> Excercise: Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-wrangling.html"><a href="data-wrangling.html#joins"><i class="fa fa-check"></i><b>3.5</b> Joins</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-joins"><i class="fa fa-check"></i><b>3.5.1</b> Excercise: Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-wrangling.html"><a href="data-wrangling.html#recoding"><i class="fa fa-check"></i><b>3.6</b> Recoding</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-wrangling.html"><a href="data-wrangling.html#excercise-recoding"><i class="fa fa-check"></i><b>3.6.1</b> Excercise: Recoding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-iteration"><i class="fa fa-check"></i><b>3.7</b> Tidy iteration</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="data-wrangling.html"><a href="data-wrangling.html#group-wise-operations"><i class="fa fa-check"></i><b>3.7.1</b> Group-wise operations</a></li>
+<li class="chapter" data-level="3.7.2" data-path="data-wrangling.html"><a href="data-wrangling.html#grouped-summarise"><i class="fa fa-check"></i><b>3.7.2</b> Grouped <code>summarise()</code></a></li>
+<li class="chapter" data-level="3.7.3" data-path="data-wrangling.html"><a href="data-wrangling.html#column-wise-operations"><i class="fa fa-check"></i><b>3.7.3</b> Column-wise operations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#the-tidy-approach-to-data-visualization"><i class="fa fa-check"></i><b>4.1</b> The “tidy” approach to data visualization</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2</b> The Grammar of graphics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#aesthetics-geometries-and-layers"><i class="fa fa-check"></i><b>4.2.1</b> Aesthetics, geometries, and layers</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#scales"><i class="fa fa-check"></i><b>4.2.2</b> Scales</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#excercise-the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.2.3</b> Excercise: The grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#order"><i class="fa fa-check"></i><b>4.3</b> Order</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#factor-levels-control-the-order-of-discrete-scales"><i class="fa fa-check"></i><b>4.3.1</b> Factor levels control the order of discrete scales</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#layers-are-plotted-on-top-of-each-other"><i class="fa fa-check"></i><b>4.3.2</b> Layers are plotted on top of each other</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualization.html"><a href="visualization.html#sometimes-the-row-order-of-the-data-matters"><i class="fa fa-check"></i><b>4.3.3</b> Sometimes the row-order of the data matters</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#facets"><i class="fa fa-check"></i><b>4.4</b> Facets</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#comparing-sub-groups-to-totals"><i class="fa fa-check"></i><b>4.4.1</b> Comparing sub-groups to totals</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visualization.html"><a href="visualization.html#chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5</b> Chart type vocabulary</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="visualization.html"><a href="visualization.html#visualizing-distributions"><i class="fa fa-check"></i><b>4.5.1</b> Visualizing distributions</a></li>
+<li class="chapter" data-level="4.5.2" data-path="visualization.html"><a href="visualization.html#visualizing-association"><i class="fa fa-check"></i><b>4.5.2</b> Visualizing association</a></li>
+<li class="chapter" data-level="4.5.3" data-path="visualization.html"><a href="visualization.html#visualizing-change"><i class="fa fa-check"></i><b>4.5.3</b> Visualizing change</a></li>
+<li class="chapter" data-level="4.5.4" data-path="visualization.html"><a href="visualization.html#visualizing-surfaces"><i class="fa fa-check"></i><b>4.5.4</b> Visualizing surfaces</a></li>
+<li class="chapter" data-level="4.5.5" data-path="visualization.html"><a href="visualization.html#excercise-chart-type-vocabulary"><i class="fa fa-check"></i><b>4.5.5</b> Excercise: Chart type vocabulary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="visualization.html"><a href="visualization.html#polish-your-plot-for-publication"><i class="fa fa-check"></i><b>4.6</b> Polish your plot for publication</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="visualization.html"><a href="visualization.html#highlight"><i class="fa fa-check"></i><b>4.6.1</b> Highlight</a></li>
+<li class="chapter" data-level="4.6.2" data-path="visualization.html"><a href="visualization.html#annotate"><i class="fa fa-check"></i><b>4.6.2</b> Annotate</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="visualization.html"><a href="visualization.html#maps"><i class="fa fa-check"></i><b>4.7</b> Maps</a></li>
+<li class="chapter" data-level="4.8" data-path="visualization.html"><a href="visualization.html#networks"><i class="fa fa-check"></i><b>4.8</b> Networks</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tidy R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="what-is-tidy-r" class="section level1">
+<h1><span class="header-section-number">2</span> What is tidy R?</h1>
+<div id="differences-between-tidy-and-base-r" class="section level2">
+<h2><span class="header-section-number">2.1</span> Differences between tidy and base R</h2>
+<p>The Gompertz Law describes the exponential relationship between age and mortality rate in human populations. Its two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> describe the overall mortality level and the relative rate of mortality inrease over age. It is well known that both parameters correlate with each other. The code below demonstrates this co-variance by fitting the Gompertz equation to Swedish birth cohorts and plotting the parameter estimates against each other.</p>
+<p><span class="math display">\[
+\mu(x) = ae^{bx}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load data</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
+
+<span class="co"># select ages 30 to 80, drop total counts, drop NAs</span>
+hmd_sub &lt;-
+<span class="st">  </span><span class="kw">na.omit</span>(<span class="kw">subset</span>(hmd_counts, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">80</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">!=</span><span class="st"> &#39;Total&#39;</span>))
+<span class="co"># split the data by sex, country and year</span>
+hmd_split &lt;-
+<span class="st">  </span><span class="kw">split</span>(hmd_sub, <span class="kw">list</span>(hmd_sub<span class="op">$</span>sex, hmd_sub<span class="op">$</span>country, hmd_sub<span class="op">$</span>period),
+        <span class="dt">drop =</span> <span class="ot">TRUE</span>)
+<span class="co"># run a linear regression on each subset</span>
+hmd_regress &lt;-
+<span class="st">  </span><span class="kw">lapply</span>(hmd_split,
+         <span class="cf">function</span> (lt) <span class="kw">glm</span>(<span class="kw">round</span>(nDx, <span class="dv">0</span>) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(age<span class="dv">-30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(nEx)),
+                           <span class="dt">family =</span> <span class="st">&#39;poisson&#39;</span>, <span class="dt">data =</span> lt))
+<span class="co"># extract the coefficients from each regression model</span>
+hmd_coef &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">sapply</span>(hmd_regress, coef))
+<span class="co"># plot a versus b coefficients</span>
+<span class="kw">plot</span>(<span class="dt">x =</span> hmd_coef[,<span class="dv">1</span>], <span class="dt">y =</span> hmd_coef[,<span class="dv">2</span>],
+     <span class="dt">main =</span> <span class="st">&#39;Gompertz correlation&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;a&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Here’s how I would write the same program today, using the <code>tidyverse</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="co"># load data</span>
+<span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
+
+hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># select ages 30 to 80, drop total counts</span>
+<span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, age <span class="op">&lt;</span><span class="st"> </span><span class="dv">80</span>, sex <span class="op">!=</span><span class="st"> &#39;Total&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># drop NAs</span>
+<span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># for each period...</span>
+<span class="st">  </span><span class="kw">group_by</span>(period, country, sex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...run a Poisson regression of deaths versus age</span>
+<span class="st">  </span><span class="kw">do</span>(<span class="dt">lm =</span> <span class="kw">glm</span>(<span class="kw">round</span>(nDx, <span class="dv">0</span>) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(age<span class="dv">-30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(nEx)),
+              <span class="dt">family =</span> <span class="st">&#39;poisson&#39;</span>, <span class="dt">data =</span> .)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># extract the regression coefficients</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">a =</span> <span class="kw">coef</span>(lm)[<span class="dv">1</span>], <span class="dt">b =</span> <span class="kw">coef</span>(lm)[<span class="dv">2</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># plot a versus b coefficients and label with year</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a, <span class="dt">y =</span> b), <span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Gompertz correlation&#39;</span>)</code></pre></div>
+<p><img src="ced18-tidyr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div id="excercise-differences-between-tidy-and-base-r" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Excercise: Differences between tidy and base R</h3>
+<ul>
+<li>Discuss the differences.</li>
+</ul>
+</div>
+</div>
+<div id="literate-programming-in-rmarkdown" class="section level2">
+<h2><span class="header-section-number">2.2</span> Literate programming in Rmarkdown</h2>
+<div id="excercise-literate-programming-in-rmarkdown" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Excercise: Literate programming in Rmarkdown</h3>
+<ul>
+<li>Rewrite any of your existing R-scripts into an Rmarkdown script. Demonstrate loading data from the hard disc, plot output, text blocks, headers and lists. Export to pdf.</li>
+</ul>
+</div>
+</div>
+<div id="first-steps-in-tidy-data-analysis" class="section level2">
+<h2><span class="header-section-number">2.3</span> First steps in tidy data analysis</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
