@@ -618,16 +618,16 @@ gss %>% select(sample(ncol(.)))
 
 ```
 ## # A tibble: 2,867 x 960
-##   libmslm  snsmot2c  raclive  gender9  relhhd3  clssmtes  tumblr  savejobs
-##   <dbl+lb> <dbl+lbl> <dbl+lb> <dbl+lb> <dbl+lb> <dbl+lbl> <dbl+l> <dbl+lb>
-## 1 2        <NA>      1        <NA>     4        <NA>      <NA>    3       
-## 2 <NA>     <NA>      1        <NA>     <NA>     2         2       3       
-## 3 1        <NA>      1        <NA>     <NA>     2         2       <NA>    
-## 4 2        <NA>      2        <NA>     4        <NA>      <NA>    4       
-## 5 1        <NA>      2        <NA>     4        2         2       <NA>    
-## # ... with 2,862 more rows, and 952 more variables: adforjob <dbl+lbl>,
-## #   cutgovt <dbl+lbl>, gender12 <dbl+lbl>, rowngun <dbl+lbl>,
-## #   coind10 <dbl+lbl>, …
+##   artfree spanking econsup1 mar12 intyrs acqntsex letdie1 suicide3 natcity
+##   <dbl+l> <dbl+lb> <dbl+lb> <dbl> <dbl+> <dbl+lb> <dbl+l> <dbl+lb> <dbl+l>
+## 1 <NA>    3        <NA>     <NA>  0      <NA>     1       1        2      
+## 2 <NA>    4        <NA>     <NA>  1      2        1       2        <NA>   
+## 3 <NA>    <NA>     3        <NA>  1      <NA>     <NA>    <NA>     <NA>   
+## 4 <NA>    3        <NA>     <NA>  1      <NA>     1       1        2      
+## 5 2       <NA>     <NA>     <NA>  1      <NA>     <NA>    <NA>     <NA>   
+## # ... with 2,862 more rows, and 951 more variables: fefam <dbl+lbl>,
+## #   lotr6 <dbl+lbl>, instagrm <dbl+lbl>, racwork <dbl+lbl>,
+## #   wksub1 <dbl+lbl>, …
 ```
 
 Selected columns can be renamed.
@@ -1262,13 +1262,13 @@ hmd_counts%>% slice(sample(1:n(), 50))
 
 ```
 ## # A tibble: 50 x 7
-##   country sex    period   age    nx   nDx    nEx
-##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
-## 1 LUX     Male     2000    29     1    8   3478.
-## 2 FIN     Male     1930    33     1  196  22997.
-## 3 FRATNP  Female   1866    73     1 6987. 77440.
-## 4 HUN     Female   2003    69     1 1204. 55310.
-## 5 IRL     Male     1956     8     1   22  30830.
+##   country sex   period   age    nx   nDx     nEx
+##   <chr>   <chr>  <int> <int> <int> <dbl>   <dbl>
+## 1 SVK     Male    1969    89     1  137     495.
+## 2 AUS     Total   1926     8     1  145. 117290.
+## 3 BLR     Total   1992    90     1 1386.   7025.
+## 4 IRL     Total   2002    38     1   57   58275.
+## 5 FIN     Total   1978   106     1    0       0 
 ## # ... with 45 more rows
 ```
 
@@ -1279,13 +1279,13 @@ hmd_counts %>% slice(sample(1:n()))
 
 ```
 ## # A tibble: 1,304,694 x 7
-##   country sex    period   age    nx   nDx       nEx
-##   <chr>   <chr>   <int> <int> <int> <dbl>     <dbl>
-## 1 NLD     Male     1906    47     1  231   24716.  
-## 2 ITA     Male     1914    80     1 4081.  26908.  
-## 3 CAN     Female   1974    32     1  112  149418.  
-## 4 IRL     Male     1993    84     1  460    2757.  
-## 5 SWE     Female   1981   109     1    1       0.83
+##   country sex    period   age    nx   nDx     nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>   <dbl>
+## 1 ESP     Total    1917    46     1 2488. 277955.
+## 2 BGR     Female   1989    60     1  503   56986.
+## 3 SVN     Female   2014    90     1  419    2631.
+## 4 CHE     Female   1914   107     1    0       0 
+## 5 DEUTW   Male     2003    22     1  280. 384203.
 ## # ... with 1.305e+06 more rows
 ```
 
@@ -1338,32 +1338,84 @@ This is what we need to know in order to build pipelines:
 
 * By default, the object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right.
 
+
+```r
+# x is the first argument of the mean function...
+mean(x = 1:10)
+```
+
+```
+## [1] 5.5
+```
+
+```r
+# ... 1:10 gets passed to x
+1:10 %>% mean()
+```
+
+```
+## [1] 5.5
+```
+
 Here's a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.
 
 
 ```r
-# Remaining life-expectancy at former and new retirement age in Russia by sex
+# remaining life-expectancy at former
+# and new retirement age in Russia by sex
 hmd %>%
   filter(period == 2014, country == 'RUS', sex != 'Total',
          sex == 'Male' & age %in% c(60, 65) |
            sex == 'Female' & age %in% c(55, 63)) %>%
-  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'old',
+  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'former',
                                     age %in% c(63, 65)~ 'new')) %>% 
   select(sex, retirement_age, ex) %>%
   ggplot(aes(x = sex, y = ex, fill = retirement_age)) +
   geom_col(position = 'dodge')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-40-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-41-1.png)<!-- -->
 
 * If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`). In that case the object on the left is only passed to the dot and not to the first argument.
 
 
+```r
+# linear trend in life-expectancy at birth in Russia by sex
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  glm(ex ~ period_std*sex, data = .)
+```
 
-* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. But the dot does not need to stand on its own. It can be indexed like a regular R object.
+```
+## 
+## Call:  glm(formula = ex ~ period_std * sex, data = .)
+## 
+## Coefficients:
+##        (Intercept)          period_std             sexMale  
+##           72.72682             0.02300            -9.17573  
+## period_std:sexMale  
+##           -0.07103  
+## 
+## Degrees of Freedom: 111 Total (i.e. Null);  108 Residual
+## Null Deviance:	    3775 
+## Residual Deviance: 265.9 	AIC: 424.7
+```
+
+* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. The advantage is that the dot does not need to stand on its own. It can be indexed like a regular R object.
 
 
+```r
+# correlation between infant mortality and life-expectancy
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  {cor(x = .$nmx, y = .$ex)}
+```
 
+```
+## [1] -0.3190741
+```
 
 ### Excercise: Data pipelines
 
@@ -1394,7 +1446,7 @@ FALSE [1] 171700
 hist(colMeans(replicate(1000, runif(100))))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-43-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-44-1.png)<!-- -->
 
 ```r
 #replicate(1000, runif(100)) %>% colMeans() %>% hist()
@@ -1608,7 +1660,7 @@ ggplot(phones) +
   geom_line(aes(x = year, y = n, colour = cont))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-49-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-50-1.png)<!-- -->
 
 ### Convert to data frame
 
@@ -1640,40 +1692,26 @@ broom::tidy(surv) %>%
   geom_step(aes(colour = strata))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-50-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-51-1.png)<!-- -->
 
 Dobson (1990) Page 93: Randomized Controlled Trial.
 
 
 ```r
-dat <- data_frame(
-  counts = c(18,17,15,20,10,20,25,13,12),
-  outcome = gl(3,1,9),
-  treatment = gl(3,3)
-)
+library(splines)
 
-dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
-
-broom::tidy(dat_fit)
-```
-
-```
-##          term      estimate std.error     statistic      p.value
-## 1 (Intercept)  3.044522e+00 0.1708987  1.781478e+01 5.426767e-71
-## 2    outcome2 -4.542553e-01 0.2021708 -2.246889e+00 2.464711e-02
-## 3    outcome3 -2.929871e-01 0.1927423 -1.520097e+00 1.284865e-01
-## 4  treatment2  1.337909e-15 0.2000000  6.689547e-15 1.000000e+00
-## 5  treatment3  1.421085e-15 0.2000000  7.105427e-15 1.000000e+00
+# linear trend in life-expectancy at birth in Russia by sex
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  glm(nmx ~ period_std + bs(period_std, df = 3)*sex, data = .) %>%
+  broom::augment() %>%
+  ggplot(aes(x = period_std, color = sex)) +
+  geom_point(aes(y = nmx)) +
+  geom_line(aes(y = .fitted))
 ```
 
-```r
-broom::glance(dat_fit)
-```
-
-```
-##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-## 1      10.58145       8 -23.38066 56.76132 57.74744 5.129141           4
-```
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-52-1.png)<!-- -->
 
 ### Long versus wide format
 
@@ -1783,6 +1821,8 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 
 ### Recoding variables
 
+
+
 ### Case studies in data cleaning
 
 #### Tidying Anscombe's quartet
@@ -1802,7 +1842,7 @@ anscombe %>%
   facet_wrap(~panel)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-57-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-58-1.png)<!-- -->
 
 #### Tidying data on test-retest reliability
 
@@ -1866,7 +1906,7 @@ long %>%
 ## Warning: Removed 30 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-58-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
 
 Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
 
@@ -1883,7 +1923,7 @@ long %>%
 ## Warning: Removed 54 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
 
 Differences are seen most clearly when plotted directly.
 
@@ -1906,7 +1946,7 @@ long %>%
 ## Warning: Removed 39 rows containing non-finite values (stat_bindot).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-61-1.png)<!-- -->
 
 #### Tidying the EU time-use-survey
 
@@ -1976,7 +2016,7 @@ income <-
 ```
 
 ```
-## Table tgs00026 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00026_date_code_FF.rds
+## Table tgs00026 cached at /tmp/RtmpcWqVbT/eurostat/tgs00026_date_code_FF.rds
 ```
 
 ```r
@@ -1988,7 +2028,7 @@ unemp <-
 ```
 
 ```
-## Table tgs00010 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00010_date_code_FF.rds
+## Table tgs00010 cached at /tmp/RtmpcWqVbT/eurostat/tgs00010_date_code_FF.rds
 ```
 
 ```r
@@ -1999,7 +2039,7 @@ totfert <-
 ```
 
 ```
-## Table tgs00100 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00100_date_code_FF.rds
+## Table tgs00100 cached at /tmp/RtmpcWqVbT/eurostat/tgs00100_date_code_FF.rds
 ```
 
 ```r
@@ -2011,7 +2051,7 @@ lifeexp <-
 ```
 
 ```
-## Table tgs00101 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00101_date_code_FF.rds
+## Table tgs00101 cached at /tmp/RtmpcWqVbT/eurostat/tgs00101_date_code_FF.rds
 ```
 
 ```r
@@ -2026,7 +2066,7 @@ popchange <-
 ```
 
 ```
-## Table tgs00099 cached at /tmp/Rtmpp6zYB9/eurostat/tgs00099_date_code_FF.rds
+## Table tgs00099 cached at /tmp/RtmpcWqVbT/eurostat/tgs00099_date_code_FF.rds
 ```
 
 ```r
@@ -2106,7 +2146,7 @@ hmd %>%
   facet_wrap(~sex)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-64-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-65-1.png)<!-- -->
 
 #### Grouped `filter()`
 
@@ -2155,7 +2195,7 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
 
 #### Grouped `summarise()`
 
@@ -2210,7 +2250,7 @@ hmd %>%
   facet_wrap(~country, scales = 'free')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
 
 #### Grouped `do()`
 

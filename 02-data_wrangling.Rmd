@@ -481,15 +481,23 @@ This is what we need to know in order to build pipelines:
 
 * By default, the object on the left of the pipe operator (`%>%`) is passed onto the first argument of the function on the right.
 
+```{r}
+# x is the first argument of the mean function...
+mean(x = 1:10)
+# ... 1:10 gets passed to x
+1:10 %>% mean()
+```
+
 Here's a pipeline which begins with raw data and ends with a plot after some data transformations steps in between.
 
 ```{r}
-# Remaining life-expectancy at former and new retirement age in Russia by sex
+# remaining life-expectancy at former
+# and new retirement age in Russia by sex
 hmd %>%
   filter(period == 2014, country == 'RUS', sex != 'Total',
          sex == 'Male' & age %in% c(60, 65) |
            sex == 'Female' & age %in% c(55, 63)) %>%
-  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'old',
+  mutate(retirement_age = case_when(age %in% c(55, 60) ~ 'former',
                                     age %in% c(63, 65)~ 'new')) %>% 
   select(sex, retirement_age, ex) %>%
   ggplot(aes(x = sex, y = ex, fill = retirement_age)) +
@@ -499,15 +507,22 @@ hmd %>%
 * If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`). In that case the object on the left is only passed to the dot and not to the first argument.
 
 ```{r}
-
+# linear trend in life-expectancy at birth in Russia by sex
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  glm(ex ~ period_std*sex, data = .)
 ```
 
-* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. But the dot does not need to stand on its own. It can be indexed like a regular R object.
+* Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. The advantage is that the dot does not need to stand on its own. It can be indexed like a regular R object.
 
 ```{r}
-
+# correlation between infant mortality and life-expectancy
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  {cor(x = .$nmx, y = .$ex)}
 ```
-
 
 ### Excercise: Data pipelines
 
@@ -611,16 +626,17 @@ broom::tidy(surv) %>%
 Dobson (1990) Page 93: Randomized Controlled Trial.
 
 ```{r}
-dat <- data_frame(
-  counts = c(18,17,15,20,10,20,25,13,12),
-  outcome = gl(3,1,9),
-  treatment = gl(3,3)
-)
+library(splines)
 
-dat_fit <- glm(counts ~ outcome + treatment, family = poisson(), data = dat)
-
-broom::tidy(dat_fit)
-broom::glance(dat_fit)
+# linear trend in life-expectancy at birth in Russia by sex
+hmd %>%
+  filter(country == 'RUS', sex != 'Total', age == 0) %>%
+  mutate(period_std = period - min(period)) %>%
+  glm(nmx ~ period_std + bs(period_std, df = 3)*sex, data = .) %>%
+  broom::augment() %>%
+  ggplot(aes(x = period_std, color = sex)) +
+  geom_point(aes(y = nmx)) +
+  geom_line(aes(y = .fitted))
 ```
 
 ### Long versus wide format
@@ -670,6 +686,8 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 ```
 
 ### Recoding variables
+
+
 
 ### Case studies in data cleaning
 

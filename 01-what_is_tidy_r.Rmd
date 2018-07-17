@@ -2,6 +2,7 @@ What is tidy R?
 ===============
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 options(tibble.print_max = 5,
         tibble.print_min = 5,
         tibble.max_extra_cols = 5)
@@ -42,7 +43,7 @@ plot(x = hmd_coef[,1], y = hmd_coef[,2],
 Here's how I would write the same program today, using the `tidyverse`.
 
 ```{r cache=TRUE, message=FALSE}
-library(tidyverse)
+#library(tidyverse)
 # load data
 load('data/hmd/hmd_counts.RData')
 
@@ -94,7 +95,7 @@ This is the script we developed during the first lecture.
 Everything starts with a dataframe.
 
 ```{r cache=TRUE}
-library(tidyverse)
+#library(tidyverse)
 
 load('data/hmd/hmd_counts.RData')
 

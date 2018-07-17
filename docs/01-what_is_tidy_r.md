@@ -42,7 +42,7 @@ Here's how I would write the same program today, using the `tidyverse`.
 
 
 ```r
-library(tidyverse)
+#library(tidyverse)
 # load data
 load('data/hmd/hmd_counts.RData')
 
@@ -97,7 +97,7 @@ Everything starts with a dataframe.
 
 
 ```r
-library(tidyverse)
+#library(tidyverse)
 
 load('data/hmd/hmd_counts.RData')
 

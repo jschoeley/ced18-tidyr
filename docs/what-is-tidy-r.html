@@ -216,7 +216,7 @@ hmd_coef &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw
      <span class="dt">main =</span> <span class="st">&#39;Gompertz correlation&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;a&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;b&#39;</span>)</code></pre></div>
 <p><img src="01-what_is_tidy_r_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Here’s how I would write the same program today, using the <code>tidyverse</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(tidyverse)</span>
 <span class="co"># load data</span>
 <span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
 
@@ -281,7 +281,7 @@ hmd_counts <span class="op">%&gt;%</span>
 <h2><span class="header-section-number">2.2</span> First steps in tidy R</h2>
 <p>This is the script we developed during the first lecture.</p>
 <p>Everything starts with a dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(tidyverse)</span>
 
 <span class="kw">load</span>(<span class="st">&#39;data/hmd/hmd_counts.RData&#39;</span>)
 
@@ -360,7 +360,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["ced18-tidyr.pdf", "ced18-tidyr.epub"],
 "toc": {
 "collapse": "subsection"
 }
