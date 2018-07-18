@@ -430,21 +430,25 @@ hmd_counts %>% slice(sample(1:n()))
 
 - Fix the following code:
 
-```{r eval=FALSE, comment=FALSE}
+```{r eval=FALSE}
 hmd_counts %>%
   filter(country = 'AUS', age = '0', sex = 'Female') %>%
   mutate(hmd_counts, period_width = diff(period))
-#hmd_counts %>%
-#  filter(country == 'AUS', age == 0, sex == 'Female') %>%
-#  mutate(period_width = c(diff(period), NA))
 
 gss %>% filter(bigbang == NA)
-#gss %>% filter(is.na(NA))
+```
+
+```{r include=FALSE}
+hmd_counts %>%
+  filter(country == 'AUS', age == 0, sex == 'Female') %>%
+  mutate(period_width = c(diff(period), NA))
+
+gss %>% filter(is.na(NA))
 ```
 
 - Filter `hmd_counts` such that it contains all Swedish life-tables and only life-tables for years 2000+ for countries other than Sweden.
 
-```{r include=FALSE}
+```{r echo=FALSE}
 #filter(hmd_counts, period >= 2000 | country == 'SWE')
 ```
 
@@ -464,7 +468,7 @@ euro_regio %>%
   - every column where the name does not contain a number
   - all columns where the names contain a phrase of your choice
 
-```{r include=FALSE}
+```{r echo=FALSE, eval=FALSE}
 gss %>% select(1:10)
 gss %>% select(rev(names(.))[10:1])
 gss %>% select(seq(1, 100, 5))
@@ -517,7 +521,7 @@ hmd %>%
 * Surrounding an expression with curly braces `{}` surpresses the left-hand side input. Instead you must use the dot notation to refer to that input. The advantage is that the dot does not need to stand on its own. It can be indexed like a regular R object.
 
 ```{r}
-# correlation between infant mortality and life-expectancy
+# correlation between infant mortality and total life-expectancy
 hmd %>%
   filter(country == 'RUS', sex != 'Total', age == 0) %>%
   mutate(period_std = period - min(period)) %>%
@@ -528,31 +532,35 @@ hmd %>%
 
 Rewrite the following expressions as pipes:
 
-```{r comment=FALSE}
+```{r eval=FALSE}
 sum(1:100)
-#1:100 %>% sum()
 
 sum(cumsum(1:100))
-#1:100 %>% cumsum() %>% sum()
 
 hist(colMeans(replicate(1000, runif(100))))
-#replicate(1000, runif(100)) %>% colMeans() %>% hist()
 
 any(is.na(mtcars$cyl))
-#mtcars$cyl %>% is.na() %>% any()
 
 cor.test(~hp+mpg, data = mtcars)
-#mtcars %>% cor.test(~ hp+mpg, data = .)
 
 cor.test(~hp+mpg, data = mtcars[1:10])
-#mtcars %>% {cor.test(~ hp+mpg, data = .[1:10])}
 
 cor(x = mtcars$mpg, y = mtcars$hp)
-#mtcars %>% {cor(x = .$mpg, y = .$hp)}
 
 xtabs(~ gear + cyl, data = mtcars, subset = mtcars$gear > 4)
-#mtcars %>% xtabs(~gear + cyl, data = ., subset = .$gear > 4)
 ```
+
+```{r include=FALSE}
+1:100 %>% sum()
+1:100 %>% cumsum() %>% sum()
+replicate(1000, runif(100)) %>% colMeans() %>% hist()
+mtcars$cyl %>% is.na() %>% any()
+mtcars %>% cor.test(~ hp+mpg, data = .)
+mtcars %>% {cor.test(~ hp+mpg, data = .[1:10])}
+mtcars %>% {cor(x = .$mpg, y = .$hp)}
+mtcars %>% xtabs(~gear + cyl, data = ., subset = .$gear > 4)
+```
+
 
 Tidy data
 ---------
@@ -608,7 +616,7 @@ ggplot(phones) +
 
 ### Convert to data frame
 
-We "tidy" the output of the `survfit` function via the "broom" package.
+We tidy the output of the `survfit` function with the `broom` package.
 
 ```{r}
 library(survival)
@@ -623,7 +631,7 @@ broom::tidy(surv) %>%
   geom_step(aes(colour = strata))
 ```
 
-Dobson (1990) Page 93: Randomized Controlled Trial.
+We tidy the output of the `glm` function with the `broom` package.
 
 ```{r}
 library(splines)
@@ -662,6 +670,54 @@ If we want to go back to a wide format we can achieve that by using the function
 spread(long, key = Sex, value = N)
 ```
 
+But when do we want to use a long versus a wide format vice versa?
+
+#### Widen to calculate differences and ratios
+
+```{r}
+# long
+hmd %>%
+  filter(country == 'RUS', age == 0) %>%
+  select(sex, period, nmx)
+
+# wide + Female-Male differences and ratios
+hmd %>%
+  filter(country == 'RUS', age == 0) %>%
+  select(sex, period, nmx) %>%
+  spread(sex, nmx) %>%
+  mutate(fmdiff = Female-Male,
+         fmratio = Female/Male)
+```
+
+#### Widen if key contains multiple variables
+
+```{r}
+# long
+eurostat::get_eurostat('demo_mlifetable') %>%
+  arrange(time, geo, sex, age, indic_de)
+
+# wide
+eurostat::get_eurostat('demo_mlifetable') %>%
+  arrange(time, geo, sex, age, indic_de) %>%
+  spread(key = indic_de, value = values)
+```
+
+#### Gather if you want to iterate over variables
+
+```{r}
+euro_regio %>%
+  filter(nuts2_code == 'ES11') %>%
+  gather(key = variable, value = value, pop:unemp) %>%
+  ggplot(aes(x = year, y = value)) +
+  geom_line() +
+  facet_wrap(~variable, scales = 'free')
+  
+```
+
+#### Gather if multiple columns relate to the same variable
+
+#### Common reshaping issues
+
 ```{r error=TRUE}
 # common problems: no matching row was found
 hmd %>%
@@ -675,7 +731,57 @@ hmd %>%
   select(-(nDx:Tx)) %>%
   spread(sex, ex) %>%
   select(country, period, age, Female, Male)
+
+# common problem: duplicate identifiers
+data_frame(Female = 1:2, Male = 3:4) %>%
+  gather() %>%
+  spread(key, value)
+
+# solution
+data_frame(Female = 1:2, Male = 3:4) %>%
+  rowid_to_column() %>% 
+  gather(... = -rowid) %>%
+  spread(key, value)
+
 ```
+
+### Labelling variables
+
+Label the variables `mar1` in the `gss` dataset.
+
+```{r}
+gss %>%
+  mutate(
+    mar1 =
+      case_when(mar1 == 1 ~ 'Married',
+                mar1 == 2 ~ 'Widowed',
+                mar1 == 3 ~ 'Divorced',
+                mar1 == 4 ~ 'Separated',
+                mar1 == 5 ~ 'Never Married',
+                mar1 >= 8 ~ 'NA')
+  ) %>% count(mar1) %>% arrange(desc(n))
+
+```
+
+Apply the same labels to variables `mar1` to `mar14`.
+
+```{r}
+# the most common living arrangements
+gss %>%
+  mutate_at(vars(mar1:mar14), .funs = funs(
+    case_when(. == 1 ~ 'Married',
+              . == 2 ~ 'Widowed',
+              . == 3 ~ 'Divorced',
+              . == 4 ~ 'Separated',
+              . == 5 ~ 'Never Married',
+              . >= 8 ~ 'NA')
+  )) %>% count(mar1, mar2, mar3) %>% arrange(desc(n))
+```
+
+
+### Recoding variables
+
+
 
 ### Handling missing values
 
@@ -685,11 +791,38 @@ eu_timeuse_tot %>% skimr::n_missing()
 eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_missing()
 ```
 
-### Recoding variables
+### Separating columns
 
-
+```{r}
+eurostat::get_eurostat('tepsr_sp320') %>%
+  arrange(time, geo, indic_he) %>%
+  separate(indic_he, into = c('sex', 'age', 'indicator'), sep = '_')
+```
 
 ### Case studies in data cleaning
+
+#### Tidying GSS Marriage status
+
+```{r}
+# the most common living arrangements
+gss %>%
+  mutate_at(vars(mar1:mar14), .funs = funs(
+    case_when(. == 1 ~ 'Married',
+              . == 2 ~ 'Widowed',
+              . == 3 ~ 'Divorced',
+              . == 4 ~ 'Separated',
+              . == 5 ~ 'Never Married',
+              . == 8 ~ "Don't know",
+              . == 9 ~ 'No answer',
+              . == 0 ~ 'Not applicable')
+  )) %>% select(mar1:mar14) %>%
+  gather(household_member, marriage_status) %>%
+  mutate(household_member =
+           str_sub(household_member, 4) %>% as.integer()) %>%
+  drop_na() %>%
+  ggplot(aes(x = household_member, fill = marriage_status)) +
+  geom_bar(position = 'stack')
+```
 
 #### Tidying Anscombe's quartet
 
@@ -827,7 +960,6 @@ popchange <-
          growthrate = GROWRT,
          natgrowthrate = NATGROWRT)
 
-# 
 eu_regional_indicators <-
   unemp %>%
   full_join(totfert) %>%

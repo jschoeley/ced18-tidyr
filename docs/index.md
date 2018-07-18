@@ -36,7 +36,8 @@ devtools::install_cran(
     'rnaturalearth', # download worldwide map data
     'gapminder',     # data from the gapminder world project
     'cowplot',       # ggplot multiple figures addon
-    'skimr'          # nice dataframe summaries
+    'skimr',         # nice dataframe summaries
+    'broom'          # convert R objects to tidy dataframes
   ),
   repos = "https://cran.rstudio.com/"
 )

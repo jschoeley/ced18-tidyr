@@ -618,16 +618,16 @@ gss %>% select(sample(ncol(.)))
 
 ```
 ## # A tibble: 2,867 x 960
-##   artfree spanking econsup1 mar12 intyrs acqntsex letdie1 suicide3 natcity
-##   <dbl+l> <dbl+lb> <dbl+lb> <dbl> <dbl+> <dbl+lb> <dbl+l> <dbl+lb> <dbl+l>
-## 1 <NA>    3        <NA>     <NA>  0      <NA>     1       1        2      
-## 2 <NA>    4        <NA>     <NA>  1      2        1       2        <NA>   
-## 3 <NA>    <NA>     3        <NA>  1      <NA>     <NA>    <NA>     <NA>   
-## 4 <NA>    3        <NA>     <NA>  1      <NA>     1       1        2      
-## 5 2       <NA>     <NA>     <NA>  1      <NA>     <NA>    <NA>     <NA>   
-## # ... with 2,862 more rows, and 951 more variables: fefam <dbl+lbl>,
-## #   lotr6 <dbl+lbl>, instagrm <dbl+lbl>, racwork <dbl+lbl>,
-## #   wksub1 <dbl+lbl>, …
+##   union1  hompop  grass   fair    proudwrk aidold hschem relpersn stayorg3
+##   <dbl+l> <dbl+l> <dbl+l> <dbl+l> <dbl+lb> <dbl+> <dbl+> <dbl+lb> <dbl+lb>
+## 1 <NA>    5       <NA>    <NA>    <NA>     2      1      4        <NA>    
+## 2 4       1       1       1       <NA>     2      2      4        <NA>    
+## 3 4       2       2       1       <NA>     <NA>   <NA>   1        <NA>    
+## 4 <NA>    6       <NA>    <NA>    <NA>     2      1      2        <NA>    
+## 5 4       3       1       2       3        <NA>   <NA>   4        4       
+## # ... with 2,862 more rows, and 951 more variables: paocc10 <dbl+lbl>,
+## #   astrosci <dbl+lbl>, relhhd2 <dbl+lbl>, closewht <dbl+lbl>,
+## #   suiyrs1 <dbl+lbl>, …
 ```
 
 Selected columns can be renamed.
@@ -1262,13 +1262,13 @@ hmd_counts%>% slice(sample(1:n(), 50))
 
 ```
 ## # A tibble: 50 x 7
-##   country sex   period   age    nx   nDx     nEx
-##   <chr>   <chr>  <int> <int> <int> <dbl>   <dbl>
-## 1 SVK     Male    1969    89     1  137     495.
-## 2 AUS     Total   1926     8     1  145. 117290.
-## 3 BLR     Total   1992    90     1 1386.   7025.
-## 4 IRL     Total   2002    38     1   57   58275.
-## 5 FIN     Total   1978   106     1    0       0 
+##   country sex    period   age    nx   nDx     nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>   <dbl>
+## 1 GBR_SCO Female   1936    97     1  22.3    41.9
+## 2 CHL     Male     2002    96     1 105     340. 
+## 3 SWE     Female   1893    10     1 227.  49540. 
+## 4 DNK     Female   2004    63     1 268   28189. 
+## 5 IRL     Female   2011    65     1 162   19649. 
 ## # ... with 45 more rows
 ```
 
@@ -1281,11 +1281,11 @@ hmd_counts %>% slice(sample(1:n()))
 ## # A tibble: 1,304,694 x 7
 ##   country sex    period   age    nx   nDx     nEx
 ##   <chr>   <chr>   <int> <int> <int> <dbl>   <dbl>
-## 1 ESP     Total    1917    46     1 2488. 277955.
-## 2 BGR     Female   1989    60     1  503   56986.
-## 3 SVN     Female   2014    90     1  419    2631.
-## 4 CHE     Female   1914   107     1    0       0 
-## 5 DEUTW   Male     2003    22     1  280. 384203.
+## 1 DNK     Male     1869    40     1  91.8   9992.
+## 2 SVK     Male     2007    56     1 523    36086.
+## 3 ESP     Total    1964    21     1 393.  474997.
+## 4 GBR_NIR Female   1935    55     1 100.    6296.
+## 5 FIN     Male     1971    63     1 687    19325.
 ## # ... with 1.305e+06 more rows
 ```
 
@@ -1298,13 +1298,11 @@ hmd_counts %>% slice(sample(1:n()))
 hmd_counts %>%
   filter(country = 'AUS', age = '0', sex = 'Female') %>%
   mutate(hmd_counts, period_width = diff(period))
-#hmd_counts %>%
-#  filter(country == 'AUS', age == 0, sex == 'Female') %>%
-#  mutate(period_width = c(diff(period), NA))
 
 gss %>% filter(bigbang == NA)
-#gss %>% filter(is.na(NA))
 ```
+
+
 
 - Filter `hmd_counts` such that it contains all Swedish life-tables and only life-tables for years 2000+ for countries other than Sweden.
 
@@ -1374,7 +1372,7 @@ hmd %>%
   geom_col(position = 'dodge')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-41-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-42-1.png)<!-- -->
 
 * If we want to use the object on the left in other places than the first argument we can explicitly refer to it by using a dot (`.`). In that case the object on the left is only passed to the dot and not to the first argument.
 
@@ -1406,7 +1404,7 @@ hmd %>%
 
 
 ```r
-# correlation between infant mortality and life-expectancy
+# correlation between infant mortality and total life-expectancy
 hmd %>%
   filter(country == 'RUS', sex != 'Total', age == 0) %>%
   mutate(period_std = period - min(period)) %>%
@@ -1424,105 +1422,24 @@ Rewrite the following expressions as pipes:
 
 ```r
 sum(1:100)
-```
-
-```
-FALSE [1] 5050
-```
-
-```r
-#1:100 %>% sum()
 
 sum(cumsum(1:100))
-```
-
-```
-FALSE [1] 171700
-```
-
-```r
-#1:100 %>% cumsum() %>% sum()
 
 hist(colMeans(replicate(1000, runif(100))))
-```
-
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-44-1.png)<!-- -->
-
-```r
-#replicate(1000, runif(100)) %>% colMeans() %>% hist()
 
 any(is.na(mtcars$cyl))
-```
-
-```
-FALSE [1] FALSE
-```
-
-```r
-#mtcars$cyl %>% is.na() %>% any()
 
 cor.test(~hp+mpg, data = mtcars)
-```
-
-```
-FALSE 
-FALSE 	Pearson's product-moment correlation
-FALSE 
-FALSE data:  hp and mpg
-FALSE t = -6.7424, df = 30, p-value = 1.788e-07
-FALSE alternative hypothesis: true correlation is not equal to 0
-FALSE 95 percent confidence interval:
-FALSE  -0.8852686 -0.5860994
-FALSE sample estimates:
-FALSE        cor 
-FALSE -0.7761684
-```
-
-```r
-#mtcars %>% cor.test(~ hp+mpg, data = .)
 
 cor.test(~hp+mpg, data = mtcars[1:10])
-```
-
-```
-FALSE 
-FALSE 	Pearson's product-moment correlation
-FALSE 
-FALSE data:  hp and mpg
-FALSE t = -6.7424, df = 30, p-value = 1.788e-07
-FALSE alternative hypothesis: true correlation is not equal to 0
-FALSE 95 percent confidence interval:
-FALSE  -0.8852686 -0.5860994
-FALSE sample estimates:
-FALSE        cor 
-FALSE -0.7761684
-```
-
-```r
-#mtcars %>% {cor.test(~ hp+mpg, data = .[1:10])}
 
 cor(x = mtcars$mpg, y = mtcars$hp)
-```
-
-```
-FALSE [1] -0.7761684
-```
-
-```r
-#mtcars %>% {cor(x = .$mpg, y = .$hp)}
 
 xtabs(~ gear + cyl, data = mtcars, subset = mtcars$gear > 4)
 ```
 
-```
-FALSE     cyl
-FALSE gear 4 6 8
-FALSE    5 2 1 2
-```
 
-```r
-#mtcars %>% xtabs(~gear + cyl, data = ., subset = .$gear > 4)
-```
+
 
 Tidy data
 ---------
@@ -1660,11 +1577,11 @@ ggplot(phones) +
   geom_line(aes(x = year, y = n, colour = cont))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-50-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-52-1.png)<!-- -->
 
 ### Convert to data frame
 
-We "tidy" the output of the `survfit` function via the "broom" package.
+We tidy the output of the `survfit` function with the `broom` package.
 
 
 ```r
@@ -1692,9 +1609,9 @@ broom::tidy(surv) %>%
   geom_step(aes(colour = strata))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-51-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-53-1.png)<!-- -->
 
-Dobson (1990) Page 93: Randomized Controlled Trial.
+We tidy the output of the `glm` function with the `broom` package.
 
 
 ```r
@@ -1711,7 +1628,7 @@ hmd %>%
   geom_line(aes(y = .fitted))
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-52-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-54-1.png)<!-- -->
 
 ### Long versus wide format
 
@@ -1757,6 +1674,123 @@ spread(long, key = Sex, value = N)
 ## 2 b          2     4
 ```
 
+But when do we want to use a long versus a wide format vice versa?
+
+#### Widen to calculate differences and ratios
+
+
+```r
+# long
+hmd %>%
+  filter(country == 'RUS', age == 0) %>%
+  select(sex, period, nmx)
+```
+
+```
+## # A tibble: 168 x 3
+##   sex    period    nmx
+##   <chr>   <int>  <dbl>
+## 1 Female   1959 0.0374
+## 2 Female   1960 0.0334
+## 3 Female   1961 0.0294
+## 4 Female   1962 0.0282
+## 5 Female   1963 0.0272
+## # ... with 163 more rows
+```
+
+```r
+# wide + Female-Male differences and ratios
+hmd %>%
+  filter(country == 'RUS', age == 0) %>%
+  select(sex, period, nmx) %>%
+  spread(sex, nmx) %>%
+  mutate(fmdiff = Female-Male,
+         fmratio = Female/Male)
+```
+
+```
+## # A tibble: 56 x 6
+##   period Female   Male  Total   fmdiff fmratio
+##    <int>  <dbl>  <dbl>  <dbl>    <dbl>   <dbl>
+## 1   1959 0.0374 0.0464 0.0420 -0.009     0.806
+## 2   1960 0.0334 0.0415 0.0376 -0.00811   0.805
+## 3   1961 0.0294 0.0374 0.0335 -0.00803   0.785
+## 4   1962 0.0282 0.0361 0.0322 -0.00796   0.780
+## 5   1963 0.0272 0.0350 0.0312 -0.00785   0.776
+## # ... with 51 more rows
+```
+
+#### Widen if key contains multiple variables
+
+
+```r
+# long
+eurostat::get_eurostat('demo_mlifetable') %>%
+  arrange(time, geo, sex, age, indic_de)
+```
+
+```
+## Table demo_mlifetable cached at /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+```
+
+```
+## # A tibble: 2,956,833 x 6
+##   indic_de  sex   age   geo   time            values
+##   <fct>     <fct> <fct> <fct> <date>           <dbl>
+## 1 DEATHRATE F     Y1    BE    1960-01-01     0.00159
+## 2 LIFEXP    F     Y1    BE    1960-01-01    73.7    
+## 3 PROBDEATH F     Y1    BE    1960-01-01     0.00159
+## 4 PROBSURV  F     Y1    BE    1960-01-01     0.998  
+## 5 PYLIVED   F     Y1    BE    1960-01-01 97316      
+## # ... with 2.957e+06 more rows
+```
+
+```r
+# wide
+eurostat::get_eurostat('demo_mlifetable') %>%
+  arrange(time, geo, sex, age, indic_de) %>%
+  spread(key = indic_de, value = values)
+```
+
+```
+## Reading cache file /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+```
+
+```
+## Table  demo_mlifetable  read from cache file:  /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+```
+
+```
+## # A tibble: 423,933 x 11
+##   sex   age   geo   time       DEATHRATE LIFEXP PROBDEATH PROBSURV PYLIVED
+##   <fct> <fct> <fct> <date>         <dbl>  <dbl>     <dbl>    <dbl>   <dbl>
+## 1 F     Y1    AL    2014-01-01  0.00043    79.9  0.00043     1.000   99176
+## 2 F     Y1    AL    2015-01-01  0.00043    79.2  0.00043     1.000   99366
+## 3 F     Y1    AL    2016-01-01  0.00044    79.8  0.00044     1.000   99131
+## 4 F     Y1    AM    2006-01-01  0.00123    75.9  0.00123     0.999   98750
+## 5 F     Y1    AM    2007-01-01  0.000520   76.5  0.000520    0.999   99063
+## # ... with 4.239e+05 more rows, and 2 more variables: SURVIVORS <dbl>,
+## #   TOTPYLIVED <dbl>
+```
+
+#### Gather if you want to iterate over variables
+
+
+```r
+euro_regio %>%
+  filter(nuts2_code == 'ES11') %>%
+  gather(key = variable, value = value, pop:unemp) %>%
+  ggplot(aes(x = year, y = value)) +
+  geom_line() +
+  facet_wrap(~variable, scales = 'free')
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
+
+#### Gather if multiple columns relate to the same variable
+
+#### Common reshaping issues
+
 
 ```r
 # common problems: no matching row was found
@@ -1799,6 +1833,96 @@ hmd %>%
 ## # ... with 4 more rows
 ```
 
+```r
+# common problem: duplicate identifiers
+data_frame(Female = 1:2, Male = 3:4) %>%
+  gather() %>%
+  spread(key, value)
+```
+
+```
+## Error: Duplicate identifiers for rows (1, 2), (3, 4)
+```
+
+```r
+# solution
+data_frame(Female = 1:2, Male = 3:4) %>%
+  rowid_to_column() %>% 
+  gather(... = -rowid) %>%
+  spread(key, value)
+```
+
+```
+## # A tibble: 2 x 3
+##   rowid Female  Male
+##   <int>  <int> <int>
+## 1     1      1     3
+## 2     2      2     4
+```
+
+### Labelling variables
+
+Label the variables `mar1` in the `gss` dataset.
+
+
+```r
+gss %>%
+  mutate(
+    mar1 =
+      case_when(mar1 == 1 ~ 'Married',
+                mar1 == 2 ~ 'Widowed',
+                mar1 == 3 ~ 'Divorced',
+                mar1 == 4 ~ 'Separated',
+                mar1 == 5 ~ 'Never Married',
+                mar1 >= 8 ~ 'NA')
+  ) %>% count(mar1) %>% arrange(desc(n))
+```
+
+```
+## # A tibble: 6 x 2
+##   mar1              n
+##   <chr>         <int>
+## 1 Married        1320
+## 2 Never Married   609
+## 3 Divorced        473
+## 4 Widowed         273
+## 5 Separated       121
+## # ... with 1 more row
+```
+
+Apply the same labels to variables `mar1` to `mar14`.
+
+
+```r
+# the most common living arrangements
+gss %>%
+  mutate_at(vars(mar1:mar14), .funs = funs(
+    case_when(. == 1 ~ 'Married',
+              . == 2 ~ 'Widowed',
+              . == 3 ~ 'Divorced',
+              . == 4 ~ 'Separated',
+              . == 5 ~ 'Never Married',
+              . >= 8 ~ 'NA')
+  )) %>% count(mar1, mar2, mar3) %>% arrange(desc(n))
+```
+
+```
+## # A tibble: 79 x 4
+##   mar1          mar2    mar3              n
+##   <chr>         <chr>   <chr>         <int>
+## 1 Married       Married <NA>            847
+## 2 Married       Married Never Married   345
+## 3 Never Married <NA>    <NA>            325
+## 4 Divorced      <NA>    <NA>            266
+## 5 Widowed       <NA>    <NA>            191
+## # ... with 74 more rows
+```
+
+
+### Recoding variables
+
+
+
 ### Handling missing values
 
 
@@ -1819,11 +1943,58 @@ eu_timeuse_tot %>% complete(activity_code, country_code, year) %>% skimr::n_miss
 ## [1] 2862
 ```
 
-### Recoding variables
+### Separating columns
 
 
+```r
+eurostat::get_eurostat('tepsr_sp320') %>%
+  arrange(time, geo, indic_he) %>%
+  separate(indic_he, into = c('sex', 'age', 'indicator'), sep = '_')
+```
+
+```
+## Table tepsr_sp320 cached at /tmp/RtmpuMbWVc/eurostat/tepsr_sp320_date_code_TF.rds
+```
+
+```
+## # A tibble: 1,816 x 7
+##   unit  sex   age   indicator geo   time       values
+##   <fct> <chr> <chr> <chr>     <fct> <date>      <dbl>
+## 1 YR    F     65    DFLE      AT    2005-01-01    6.9
+## 2 YR    F     65    LE        AT    2005-01-01   20.3
+## 3 YR    M     65    DFLE      AT    2005-01-01    6.8
+## 4 YR    M     65    LE        AT    2005-01-01   17  
+## 5 YR    F     65    DFLE      BE    2005-01-01    9.8
+## # ... with 1,811 more rows
+```
 
 ### Case studies in data cleaning
+
+#### Tidying GSS Marriage status
+
+
+```r
+# the most common living arrangements
+gss %>%
+  mutate_at(vars(mar1:mar14), .funs = funs(
+    case_when(. == 1 ~ 'Married',
+              . == 2 ~ 'Widowed',
+              . == 3 ~ 'Divorced',
+              . == 4 ~ 'Separated',
+              . == 5 ~ 'Never Married',
+              . == 8 ~ "Don't know",
+              . == 9 ~ 'No answer',
+              . == 0 ~ 'Not applicable')
+  )) %>% select(mar1:mar14) %>%
+  gather(household_member, marriage_status) %>%
+  mutate(household_member =
+           str_sub(household_member, 4) %>% as.integer()) %>%
+  drop_na() %>%
+  ggplot(aes(x = household_member, fill = marriage_status)) +
+  geom_bar(position = 'stack')
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
 
 #### Tidying Anscombe's quartet
 
@@ -1842,7 +2013,7 @@ anscombe %>%
   facet_wrap(~panel)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-58-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
 
 #### Tidying data on test-retest reliability
 
@@ -1906,7 +2077,7 @@ long %>%
 ## Warning: Removed 30 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-59-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
 
 Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
 
@@ -1923,7 +2094,7 @@ long %>%
 ## Warning: Removed 54 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-60-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
 
 Differences are seen most clearly when plotted directly.
 
@@ -1946,7 +2117,7 @@ long %>%
 ## Warning: Removed 39 rows containing non-finite values (stat_bindot).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-61-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-70-1.png)<!-- -->
 
 #### Tidying the EU time-use-survey
 
@@ -2016,7 +2187,7 @@ income <-
 ```
 
 ```
-## Table tgs00026 cached at /tmp/RtmpcWqVbT/eurostat/tgs00026_date_code_FF.rds
+## Table tgs00026 cached at /tmp/RtmpuMbWVc/eurostat/tgs00026_date_code_FF.rds
 ```
 
 ```r
@@ -2028,7 +2199,7 @@ unemp <-
 ```
 
 ```
-## Table tgs00010 cached at /tmp/RtmpcWqVbT/eurostat/tgs00010_date_code_FF.rds
+## Table tgs00010 cached at /tmp/RtmpuMbWVc/eurostat/tgs00010_date_code_FF.rds
 ```
 
 ```r
@@ -2039,7 +2210,7 @@ totfert <-
 ```
 
 ```
-## Table tgs00100 cached at /tmp/RtmpcWqVbT/eurostat/tgs00100_date_code_FF.rds
+## Table tgs00100 cached at /tmp/RtmpuMbWVc/eurostat/tgs00100_date_code_FF.rds
 ```
 
 ```r
@@ -2051,7 +2222,7 @@ lifeexp <-
 ```
 
 ```
-## Table tgs00101 cached at /tmp/RtmpcWqVbT/eurostat/tgs00101_date_code_FF.rds
+## Table tgs00101 cached at /tmp/RtmpuMbWVc/eurostat/tgs00101_date_code_FF.rds
 ```
 
 ```r
@@ -2066,11 +2237,10 @@ popchange <-
 ```
 
 ```
-## Table tgs00099 cached at /tmp/RtmpcWqVbT/eurostat/tgs00099_date_code_FF.rds
+## Table tgs00099 cached at /tmp/RtmpuMbWVc/eurostat/tgs00099_date_code_FF.rds
 ```
 
 ```r
-# 
 eu_regional_indicators <-
   unemp %>%
   full_join(totfert) %>%
@@ -2146,7 +2316,7 @@ hmd %>%
   facet_wrap(~sex)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-65-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-74-1.png)<!-- -->
 
 #### Grouped `filter()`
 
@@ -2195,7 +2365,7 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-76-1.png)<!-- -->
 
 #### Grouped `summarise()`
 
@@ -2250,7 +2420,7 @@ hmd %>%
   facet_wrap(~country, scales = 'free')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-78-1.png)<!-- -->
 
 #### Grouped `do()`
 
