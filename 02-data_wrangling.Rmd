@@ -801,6 +801,24 @@ eurostat::get_eurostat('tepsr_sp320') %>%
 
 ### Case studies in data cleaning
 
+#### Rehaping the EU asylum decision database
+
+```{r}
+# calculate quota of asylum acceptance by country for 2017
+migr <- eurostat::get_eurostat('migr_asydcfina')
+migr %>%
+  filter(age == 'TOTAL',
+         citizen == 'TOTAL',
+         sex == 'T',
+         time == '2017-01-01') %>%
+  spread(key = decision, value = values) %>% 
+  mutate(p_reject = REJECTED/TOTAL,
+         geo = fct_reorder(geo, p_reject)) %>%
+  ggplot() +
+  geom_col(aes(x = geo, y = p_reject)) +
+  coord_flip()
+```
+
 #### Tidying GSS Marriage status
 
 ```{r}
@@ -825,8 +843,6 @@ gss %>%
 ```
 
 #### Tidying Anscombe's quartet
-
-Can you figure out what happens here? Try running the code yourself line by line.
 
 ```{r}
 anscombe %>%
@@ -924,7 +940,6 @@ eu_timeuse
 
 - Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
-
 Joins
 -----
 
@@ -1012,6 +1027,17 @@ hmd %>%
 
 #### Grouped `filter()`
 
+Whenever `group_by()` is combined with `filter()` the filtering condition is applied group by group. This makes it possible for example to return the three richest regions in the EU for each year.
+
+```{r}
+euro_regio %>%
+  group_by(year) %>%
+  filter(min_rank(desc(gdp)) <= 3) %>%
+  arrange(year, country_code, nuts2_name) %>%
+  ggplot(aes(x = year, y = gdp)) +
+  geom_text(aes(label = nuts2_name))
+```
+
 #### Grouped `slice()`
 
 `slice()` selects rows by index. Using `slice()` in a grouped fashion we can return the first and last row for each group -- this comes in handy as a quick check for data structure and coverage.
@@ -1080,20 +1106,50 @@ hmd %>%
 
 #### Grouped `do()`
 
-#### Fitting and summarising many models
+```{r}
+hmd_counts %>%
+  # select ages 30 to 80, drop total counts
+  filter(age >= 30, age < 80, sex != 'Total') %>%
+  # drop NAs
+  drop_na() %>%
+  # for each period...
+  group_by(period, country, sex) %>%
+  # ...run a Poisson regression of deaths versus age
+  do(lm = glm(round(nDx, 0) ~ I(age-30) + offset(log(nEx)),
+              family = 'poisson', data = .))
+```
+
+
+```{r cache=TRUE}
+hmd_counts %>%
+  # select ages 30 to 80, drop total counts
+  filter(age >= 90, sex != 'Total', nEx != 0, period == 2015) %>%
+  # drop NAs
+  drop_na() %>%
+  # for each period...
+  group_by(country, sex) %>%
+  # ...run a Poisson regression of deaths versus age
+  do(
+    glm(round(nDx, 0) ~ I(age-90) + offset(log(nEx)),
+               family = 'poisson', data = .) %>%
+    broom::tidy()
+  ) %>%
+  filter(term == 'I(age - 90)') %>%
+  ggplot(aes(x = estimate, color = sex)) +
+  geom_density()
+
+```
 
 #### Excercise: Group-wise operations
 
 - Calculate five year abridged mortality rates for the whole `hmd_counts` data.
 
-```{r include=FALSE, eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 hmd_counts %>%
   mutate(x5 = age%/%5*5) %>%
   group_by(country, sex, x5) %>%
   summarise(nmx = sum(nDx/sum(nEx))) %>%
   ungroup()
-
-# ungroup key can't be modified because it's a grouping variable
 ```
 
 ### Column-wise operations

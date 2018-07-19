@@ -596,16 +596,16 @@ gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sele
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># reorder the columns randomly</span>
 gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">sample</span>(<span class="kw">ncol</span>(.)))</code></pre></div>
 <pre><code>## # A tibble: 2,867 x 960
-##   relsp1  abany  wordf  marasian  artmostoth spjewaj  mar1  prfmatt5 mar8 
-##   &lt;dbl+l&gt; &lt;dbl+&gt; &lt;dbl+&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt;  &lt;dbl+lb&gt; &lt;dbl&gt; &lt;dbl+lb&gt; &lt;dbl&gt;
-## 1 2       1      1      3         &lt;NA&gt;       0        1     &lt;NA&gt;     &lt;NA&gt; 
-## 2 &lt;NA&gt;    &lt;NA&gt;   1      1         &lt;NA&gt;       0        4     &lt;NA&gt;     &lt;NA&gt; 
-## 3 2       2      &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;       0        1     2        &lt;NA&gt; 
-## 4 2       2      1      3         &lt;NA&gt;       0        1     &lt;NA&gt;     &lt;NA&gt; 
-## 5 2       1      &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;       0        1     &lt;NA&gt;     &lt;NA&gt; 
-## # ... with 2,862 more rows, and 951 more variables: helpsick &lt;dbl+lbl&gt;,
-## #   workhard &lt;dbl+lbl&gt;, racethhi &lt;dbl+lbl&gt;, corrupt2 &lt;dbl+lbl&gt;,
-## #   gendereq &lt;dbl+lbl&gt;, …</code></pre>
+##   old1   wotrial  spother arttrvl relhh11 libmslm lookjob evolved2 wrkearn
+##   &lt;dbl+&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+l&gt;
+## 1 47     4        &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    2       &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;   
+## 2 60     4        &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    1        &lt;NA&gt;   
+## 3 72     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    1       &lt;NA&gt;    &lt;NA&gt;     2      
+## 4 46     3        &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    2       &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;   
+## 5 54     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    1       &lt;NA&gt;    &lt;NA&gt;     4      
+## # ... with 2,862 more rows, and 951 more variables: whencol &lt;dbl+lbl&gt;,
+## #   discaff &lt;dbl+lbl&gt;, fechld &lt;dbl+lbl&gt;, mar4 &lt;dbl+lbl&gt;, wksup1 &lt;dbl+lbl&gt;,
+## #   …</code></pre>
 <p>Selected columns can be renamed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="dt">ID =</span> id, <span class="dt">EDUCATION =</span> educ)</code></pre></div>
 <pre><code>## # A tibble: 2,867 x 2
@@ -984,24 +984,24 @@ hmd_counts<span class="op">%&gt;%</span><span class="st"> </span><span class="kw
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract 50 random rows</span>
 hmd_counts<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(), <span class="dv">50</span>))</code></pre></div>
 <pre><code>## # A tibble: 50 x 7
-##   country sex    period   age    nx     nDx      nEx
-##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1 ISL     Female   1873    85     1    4.93     19.8
-## 2 JPN     Male     1974    50     1 3287.   553789. 
-## 3 SWE     Female   2004    13     1    9     62950. 
-## 4 ITA     Male     1898    54     1 2471.   141224. 
-## 5 SVN     Total    1992    89     1  358      1494. 
+##   country sex    period   age    nx    nDx      nEx
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 NOR     Male     1960    24     1   26.5  19715. 
+## 2 NOR     Male     1945    93     1   63      192. 
+## 3 ITA     Female   1930    31     1 1267.  305862. 
+## 4 BEL     Total    1917    14     1   NA       NA  
+## 5 ISL     Total    2008    99     1    8       27.6
 ## # ... with 45 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># randomly shuffle all rows</span>
 hmd_counts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()))</code></pre></div>
 <pre><code>## # A tibble: 1,304,694 x 7
 ##   country sex    period   age    nx    nDx     nEx
 ##   &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 FRATNP  Male     1884    64     1 6015.  146349.
-## 2 NLD     Total    1962    80     1 3008.   29829.
-## 3 EST     Male     1972    28     1   25.0   8064.
-## 4 DEUTW   Female   1987    19     1  186   494103.
-## 5 SVK     Female   1999    20     1   18    47135.
+## 1 ISL     Female   2008   100     1   3       13.3
+## 2 EST     Total    1980   101     1   4.04    13.4
+## 3 LTU     Female   1984     7     1  15    25764. 
+## 4 HUN     Total    1950    34     1 260.   91201. 
+## 5 SVN     Total    1999    93     1 207      660. 
 ## # ... with 1.305e+06 more rows</code></pre>
 </div>
 </div>
@@ -1294,7 +1294,7 @@ hmd <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># long</span>
 eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&#39;demo_mlifetable&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(time, geo, sex, age, indic_de)</code></pre></div>
-<pre><code>## Table demo_mlifetable cached at /tmp/RtmphBdpGI/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
+<pre><code>## Table demo_mlifetable cached at /tmp/RtmpWkj6Qv/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
 <pre><code>## # A tibble: 2,956,833 x 6
 ##   indic_de  sex   age   geo   time            values
 ##   &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;date&gt;           &lt;dbl&gt;
@@ -1308,8 +1308,8 @@ eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span cla
 eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&#39;demo_mlifetable&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(time, geo, sex, age, indic_de) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> indic_de, <span class="dt">value =</span> values)</code></pre></div>
-<pre><code>## Reading cache file /tmp/RtmphBdpGI/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
-<pre><code>## Table  demo_mlifetable  read from cache file:  /tmp/RtmphBdpGI/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
+<pre><code>## Reading cache file /tmp/RtmpWkj6Qv/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
+<pre><code>## Table  demo_mlifetable  read from cache file:  /tmp/RtmpWkj6Qv/eurostat/demo_mlifetable_date_code_TF.rds</code></pre>
 <pre><code>## # A tibble: 423,933 x 11
 ##   sex   age   geo   time       DEATHRATE LIFEXP PROBDEATH PROBSURV PYLIVED
 ##   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;date&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
@@ -1441,7 +1441,7 @@ eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span>skimr<span
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&#39;tepsr_sp320&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(time, geo, indic_he) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">separate</span>(indic_he, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;sex&#39;</span>, <span class="st">&#39;age&#39;</span>, <span class="st">&#39;indicator&#39;</span>), <span class="dt">sep =</span> <span class="st">&#39;_&#39;</span>)</code></pre></div>
-<pre><code>## Table tepsr_sp320 cached at /tmp/RtmphBdpGI/eurostat/tepsr_sp320_date_code_TF.rds</code></pre>
+<pre><code>## Table tepsr_sp320 cached at /tmp/RtmpWkj6Qv/eurostat/tepsr_sp320_date_code_TF.rds</code></pre>
 <pre><code>## # A tibble: 1,816 x 7
 ##   unit  sex   age   indicator geo   time       values
 ##   &lt;fct&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;fct&gt; &lt;date&gt;      &lt;dbl&gt;
@@ -1454,8 +1454,27 @@ eu_timeuse_tot <span class="op">%&gt;%</span><span class="st"> </span>skimr<span
 </div>
 <div id="case-studies-in-data-cleaning" class="section level3">
 <h3><span class="header-section-number">3.5.8</span> Case studies in data cleaning</h3>
+<div id="rehaping-the-eu-asylum-decision-database" class="section level4">
+<h4><span class="header-section-number">3.5.8.1</span> Rehaping the EU asylum decision database</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate quota of asylum acceptance by country for 2017</span>
+migr &lt;-<span class="st"> </span>eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&#39;migr_asydcfina&#39;</span>)</code></pre></div>
+<pre><code>## Table migr_asydcfina cached at /tmp/RtmpWkj6Qv/eurostat/migr_asydcfina_date_code_TF.rds</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">migr <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(age <span class="op">==</span><span class="st"> &#39;TOTAL&#39;</span>,
+         citizen <span class="op">==</span><span class="st"> &#39;TOTAL&#39;</span>,
+         sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>,
+         time <span class="op">==</span><span class="st"> &#39;2017-01-01&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> decision, <span class="dt">value =</span> values) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">p_reject =</span> REJECTED<span class="op">/</span>TOTAL,
+         <span class="dt">geo =</span> <span class="kw">fct_reorder</span>(geo, p_reject)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> geo, <span class="dt">y =</span> p_reject)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values (position_stack).</code></pre>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+</div>
 <div id="tidying-gss-marriage-status" class="section level4">
-<h4><span class="header-section-number">3.5.8.1</span> Tidying GSS Marriage status</h4>
+<h4><span class="header-section-number">3.5.8.2</span> Tidying GSS Marriage status</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the most common living arrangements</span>
 gss <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(mar1<span class="op">:</span>mar14), <span class="dt">.funs =</span> <span class="kw">funs</span>(
@@ -1474,11 +1493,10 @@ gss <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> household_member, <span class="dt">fill =</span> marriage_status)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>)</code></pre></div>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 <div id="tidying-anscombes-quartet" class="section level4">
-<h4><span class="header-section-number">3.5.8.2</span> Tidying Anscombe’s quartet</h4>
-<p>Can you figure out what happens here? Try running the code yourself line by line.</p>
+<h4><span class="header-section-number">3.5.8.3</span> Tidying Anscombe’s quartet</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">anscombe <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">seq_along</span>(x1)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(<span class="dt">... =</span> <span class="op">-</span>id) <span class="op">%&gt;%</span>
@@ -1488,10 +1506,10 @@ gss <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>panel)</code></pre></div>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 </div>
 <div id="tidying-data-on-test-retest-reliability" class="section level4">
-<h4><span class="header-section-number">3.5.8.3</span> Tidying data on test-retest reliability</h4>
+<h4><span class="header-section-number">3.5.8.4</span> Tidying data on test-retest reliability</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/jschoeley/idem_viz/master/ggplot_practical/03-tidy_data/wide_data.csv&quot;</span>)
 wide</code></pre></div>
 <pre><code>## # A tibble: 48 x 20
@@ -1533,7 +1551,7 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(rater<span class="op">~</span>measurement)</code></pre></div>
 <pre><code>## Warning: Removed 30 rows containing missing values (geom_path).</code></pre>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
@@ -1541,7 +1559,7 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span> rater, <span class="dt">group =</span> id)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(measurement<span class="op">~</span>rater)</code></pre></div>
 <pre><code>## Warning: Removed 54 rows containing missing values (geom_path).</code></pre>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>Differences are seen most clearly when plotted directly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(method <span class="op">==</span><span class="st"> &quot;camera&quot;</span>) <span class="op">%&gt;%</span>
@@ -1552,10 +1570,10 @@ long</code></pre></div>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>rater)</code></pre></div>
 <pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 39 rows containing non-finite values (stat_bindot).</code></pre>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 </div>
 <div id="tidying-the-eu-time-use-survey" class="section level4">
-<h4><span class="header-section-number">3.5.8.4</span> Tidying the EU time-use-survey</h4>
+<h4><span class="header-section-number">3.5.8.5</span> Tidying the EU time-use-survey</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 <span class="kw">library</span>(eurostat)
 
@@ -1607,24 +1625,24 @@ eu_timeuse &lt;-
 income &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00026&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">income =</span> values)</code></pre></div>
-<pre><code>## Table tgs00026 cached at /tmp/RtmphBdpGI/eurostat/tgs00026_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00026 cached at /tmp/RtmpWkj6Qv/eurostat/tgs00026_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># unemployment rate</span>
 unemp &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00010&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">unemp =</span> values)</code></pre></div>
-<pre><code>## Table tgs00010 cached at /tmp/RtmphBdpGI/eurostat/tgs00010_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00010 cached at /tmp/RtmpWkj6Qv/eurostat/tgs00010_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total fertility rate</span>
 totfert &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00100&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">totfert =</span> values)</code></pre></div>
-<pre><code>## Table tgs00100 cached at /tmp/RtmphBdpGI/eurostat/tgs00100_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00100 cached at /tmp/RtmpWkj6Qv/eurostat/tgs00100_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># total life-expectancy</span>
 lifeexp &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00101&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &#39;T&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(geo, time, <span class="dt">lifeexp =</span> values)</code></pre></div>
-<pre><code>## Table tgs00101 cached at /tmp/RtmphBdpGI/eurostat/tgs00101_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00101 cached at /tmp/RtmpWkj6Qv/eurostat/tgs00101_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># population change</span>
 popchange &lt;-
 <span class="st">  </span><span class="kw">get_eurostat</span>(<span class="st">&#39;tgs00099&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
@@ -1633,7 +1651,7 @@ popchange &lt;-
          <span class="dt">netmigrate =</span> CNMIGRATRT,
          <span class="dt">growthrate =</span> GROWRT,
          <span class="dt">natgrowthrate =</span> NATGROWRT)</code></pre></div>
-<pre><code>## Table tgs00099 cached at /tmp/RtmphBdpGI/eurostat/tgs00099_date_code_FF.rds</code></pre>
+<pre><code>## Table tgs00099 cached at /tmp/RtmpWkj6Qv/eurostat/tgs00099_date_code_FF.rds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eu_regional_indicators &lt;-
 <span class="st">  </span>unemp <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">full_join</span>(totfert) <span class="op">%&gt;%</span>
@@ -1690,10 +1708,18 @@ popchange &lt;-
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> relAge, <span class="dt">y =</span> lx, <span class="dt">group =</span> period, <span class="dt">color =</span> period)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>sex)</code></pre></div>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 </div>
 <div id="grouped-filter" class="section level4">
 <h4><span class="header-section-number">3.7.1.2</span> Grouped <code>filter()</code></h4>
+<p>Whenever <code>group_by()</code> is combined with <code>filter()</code> the filtering condition is applied group by group. This makes it possible for example to return the three richest regions in the EU for each year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">euro_regio <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="kw">desc</span>(gdp)) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(year, country_code, nuts2_name) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> gdp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> nuts2_name))</code></pre></div>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="grouped-slice" class="section level4">
 <h4><span class="header-section-number">3.7.1.3</span> Grouped <code>slice()</code></h4>
@@ -1727,7 +1753,7 @@ popchange &lt;-
 <span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> lifeexp,
                 <span class="dt">label =</span> nuts2_name, <span class="dt">color =</span> nuts2_name),
             <span class="dt">show.legend =</span> <span class="ot">FALSE</span>, <span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 </div>
 <div id="grouped-summarise" class="section level4">
 <h4><span class="header-section-number">3.7.1.4</span> Grouped <code>summarise()</code></h4>
@@ -1768,16 +1794,52 @@ popchange &lt;-
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_path</span>(<span class="kw">aes</span>(<span class="dt">x =</span> e0, <span class="dt">y =</span> cv, <span class="dt">color =</span> sex)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>)</code></pre></div>
-<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 </div>
 <div id="grouped-do" class="section level4">
 <h4><span class="header-section-number">3.7.1.5</span> Grouped <code>do()</code></h4>
-</div>
-<div id="fitting-and-summarising-many-models" class="section level4">
-<h4><span class="header-section-number">3.7.1.6</span> Fitting and summarising many models</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># select ages 30 to 80, drop total counts</span>
+<span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">30</span>, age <span class="op">&lt;</span><span class="st"> </span><span class="dv">80</span>, sex <span class="op">!=</span><span class="st"> &#39;Total&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># drop NAs</span>
+<span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># for each period...</span>
+<span class="st">  </span><span class="kw">group_by</span>(period, country, sex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...run a Poisson regression of deaths versus age</span>
+<span class="st">  </span><span class="kw">do</span>(<span class="dt">lm =</span> <span class="kw">glm</span>(<span class="kw">round</span>(nDx, <span class="dv">0</span>) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(age<span class="dv">-30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(nEx)),
+              <span class="dt">family =</span> <span class="st">&#39;poisson&#39;</span>, <span class="dt">data =</span> .))</code></pre></div>
+<pre><code>## Source: local data frame [7,826 x 4]
+## Groups: &lt;by row&gt;
+## 
+## # A tibble: 7,826 x 4
+##   period country sex    lm       
+## *  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;list&gt;   
+## 1   1751 SWE     Female &lt;S3: glm&gt;
+## 2   1751 SWE     Male   &lt;S3: glm&gt;
+## 3   1752 SWE     Female &lt;S3: glm&gt;
+## 4   1752 SWE     Male   &lt;S3: glm&gt;
+## 5   1753 SWE     Female &lt;S3: glm&gt;
+## # ... with 7,821 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hmd_counts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># select ages 30 to 80, drop total counts</span>
+<span class="st">  </span><span class="kw">filter</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">90</span>, sex <span class="op">!=</span><span class="st"> &#39;Total&#39;</span>, nEx <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, period <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># drop NAs</span>
+<span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># for each period...</span>
+<span class="st">  </span><span class="kw">group_by</span>(country, sex) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># ...run a Poisson regression of deaths versus age</span>
+<span class="st">  </span><span class="kw">do</span>(
+    <span class="kw">glm</span>(<span class="kw">round</span>(nDx, <span class="dv">0</span>) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(age<span class="dv">-90</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(nEx)),
+               <span class="dt">family =</span> <span class="st">&#39;poisson&#39;</span>, <span class="dt">data =</span> .) <span class="op">%&gt;%</span>
+<span class="st">    </span>broom<span class="op">::</span><span class="kw">tidy</span>()
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(term <span class="op">==</span><span class="st"> &#39;I(age - 90)&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> estimate, <span class="dt">color =</span> sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>()</code></pre></div>
+<p><img src="02-data_wrangling_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 </div>
 <div id="excercise-group-wise-operations" class="section level4">
-<h4><span class="header-section-number">3.7.1.7</span> Excercise: Group-wise operations</h4>
+<h4><span class="header-section-number">3.7.1.6</span> Excercise: Group-wise operations</h4>
 <ul>
 <li>Calculate five year abridged mortality rates for the whole <code>hmd_counts</code> data.</li>
 </ul>
@@ -1891,7 +1953,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["ced18-tidyr.pdf", "ced18-tidyr.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

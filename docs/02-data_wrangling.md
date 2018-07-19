@@ -618,16 +618,16 @@ gss %>% select(sample(ncol(.)))
 
 ```
 ## # A tibble: 2,867 x 960
-##   union1  hompop  grass   fair    proudwrk aidold hschem relpersn stayorg3
-##   <dbl+l> <dbl+l> <dbl+l> <dbl+l> <dbl+lb> <dbl+> <dbl+> <dbl+lb> <dbl+lb>
-## 1 <NA>    5       <NA>    <NA>    <NA>     2      1      4        <NA>    
-## 2 4       1       1       1       <NA>     2      2      4        <NA>    
-## 3 4       2       2       1       <NA>     <NA>   <NA>   1        <NA>    
-## 4 <NA>    6       <NA>    <NA>    <NA>     2      1      2        <NA>    
-## 5 4       3       1       2       3        <NA>   <NA>   4        4       
-## # ... with 2,862 more rows, and 951 more variables: paocc10 <dbl+lbl>,
-## #   astrosci <dbl+lbl>, relhhd2 <dbl+lbl>, closewht <dbl+lbl>,
-## #   suiyrs1 <dbl+lbl>, …
+##   richwork  moveinus  relhhd9  reliten  emailmin hope2   dwelling nateduc 
+##   <dbl+lbl> <dbl+lbl> <dbl+lb> <dbl+lb> <dbl+lb> <dbl+l> <dbl+lb> <dbl+lb>
+## 1 2         <NA>      <NA>     4        0        <NA>    2        2       
+## 2 <NA>      <NA>      <NA>     4        30       3       2        1       
+## 3 <NA>      <NA>      <NA>     1        <NA>     <NA>    2        1       
+## 4 1         <NA>      <NA>     3        10       <NA>    2        1       
+## 5 1         <NA>      <NA>     4        <NA>     4       2        <NA>    
+## # ... with 2,862 more rows, and 952 more variables: exjobsat <dbl+lbl>,
+## #   flexhrs1 <dbl+lbl>, where1 <dbl+lbl>, cctv <dbl+lbl>, bible <dbl+lbl>,
+## #   …
 ```
 
 Selected columns can be renamed.
@@ -1262,13 +1262,13 @@ hmd_counts%>% slice(sample(1:n(), 50))
 
 ```
 ## # A tibble: 50 x 7
-##   country sex    period   age    nx   nDx     nEx
-##   <chr>   <chr>   <int> <int> <int> <dbl>   <dbl>
-## 1 GBR_SCO Female   1936    97     1  22.3    41.9
-## 2 CHL     Male     2002    96     1 105     340. 
-## 3 SWE     Female   1893    10     1 227.  49540. 
-## 4 DNK     Female   2004    63     1 268   28189. 
-## 5 IRL     Female   2011    65     1 162   19649. 
+##   country sex    period   age    nx   nDx    nEx
+##   <chr>   <chr>   <int> <int> <int> <dbl>  <dbl>
+## 1 FIN     Male     1900    35     1   136 16361.
+## 2 IRL     Male     1968    54     1   184 16226.
+## 3 DEUTE   Total    1959    97     1    68   139.
+## 4 NLD     Male     2015    89     1  1849 10520.
+## 5 SWE     Female   1979    43     1    89 43882.
 ## # ... with 45 more rows
 ```
 
@@ -1281,11 +1281,11 @@ hmd_counts %>% slice(sample(1:n()))
 ## # A tibble: 1,304,694 x 7
 ##   country sex    period   age    nx   nDx     nEx
 ##   <chr>   <chr>   <int> <int> <int> <dbl>   <dbl>
-## 1 DNK     Male     1869    40     1  91.8   9992.
-## 2 SVK     Male     2007    56     1 523    36086.
-## 3 ESP     Total    1964    21     1 393.  474997.
-## 4 GBR_NIR Female   1935    55     1 100.    6296.
-## 5 FIN     Male     1971    63     1 687    19325.
+## 1 FRATNP  Female   1930    52     1 2860. 263496.
+## 2 SWE     Male     1811    49     1  319.  11931.
+## 3 GBR_SCO Female   1898    70     1  464.   8631.
+## 4 NOR     Male     1853    59     1  141    4936.
+## 5 BEL     Female   1993    82     1 2283   29096.
 ## # ... with 1.305e+06 more rows
 ```
 
@@ -1730,7 +1730,7 @@ eurostat::get_eurostat('demo_mlifetable') %>%
 ```
 
 ```
-## Table demo_mlifetable cached at /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+## Table demo_mlifetable cached at /tmp/Rtmpbls2zl/eurostat/demo_mlifetable_date_code_TF.rds
 ```
 
 ```
@@ -1753,11 +1753,11 @@ eurostat::get_eurostat('demo_mlifetable') %>%
 ```
 
 ```
-## Reading cache file /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+## Reading cache file /tmp/Rtmpbls2zl/eurostat/demo_mlifetable_date_code_TF.rds
 ```
 
 ```
-## Table  demo_mlifetable  read from cache file:  /tmp/RtmpuMbWVc/eurostat/demo_mlifetable_date_code_TF.rds
+## Table  demo_mlifetable  read from cache file:  /tmp/Rtmpbls2zl/eurostat/demo_mlifetable_date_code_TF.rds
 ```
 
 ```
@@ -1953,7 +1953,7 @@ eurostat::get_eurostat('tepsr_sp320') %>%
 ```
 
 ```
-## Table tepsr_sp320 cached at /tmp/RtmpuMbWVc/eurostat/tepsr_sp320_date_code_TF.rds
+## Table tepsr_sp320 cached at /tmp/Rtmpbls2zl/eurostat/tepsr_sp320_date_code_TF.rds
 ```
 
 ```
@@ -1969,6 +1969,38 @@ eurostat::get_eurostat('tepsr_sp320') %>%
 ```
 
 ### Case studies in data cleaning
+
+#### Rehaping the EU asylum decision database
+
+
+```r
+# calculate quota of asylum acceptance by country for 2017
+migr <- eurostat::get_eurostat('migr_asydcfina')
+```
+
+```
+## Table migr_asydcfina cached at /tmp/Rtmpbls2zl/eurostat/migr_asydcfina_date_code_TF.rds
+```
+
+```r
+migr %>%
+  filter(age == 'TOTAL',
+         citizen == 'TOTAL',
+         sex == 'T',
+         time == '2017-01-01') %>%
+  spread(key = decision, value = values) %>% 
+  mutate(p_reject = REJECTED/TOTAL,
+         geo = fct_reorder(geo, p_reject)) %>%
+  ggplot() +
+  geom_col(aes(x = geo, y = p_reject)) +
+  coord_flip()
+```
+
+```
+## Warning: Removed 2 rows containing missing values (position_stack).
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
 
 #### Tidying GSS Marriage status
 
@@ -1994,11 +2026,9 @@ gss %>%
   geom_bar(position = 'stack')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-66-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
 
 #### Tidying Anscombe's quartet
-
-Can you figure out what happens here? Try running the code yourself line by line.
 
 
 ```r
@@ -2013,7 +2043,7 @@ anscombe %>%
   facet_wrap(~panel)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
 
 #### Tidying data on test-retest reliability
 
@@ -2077,7 +2107,7 @@ long %>%
 ## Warning: Removed 30 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-68-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
 
 Comparisions along the y-axis is easiest if the scales are aligned therefore it is easier to compare along the horizontal.
 
@@ -2094,7 +2124,7 @@ long %>%
 ## Warning: Removed 54 rows containing missing values (geom_path).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-69-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-70-1.png)<!-- -->
 
 Differences are seen most clearly when plotted directly.
 
@@ -2117,7 +2147,7 @@ long %>%
 ## Warning: Removed 39 rows containing non-finite values (stat_bindot).
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-70-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-71-1.png)<!-- -->
 
 #### Tidying the EU time-use-survey
 
@@ -2174,7 +2204,6 @@ eu_timeuse
 
 - Recode the activity variable in dataset `eu_timeuse` into less than 10 meaningful categories of your own choice (make sure to filter out the "Total" values first). Visualize.
 
-
 Joins
 -----
 
@@ -2187,7 +2216,7 @@ income <-
 ```
 
 ```
-## Table tgs00026 cached at /tmp/RtmpuMbWVc/eurostat/tgs00026_date_code_FF.rds
+## Table tgs00026 cached at /tmp/Rtmpbls2zl/eurostat/tgs00026_date_code_FF.rds
 ```
 
 ```r
@@ -2199,7 +2228,7 @@ unemp <-
 ```
 
 ```
-## Table tgs00010 cached at /tmp/RtmpuMbWVc/eurostat/tgs00010_date_code_FF.rds
+## Table tgs00010 cached at /tmp/Rtmpbls2zl/eurostat/tgs00010_date_code_FF.rds
 ```
 
 ```r
@@ -2210,7 +2239,7 @@ totfert <-
 ```
 
 ```
-## Table tgs00100 cached at /tmp/RtmpuMbWVc/eurostat/tgs00100_date_code_FF.rds
+## Table tgs00100 cached at /tmp/Rtmpbls2zl/eurostat/tgs00100_date_code_FF.rds
 ```
 
 ```r
@@ -2222,7 +2251,7 @@ lifeexp <-
 ```
 
 ```
-## Table tgs00101 cached at /tmp/RtmpuMbWVc/eurostat/tgs00101_date_code_FF.rds
+## Table tgs00101 cached at /tmp/Rtmpbls2zl/eurostat/tgs00101_date_code_FF.rds
 ```
 
 ```r
@@ -2237,7 +2266,7 @@ popchange <-
 ```
 
 ```
-## Table tgs00099 cached at /tmp/RtmpuMbWVc/eurostat/tgs00099_date_code_FF.rds
+## Table tgs00099 cached at /tmp/Rtmpbls2zl/eurostat/tgs00099_date_code_FF.rds
 ```
 
 ```r
@@ -2316,9 +2345,23 @@ hmd %>%
   facet_wrap(~sex)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-74-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-75-1.png)<!-- -->
 
 #### Grouped `filter()`
+
+Whenever `group_by()` is combined with `filter()` the filtering condition is applied group by group. This makes it possible for example to return the three richest regions in the EU for each year.
+
+
+```r
+euro_regio %>%
+  group_by(year) %>%
+  filter(min_rank(desc(gdp)) <= 3) %>%
+  arrange(year, country_code, nuts2_name) %>%
+  ggplot(aes(x = year, y = gdp)) +
+  geom_text(aes(label = nuts2_name))
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-76-1.png)<!-- -->
 
 #### Grouped `slice()`
 
@@ -2365,7 +2408,7 @@ euro_regio %>%
             show.legend = FALSE, size = 3)
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-76-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-78-1.png)<!-- -->
 
 #### Grouped `summarise()`
 
@@ -2420,11 +2463,61 @@ hmd %>%
   facet_wrap(~country, scales = 'free')
 ```
 
-![](02-data_wrangling_files/figure-epub3/unnamed-chunk-78-1.png)<!-- -->
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-80-1.png)<!-- -->
 
 #### Grouped `do()`
 
-#### Fitting and summarising many models
+
+```r
+hmd_counts %>%
+  # select ages 30 to 80, drop total counts
+  filter(age >= 30, age < 80, sex != 'Total') %>%
+  # drop NAs
+  drop_na() %>%
+  # for each period...
+  group_by(period, country, sex) %>%
+  # ...run a Poisson regression of deaths versus age
+  do(lm = glm(round(nDx, 0) ~ I(age-30) + offset(log(nEx)),
+              family = 'poisson', data = .))
+```
+
+```
+## Source: local data frame [7,826 x 4]
+## Groups: <by row>
+## 
+## # A tibble: 7,826 x 4
+##   period country sex    lm       
+## *  <int> <chr>   <chr>  <list>   
+## 1   1751 SWE     Female <S3: glm>
+## 2   1751 SWE     Male   <S3: glm>
+## 3   1752 SWE     Female <S3: glm>
+## 4   1752 SWE     Male   <S3: glm>
+## 5   1753 SWE     Female <S3: glm>
+## # ... with 7,821 more rows
+```
+
+
+
+```r
+hmd_counts %>%
+  # select ages 30 to 80, drop total counts
+  filter(age >= 90, sex != 'Total', nEx != 0, period == 2015) %>%
+  # drop NAs
+  drop_na() %>%
+  # for each period...
+  group_by(country, sex) %>%
+  # ...run a Poisson regression of deaths versus age
+  do(
+    glm(round(nDx, 0) ~ I(age-90) + offset(log(nEx)),
+               family = 'poisson', data = .) %>%
+    broom::tidy()
+  ) %>%
+  filter(term == 'I(age - 90)') %>%
+  ggplot(aes(x = estimate, color = sex)) +
+  geom_density()
+```
+
+![](02-data_wrangling_files/figure-epub3/unnamed-chunk-82-1.png)<!-- -->
 
 #### Excercise: Group-wise operations
 
